@@ -1,0 +1,171 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="WebNhutLongModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="tbl_Customers">
+          <Key>
+            <PropertyRef Name="IDCustomers" />
+          </Key>
+          <Property Name="IDCustomers" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="NameCustomers" Type="nvarchar" MaxLength="225" />
+          <Property Name="ChucvuCustomers" Type="nvarchar" MaxLength="225" />
+          <Property Name="CongTyCustomers" Type="nvarchar" MaxLength="500" />
+          <Property Name="CodeCustomers" Type="varchar" MaxLength="50" />
+          <Property Name="EmailCustomers" Type="nvarchar" MaxLength="500" />
+          <Property Name="PhoneCustomers" Type="nvarchar" MaxLength="15" />
+          <Property Name="FaxCustomers" Type="nvarchar" MaxLength="15" />
+          <Property Name="DiachiCustomers" Type="nvarchar" MaxLength="500" />
+          <Property Name="MasothueCustomers" Type="nvarchar" MaxLength="50" />
+          <Property Name="StatusCustomers" Type="int" />
+          <Property Name="CreateDateCustomers" Type="datetime" />
+          <Property Name="ModifyDateCustomers" Type="datetime" />
+          <Property Name="CreateUserCustomers" Type="nvarchar" MaxLength="50" />
+          <Property Name="ModifyUserCustomers" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="tbl_Products">
+          <Key>
+            <PropertyRef Name="ID_Products" />
+          </Key>
+          <Property Name="ID_Products" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="NameProducts" Type="nvarchar" MaxLength="500" />
+          <Property Name="SolopProducts" Type="int" />
+          <Property Name="LoaigiayProducts" Type="nvarchar" MaxLength="500" />
+          <Property Name="OffsetFlexoProducts" Type="nvarchar" MaxLength="500" />
+          <Property Name="DanKimProducts" Type="nvarchar" MaxLength="50" />
+          <Property Name="SoluongProducts" Type="int" />
+          <Property Name="GiaProducts" Type="nvarchar" MaxLength="50" />
+          <Property Name="CreatedDateProducts" Type="datetime" />
+          <Property Name="ModifyDateProducts" Type="datetime" />
+          <Property Name="CreateUserProducts" Type="nvarchar" MaxLength="500" />
+          <Property Name="ModifyUserProducts" Type="nvarchar" MaxLength="500" />
+          <Property Name="StatusProducts" Type="int" />
+          <Property Name="CodeProducts" Type="nvarchar" MaxLength="50" />
+          <Property Name="QuyCachProducts" Type="nvarchar" MaxLength="500" />
+        </EntityType>
+        <EntityContainer Name="WebNhutLongModelStoreContainer">
+          <EntitySet Name="tbl_Customers" EntityType="Self.tbl_Customers" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tbl_Products" EntityType="Self.tbl_Products" Schema="dbo" store:Type="Tables" />
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="WebNhutLongModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="tbl_Customers">
+          <Key>
+            <PropertyRef Name="IDCustomers" />
+          </Key>
+          <Property Name="IDCustomers" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="NameCustomers" Type="String" MaxLength="225" FixedLength="false" Unicode="true" />
+          <Property Name="ChucvuCustomers" Type="String" MaxLength="225" FixedLength="false" Unicode="true" />
+          <Property Name="CongTyCustomers" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="CodeCustomers" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="EmailCustomers" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="PhoneCustomers" Type="String" MaxLength="15" FixedLength="false" Unicode="true" />
+          <Property Name="FaxCustomers" Type="String" MaxLength="15" FixedLength="false" Unicode="true" />
+          <Property Name="DiachiCustomers" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="MasothueCustomers" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="StatusCustomers" Type="Int32" />
+          <Property Name="CreateDateCustomers" Type="DateTime" Precision="3" />
+          <Property Name="CreateUserCustomers" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="ModifyDateCustomers" Precision="3" Type="DateTime" />
+          <Property Name="ModifyUserCustomers" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityContainer Name="WebNhutLongEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="tbl_Customers" EntityType="Self.tbl_Customers" />
+          <EntitySet Name="tbl_Products" EntityType="WebNhutLongModel.tbl_Products" />
+        </EntityContainer>
+        <EntityType Name="tbl_Products">
+          <Key>
+            <PropertyRef Name="ID_Products" />
+          </Key>
+          <Property Name="ID_Products" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="NameProducts" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="SolopProducts" Type="Int32" />
+          <Property Name="LoaigiayProducts" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="OffsetFlexoProducts" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="DanKimProducts" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="SoluongProducts" Type="Int32" />
+          <Property Name="GiaProducts" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="CreatedDateProducts" Type="DateTime" Precision="3" />
+          <Property Name="ModifyDateProducts" Type="DateTime" Precision="3" />
+          <Property Name="CreateUserProducts" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="ModifyUserProducts" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="StatusProducts" Type="Int32" />
+          <Property Name="CodeProducts" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="QuyCachProducts" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+        </EntityType>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="WebNhutLongModelStoreContainer" CdmEntityContainer="WebNhutLongEntities">
+          <EntitySetMapping Name="tbl_Customers">
+            <EntityTypeMapping TypeName="WebNhutLongModel.tbl_Customers">
+              <MappingFragment StoreEntitySet="tbl_Customers">
+                <ScalarProperty Name="ModifyUserCustomers" ColumnName="ModifyUserCustomers" />
+                <ScalarProperty Name="ModifyDateCustomers" ColumnName="ModifyDateCustomers" />
+                <ScalarProperty Name="CreateUserCustomers" ColumnName="CreateUserCustomers" />
+                <ScalarProperty Name="CreateDateCustomers" ColumnName="CreateDateCustomers" />
+                <ScalarProperty Name="StatusCustomers" ColumnName="StatusCustomers" />
+                <ScalarProperty Name="IDCustomers" ColumnName="IDCustomers" />
+                <ScalarProperty Name="NameCustomers" ColumnName="NameCustomers" />
+                <ScalarProperty Name="ChucvuCustomers" ColumnName="ChucvuCustomers" />
+                <ScalarProperty Name="CongTyCustomers" ColumnName="CongTyCustomers" />
+                <ScalarProperty Name="CodeCustomers" ColumnName="CodeCustomers" />
+                <ScalarProperty Name="EmailCustomers" ColumnName="EmailCustomers" />
+                <ScalarProperty Name="PhoneCustomers" ColumnName="PhoneCustomers" />
+                <ScalarProperty Name="FaxCustomers" ColumnName="FaxCustomers" />
+                <ScalarProperty Name="DiachiCustomers" ColumnName="DiachiCustomers" />
+                <ScalarProperty Name="MasothueCustomers" ColumnName="MasothueCustomers" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tbl_Products">
+            <EntityTypeMapping TypeName="WebNhutLongModel.tbl_Products">
+              <MappingFragment StoreEntitySet="tbl_Products">
+                <ScalarProperty Name="QuyCachProducts" ColumnName="QuyCachProducts" />
+                <ScalarProperty Name="CodeProducts" ColumnName="CodeProducts" />
+                <ScalarProperty Name="StatusProducts" ColumnName="StatusProducts" />
+                <ScalarProperty Name="ModifyUserProducts" ColumnName="ModifyUserProducts" />
+                <ScalarProperty Name="CreateUserProducts" ColumnName="CreateUserProducts" />
+                <ScalarProperty Name="ModifyDateProducts" ColumnName="ModifyDateProducts" />
+                <ScalarProperty Name="CreatedDateProducts" ColumnName="CreatedDateProducts" />
+                <ScalarProperty Name="GiaProducts" ColumnName="GiaProducts" />
+                <ScalarProperty Name="SoluongProducts" ColumnName="SoluongProducts" />
+                <ScalarProperty Name="DanKimProducts" ColumnName="DanKimProducts" />
+                <ScalarProperty Name="OffsetFlexoProducts" ColumnName="OffsetFlexoProducts" />
+                <ScalarProperty Name="LoaigiayProducts" ColumnName="LoaigiayProducts" />
+                <ScalarProperty Name="SolopProducts" ColumnName="SolopProducts" />
+                <ScalarProperty Name="NameProducts" ColumnName="NameProducts" />
+                <ScalarProperty Name="ID_Products" ColumnName="ID_Products" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="true" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
