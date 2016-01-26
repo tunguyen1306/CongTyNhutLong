@@ -25,6 +25,18 @@
           <Property Name="CreateUserCustomers" Type="nvarchar" MaxLength="50" />
           <Property Name="ModifyUserCustomers" Type="nvarchar" MaxLength="50" />
         </EntityType>
+        <EntityType Name="tbl_DonHang">
+          <Key>
+            <PropertyRef Name="ID_Donhang" />
+          </Key>
+          <Property Name="ID_Donhang" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ID_Products" Type="int" />
+          <Property Name="ID_Customers" Type="int" />
+          <Property Name="CreateDate" Type="datetime" />
+          <Property Name="ModifyDate" Type="datetime" />
+          <Property Name="CreateUser" Type="nvarchar" MaxLength="50" />
+          <Property Name="ModifyUser" Type="nvarchar" MaxLength="50" />
+        </EntityType>
         <EntityType Name="tbl_Products">
           <Key>
             <PropertyRef Name="ID_Products" />
@@ -45,9 +57,25 @@
           <Property Name="CodeProducts" Type="nvarchar" MaxLength="50" />
           <Property Name="QuyCachProducts" Type="nvarchar" MaxLength="500" />
         </EntityType>
+        <EntityType Name="tbl_User">
+          <Key>
+            <PropertyRef Name="IDUser" />
+          </Key>
+          <Property Name="IDUser" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Username" Type="nvarchar" MaxLength="250" />
+          <Property Name="FullName" Type="nvarchar" MaxLength="250" />
+          <Property Name="Status" Type="int" />
+          <Property Name="ModifyDate" Type="datetime" />
+          <Property Name="ModifyUser" Type="nvarchar" MaxLength="250" />
+          <Property Name="CreateUser" Type="nvarchar" MaxLength="250" />
+          <Property Name="CreateDate" Type="datetime" />
+          <Property Name="Password" Type="nvarchar" MaxLength="250" />
+        </EntityType>
         <EntityContainer Name="WebNhutLongModelStoreContainer">
           <EntitySet Name="tbl_Customers" EntityType="Self.tbl_Customers" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tbl_DonHang" EntityType="Self.tbl_DonHang" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="tbl_Products" EntityType="Self.tbl_Products" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tbl_User" EntityType="Self.tbl_User" Schema="dbo" store:Type="Tables" />
         </EntityContainer>
       </Schema></edmx:StorageModels>
     <!-- CSDL content -->
@@ -76,6 +104,8 @@
         <EntityContainer Name="WebNhutLongEntities" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="tbl_Customers" EntityType="Self.tbl_Customers" />
           <EntitySet Name="tbl_Products" EntityType="WebNhutLongModel.tbl_Products" />
+          <EntitySet Name="tbl_DonHang" EntityType="WebNhutLongModel.tbl_DonHang" />
+          <EntitySet Name="tbl_User" EntityType="WebNhutLongModel.tbl_User" />
         </EntityContainer>
         <EntityType Name="tbl_Products">
           <Key>
@@ -96,6 +126,32 @@
           <Property Name="StatusProducts" Type="Int32" />
           <Property Name="CodeProducts" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="QuyCachProducts" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="tbl_DonHang">
+          <Key>
+            <PropertyRef Name="ID_Donhang" />
+          </Key>
+          <Property Name="ID_Donhang" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ID_Products" Type="Int32" />
+          <Property Name="ID_Customers" Type="Int32" />
+          <Property Name="CreateDate" Type="DateTime" Precision="3" />
+          <Property Name="ModifyDate" Type="DateTime" Precision="3" />
+          <Property Name="CreateUser" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="ModifyUser" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="tbl_User">
+          <Key>
+            <PropertyRef Name="IDUser" />
+          </Key>
+          <Property Name="IDUser" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Username" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+          <Property Name="FullName" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+          <Property Name="Status" Type="Int32" />
+          <Property Name="ModifyDate" Type="DateTime" Precision="3" />
+          <Property Name="ModifyUser" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+          <Property Name="CreateUser" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+          <Property Name="CreateDate" Type="DateTime" Precision="3" />
+          <Property Name="Password" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
         </EntityType>
       </Schema>
     </edmx:ConceptualModels>
@@ -142,6 +198,34 @@
                 <ScalarProperty Name="SolopProducts" ColumnName="SolopProducts" />
                 <ScalarProperty Name="NameProducts" ColumnName="NameProducts" />
                 <ScalarProperty Name="ID_Products" ColumnName="ID_Products" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tbl_DonHang">
+            <EntityTypeMapping TypeName="WebNhutLongModel.tbl_DonHang">
+              <MappingFragment StoreEntitySet="tbl_DonHang">
+                <ScalarProperty Name="ModifyUser" ColumnName="ModifyUser" />
+                <ScalarProperty Name="CreateUser" ColumnName="CreateUser" />
+                <ScalarProperty Name="ModifyDate" ColumnName="ModifyDate" />
+                <ScalarProperty Name="CreateDate" ColumnName="CreateDate" />
+                <ScalarProperty Name="ID_Customers" ColumnName="ID_Customers" />
+                <ScalarProperty Name="ID_Products" ColumnName="ID_Products" />
+                <ScalarProperty Name="ID_Donhang" ColumnName="ID_Donhang" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tbl_User">
+            <EntityTypeMapping TypeName="WebNhutLongModel.tbl_User">
+              <MappingFragment StoreEntitySet="tbl_User">
+                <ScalarProperty Name="Password" ColumnName="Password" />
+                <ScalarProperty Name="CreateDate" ColumnName="CreateDate" />
+                <ScalarProperty Name="CreateUser" ColumnName="CreateUser" />
+                <ScalarProperty Name="ModifyUser" ColumnName="ModifyUser" />
+                <ScalarProperty Name="ModifyDate" ColumnName="ModifyDate" />
+                <ScalarProperty Name="Status" ColumnName="Status" />
+                <ScalarProperty Name="FullName" ColumnName="FullName" />
+                <ScalarProperty Name="Username" ColumnName="Username" />
+                <ScalarProperty Name="IDUser" ColumnName="IDUser" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
