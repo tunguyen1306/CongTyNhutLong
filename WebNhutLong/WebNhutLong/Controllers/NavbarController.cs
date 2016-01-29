@@ -16,5 +16,11 @@ namespace WebNhutLong.Controllers
             var data = new Data();
             return PartialView("_Navbar", data.navbarItems().ToList());
         }
+        public ActionResult Logout()
+        {
+            Session.Remove("username");
+            Session.Clear();
+            return RedirectToAction("Login","Login");
+        }
     }
 }

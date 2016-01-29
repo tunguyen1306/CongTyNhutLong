@@ -17,12 +17,20 @@ namespace WebNhutLong.Controllers
         // GET: Customers
         public ActionResult Index()
         {
+            if (Session["username"]==null)
+            {
+                return RedirectToAction("Login", "Login");
+            }
             return View(db.tbl_Customers.ToList());
         }
 
         // GET: Customers/Details/5
         public ActionResult Details(int? id)
         {
+            if (Session["username"] == null)
+            {
+                return RedirectToAction("Login", "Login");
+            }
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
@@ -48,6 +56,10 @@ namespace WebNhutLong.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Create([Bind(Include = "IDCustomers,NameCustomers,ChucvuCustomers,CongTyCustomers,CodeCustomers,EmailCustomers,PhoneCustomers,FaxCustomers,DiachiCustomers,MasothueCustomers,StatusCustomers,CreateDateCustomers,ModifyDateCustomers,CreateUserCustomers,ModifyUserCustomers")] tbl_Customers tbl_Customers)
         {
+            if (Session["username"] == null)
+            {
+                return RedirectToAction("Login", "Login");
+            }
             if (ModelState.IsValid)
             {
                 db.tbl_Customers.Add(tbl_Customers);
@@ -61,6 +73,10 @@ namespace WebNhutLong.Controllers
         // GET: Customers/Edit/5
         public ActionResult Edit(int? id)
         {
+            if (Session["username"] == null)
+            {
+                return RedirectToAction("Login", "Login");
+            }
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
@@ -80,6 +96,10 @@ namespace WebNhutLong.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Edit([Bind(Include = "IDCustomers,NameCustomers,ChucvuCustomers,CongTyCustomers,CodeCustomers,EmailCustomers,PhoneCustomers,FaxCustomers,DiachiCustomers,MasothueCustomers,StatusCustomers,CreateDateCustomers,ModifyDateCustomers,CreateUserCustomers,ModifyUserCustomers")] tbl_Customers tbl_Customers)
         {
+            if (Session["username"] == null)
+            {
+                return RedirectToAction("Login", "Login");
+            }
             if (ModelState.IsValid)
             {
                 db.Entry(tbl_Customers).State = EntityState.Modified;
@@ -92,6 +112,10 @@ namespace WebNhutLong.Controllers
         // GET: Customers/Delete/5
         public ActionResult Delete(int? id)
         {
+            if (Session["username"] == null)
+            {
+                return RedirectToAction("Login", "Login");
+            }
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
@@ -109,6 +133,10 @@ namespace WebNhutLong.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
+            if (Session["username"] == null)
+            {
+                return RedirectToAction("Login", "Login");
+            }
             tbl_Customers tbl_Customers = db.tbl_Customers.Find(id);
             db.tbl_Customers.Remove(tbl_Customers);
             db.SaveChanges();

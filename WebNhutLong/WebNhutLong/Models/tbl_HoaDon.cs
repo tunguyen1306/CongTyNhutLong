@@ -12,19 +12,15 @@ namespace WebNhutLong.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class tbl_DonHang
+    public partial class tbl_HoaDon
     {
-        public int ID_Donhang { get; set; }
+        public int ID_HoaDon { get; set; }
         public Nullable<int> ID_Products { get; set; }
         public Nullable<int> ID_Customers { get; set; }
+        public Nullable<int> Status { get; set; }
         public Nullable<System.DateTime> CreateDate { get; set; }
         public Nullable<System.DateTime> ModifyDate { get; set; }
         public string CreateUser { get; set; }
         public string ModifyUser { get; set; }
-        public Nullable<int> Status { get; set; }
-        public string CodeDonHang { get; set; }
-        public Nullable<int> TimeGiaohang { get; set; }
-        public string TotalDonHang { get; set; }
-        public string DiaChiGiaoHang { get; set; }
     }
 }

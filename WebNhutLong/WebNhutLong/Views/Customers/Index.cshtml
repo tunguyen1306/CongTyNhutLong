@@ -32,6 +32,9 @@
                         <thead>
                             <tr>
                                 <th>
+                                   
+                                </th>
+                                <th>
                                     Mã Khách Hàng
                                 </th>
                                 <th>
@@ -65,7 +68,9 @@
                         <tbody>
                             @foreach (tbl_Customers item in Model)
                             {
-                                <tr>
+                                <tr><td>
+                                        @Html.ActionLink("Xem báo giá", "Edit", new { id = item.IDCustomers }, htmlAttributes: new { @class = "btn btn-outline btn-primary btn-xs" })
+</td>
                                     <td>
                                         @Html.DisplayFor(modelItem => item.CodeCustomers)
                                     </td>
@@ -99,7 +104,10 @@
                                         @Html.DisplayFor(modelItem => item.DiachiCustomers)
                                     </td>
                                     <td>
-                                        @Html.DisplayFor(modelItem => item.StatusCustomers)
+                                        @(
+                                            item.StatusCustomers == 1 ? "Hoạt động" : "Không hoạt động"
+                                        )
+                                      
                                     </td>
                                     <td>
                                         @Html.ActionLink("Sửa", "Edit", new { id = item.IDCustomers }, htmlAttributes: new { @class = "btn btn-outline btn-primary btn-xs" }) 

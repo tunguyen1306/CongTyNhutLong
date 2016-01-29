@@ -1,14 +1,13 @@
-﻿@model WebNhutLong.Models.tbl_User
+﻿@model WebNhutLong.Models.tbl_DonHang
 
 @{
-    ViewBag.Title = "Edit";
+    ViewBag.Title = "Create";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-
 <div class="row">
     <div class="col-lg-12">
-        <h1 class="page-header">Thêm thông tin User</h1>
+        <h1 class="page-header">Thêm đơn hàng</h1>
     </div>
     <!-- /.col-lg-12 -->
 </div>
@@ -21,44 +20,45 @@
             </div>
             @using (Html.BeginForm())
             {
-                @Html.HiddenFor(model=>model.IDUser)
                 @Html.AntiForgeryToken()
+
+
                 <div class="panel-body">
                     <div class="row">
 
                         <div class="col-lg-6">
                             @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-                            <div class="form-group">
-                                <label>Username</label>
 
-                                @Html.EditorFor(model => model.Username, new { htmlAttributes = new { @class = "form-control" } })
-                                @Html.ValidationMessageFor(model => model.Username, "", new { @class = "text-danger" })
+                            <div class="form-group">
+                                <label>Mã đơn hàng</label>
+
+                                @Html.EditorFor(model => model.CodeDonHang, new { htmlAttributes = new { @class = "form-control" } })
+                                @Html.ValidationMessageFor(model => model.CodeDonHang, "", new { @class = "text-danger" })
 
                             </div>
 
                             <div class="form-group">
-                                <label>Password</label>
+                                <label>Thời gian giao hàng</label>
 
-                                @Html.EditorFor(model => model.Password, new { htmlAttributes = new { @class = "form-control" } })
-                                @Html.ValidationMessageFor(model => model.Password, "", new { @class = "text-danger" })
+                                @Html.EditorFor(model => model.TimeGiaohang, new { htmlAttributes = new { @class = "form-control" } })
+                                @Html.ValidationMessageFor(model => model.TimeGiaohang, "", new { @class = "text-danger" })
 
                             </div>
+                            <div class="form-group">
+                                <label>Địa chỉ giao hàng</label>
 
+                                @Html.EditorFor(model => model.DiaChiGiaoHang, new { htmlAttributes = new { @class = "form-control" } })
+                                @Html.ValidationMessageFor(model => model.DiaChiGiaoHang, "", new { @class = "text-danger" })
 
+                            </div>
+                          
 
 
 
                         </div>
                         <div class="col-lg-6">
 
-                            <div class="form-group">
-                                <label>Họ và tên</label>
-
-                                @Html.EditorFor(model => model.FullName, new { htmlAttributes = new { @class = "form-control" } })
-                                @Html.ValidationMessageFor(model => model.FullName, "", new { @class = "text-danger" })
-
-                            </div>
-
+                           
                             <div class="form-group">
                                 <label>Trạng thái</label>
 
@@ -71,26 +71,28 @@
 
                             </div>
 
-                            <div class="form-group">
 
-                                <input type="submit" value="Sửa" class="btn btn-primary" />
-                                @Html.ActionLink("Hủy", "Index", "", htmlAttributes: new { @class = "btn btn-primary" })
+
+                            <div class="form-group">
+                                <label></label>
+                                <input type="submit" value="Save" class="btn btn-primary" />
+                                @Html.ActionLink("Hủy", "Index", "", new { @class = "btn btn-primary" })
 
                             </div>
 
                         </div>
+
                     </div>
                     <!-- /.row (nested) -->
                 </div>
-    <!-- /.panel-body -->
             }
+
         </div>
         <!-- /.panel -->
     </div>
     <!-- /.col-lg-12 -->
 </div>
 <!-- /.row -->
-
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")
 }

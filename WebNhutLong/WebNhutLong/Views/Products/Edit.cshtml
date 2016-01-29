@@ -55,8 +55,19 @@
                             </div>
                             <div class="form-group">
                                 <label>Loại giấy</label>
-
-                                @Html.EditorFor(model => model.LoaigiayProducts, new { htmlAttributes = new { @class = "form-control" } })
+                                @Html.DropDownListFor(model => model.LoaigiayProducts, new List<SelectListItem>
+                                {
+                                    new SelectListItem {Value = "0", Text = "Chọn loại giấy"},
+                                    new SelectListItem {Value = "3 lớp: 2 Vàng 1 Xeo", Text = "3 lớp: 2 Vàng 1 Xeo"},
+                                    new SelectListItem {Value = "3 lớp: 1 Trắng 1 Xeo 1 Vàng", Text = "3 lớp: 1 Trắng 1 Xeo 1 Vàng"},
+                                    new SelectListItem {Value = "3 lớp: 1 Đài Loan 1 Xeo 1 Vàng", Text = "3 lớp: 1 Đài Loan 1 Xeo 1 Vàng"},
+                                    new SelectListItem {Value = "5 lớp: 2 Vàng 3 Xeo", Text = "5 lớp: 2 Vàng 3 Xeo"},
+                                    new SelectListItem {Value = "5 lớp: 1 Trắng 1 Vàng 3 Xeo", Text = "5 lớp: 1 Trắng 1 Vàng 3 Xeo"},
+                                    new SelectListItem {Value = "5 lớp: 1 Đài Loan 1 Vàng 3 Xeo", Text = "5 lớp: 1 Đài Loan 1 Vàng 3 Xeo"},
+                                    new SelectListItem {Value = "2 lớp: 1 Vàng 1 Xeo - sóng E", Text = "2 lớp: 1 Vàng 1 Xeo - sóng E"},
+                                    new SelectListItem {Value = "2 lớp: 1 Vàng 1 Xeo - sóng C", Text = "2 lớp: 1 Vàng 1 Xeo - sóng C"},
+                                    new SelectListItem {Value = "2 lớp: 1 Trắng 1 Xeo - sóng E", Text = "2 lớp: 1 Trắng 1 Xeo - sóng E"}
+                                }, new { @class = "form-control" })
                                 @Html.ValidationMessageFor(model => model.LoaigiayProducts, "", new { @class = "text-danger" })
 
                             </div>
@@ -65,7 +76,7 @@
                             <div class="form-group">
                                 <label>Offset/Flexo</label>
 
-                                @Html.DropDownListFor(model => model.OffsetFlexoProducts, new List<SelectListItem> { new SelectListItem { Text = "Offset", Value = "0" }, new SelectListItem { Text = "Flexo", Value = "1" } },  htmlAttributes : new { @class = "form-control"  })
+                                @Html.DropDownListFor(model => model.OffsetFlexoProducts, new List<SelectListItem> { new SelectListItem { Text = "Offset", Value = "Offset" }, new SelectListItem { Text = "Flexo", Value = "Flexo" } }, htmlAttributes: new { @class = "form-control" })
                                 @Html.ValidationMessageFor(model => model.OffsetFlexoProducts, "", new { @class = "text-danger" })
 
                             </div>
@@ -78,7 +89,7 @@
                             <div class="form-group">
                                 <label>Dán kim</label>
 
-                              @Html.DropDownListFor(model => model.OffsetFlexoProducts, new List<SelectListItem> { new SelectListItem { Text = "Dán keo", Value = "0" }, new SelectListItem { Text = "Đóng kim", Value = "1" } },  htmlAttributes:new { @class = "form-control"  })
+                              @Html.DropDownListFor(model => model.DanKimProducts, new List<SelectListItem> { new SelectListItem { Text = "Dán keo", Value = "Dán keo" }, new SelectListItem { Text = "Đóng kim", Value = "Đóng kim" } }, htmlAttributes: new { @class = "form-control" })
                                 @Html.ValidationMessageFor(model => model.DanKimProducts, "", new { @class = "text-danger" })
 
                             </div>

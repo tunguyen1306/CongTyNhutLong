@@ -1,15 +1,14 @@
 ﻿@using WebNhutLong.Models
-@model IEnumerable<WebNhutLong.Models.tbl_User>
+@model IEnumerable<tbl_DonHang>
 
 @{
-    ViewBag.Title = "Trang User";
+    ViewBag.Title = "Index";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-
 <div class="row">
     <div class="col-lg-12">
-        <h1 class="page-header">Thông Tin User</h1>
+        <h1 class="page-header">Thông tin đơn hàng</h1>
     </div>
     <!-- /.col-lg-12 -->
 </div>
@@ -21,7 +20,7 @@
         <div class="panel panel-default">
 
             <div class="panel-heading">
-                @Html.ActionLink("Thêm User", "Create", "", new { @class = "btn btn-primary" })
+                @Html.ActionLink("Thêm đơn hàng", "Create", "", new {@class = "btn btn-primary"})
             </div>
             <!-- /.panel-heading -->
             <div class="panel-body">
@@ -32,52 +31,67 @@
                         <thead>
                             <tr>
                                 <th>
-                                   ID
+
                                 </th>
                                 <th>
-                                   Username
+                                    Mã đơn hàng
                                 </th>
                                 <th>
-                                   Họ và tên
+                                    Tổng tiền
                                 </th>
                                 <th>
-                                    Trạng thái
+                                    Thời gian giao hàng
                                 </th>
                                 <th>
-                                   Ngày tạo
+                                    Địa chỉ giao hàng
+                                </th>
+                                <th>
+                                    Ngày tạo
+                                </th>
+                                <th>
+                                    Trạng thái giao hàng
                                 </th>
                                
                                 <th></th>
                             </tr>
                         </thead>
                         <tbody>
-                            @foreach (tbl_User item in Model)
+                            @foreach (tbl_DonHang item in Model)
                             {
                                 <tr>
                                     <td>
-                                        @Html.DisplayFor(modelItem => item.IDUser)
+                                        @Html.ActionLink("Xem chi tiết", "ChitietDonhang", "DonHang", new { id = item.ID_Donhang }, new { @class = "btn btn-outline btn-primary btn-xs" })
                                     </td>
                                     <td>
-                                        @Html.DisplayFor(modelItem => item.Username)
+                                        @Html.DisplayFor(modelItem => item.CodeDonHang)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.TotalDonHang)
 
                                     </td>
                                     <td>
-                                        @Html.DisplayFor(modelItem => item.FullName)
+                                        @Html.DisplayFor(modelItem => item.TimeGiaohang)
 
                                     </td>
                                     <td>
-                                       @(item.Status==1 ?"Hoạt động":"Không hoạt động")
+                                        @Html.DisplayFor(modelItem => item.DiaChiGiaoHang)
                                     </td>
                                     <td>
                                         @Html.DisplayFor(modelItem => item.CreateDate)
 
                                     </td>
+                              
                                  
-                                   
                                     <td>
-                                        @Html.ActionLink("Sửa", "Edit", new { id = item.IDUser }, htmlAttributes: new { @class = "btn btn-outline btn-primary btn-xs" })
+                                        @(
+                                            item.Status == 1 ? "Hoạt động" : "Không hoạt động"
+                                          )
 
-                                        @Html.ActionLink("Xóa", "Delete", new { id = item.IDUser }, htmlAttributes: new { @class = "btn btn-outline btn-primary btn-xs" })
+                                    </td>
+                                    <td>
+                                        @Html.ActionLink("Sửa", "Edit", new {id = item.ID_Donhang}, new {@class = "btn btn-outline btn-primary btn-xs"})
+
+                                        @Html.ActionLink("Xóa", "Delete", new {id = item.ID_Donhang}, new {@class = "btn btn-outline btn-primary btn-xs"})
                                     </td>
                                 </tr>
                             }
@@ -94,4 +108,3 @@
     <!-- /.col-lg-12 -->
 </div>
 <!-- /.row -->
-

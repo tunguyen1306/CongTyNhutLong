@@ -7,6 +7,8 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
+using Newtonsoft.Json;
+
 namespace WebNhutLong.Models
 {
     using System;
@@ -30,4 +32,5 @@ namespace WebNhutLong.Models
         public string CodeProducts { get; set; }
         public string QuyCachProducts { get; set; }
     }
+ 
 }
