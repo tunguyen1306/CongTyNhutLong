@@ -29,5 +29,7 @@ namespace WebNhutLong.Models
         public DbSet<tbl_Products> tbl_Products { get; set; }
         public DbSet<tbl_User> tbl_User { get; set; }
         public DbSet<tbl_QuyTrinh> tbl_QuyTrinh { get; set; }
+        public DbSet<tbl_BaoGia> tbl_BaoGia { get; set; }
+        public DbSet<tbl_BaoGiaChiTiet> tbl_BaoGiaChiTiet { get; set; }
     }
 }

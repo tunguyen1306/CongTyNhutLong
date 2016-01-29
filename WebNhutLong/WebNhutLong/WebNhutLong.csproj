@@ -118,6 +118,7 @@
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="Controllers\BaoGiaController.cs" />
     <Compile Include="Controllers\CustomersController.cs" />
     <Compile Include="Controllers\EmailController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
@@ -129,6 +130,7 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Models\BaoGiaColumn.cs" />
     <Compile Include="Models\DataWeb.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -147,6 +149,12 @@
     <Compile Include="Models\LoaiGiay.cs" />
     <Compile Include="Models\Navbar.cs" />
     <Compile Include="Models\SendEmail.cs" />
+    <Compile Include="Models\tbl_BaoGia.cs">
+      <DependentUpon>DataWeb.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\tbl_BaoGiaChiTiet.cs">
+      <DependentUpon>DataWeb.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\tbl_Customers.cs">
       <DependentUpon>DataWeb.tt</DependentUpon>
     </Compile>
@@ -985,6 +993,11 @@
     <Content Include="Views\Email\Send.cshtml" />
     <Content Include="Views\Email\Index.cshtml" />
     <Content Include="Views\Email\success.cshtml" />
+    <Content Include="Views\BaoGia\Create.cshtml" />
+    <Content Include="Views\BaoGia\Delete.cshtml" />
+    <Content Include="Views\BaoGia\Details.cshtml" />
+    <Content Include="Views\BaoGia\Edit.cshtml" />
+    <Content Include="Views\BaoGia\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

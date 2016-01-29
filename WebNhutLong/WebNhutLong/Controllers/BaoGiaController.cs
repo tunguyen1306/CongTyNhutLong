@@ -1,0 +1,127 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Data;
+using System.Data.Entity;
+using System.Linq;
+using System.Net;
+using System.Web;
+using System.Web.Mvc;
+using WebNhutLong.Models;
+
+namespace WebNhutLong.Controllers
+{
+    public class BaoGiaController : Controller
+    {
+        private WebNhutLongEntities db = new WebNhutLongEntities();
+
+        // GET: BaoGia
+        public ActionResult Index()
+        {
+            return View(db.tbl_BaoGia.ToList());
+        }
+
+        // GET: BaoGia/Details/5
+        public ActionResult Details(int? id)
+        {
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            tbl_BaoGia tbl_BaoGia = db.tbl_BaoGia.Find(id);
+            if (tbl_BaoGia == null)
+            {
+                return HttpNotFound();
+            }
+            return View(tbl_BaoGia);
+        }
+
+        // GET: BaoGia/Create
+        public ActionResult Create()
+        {
+            return View();
+        }
+
+        // POST: BaoGia/Create
+        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
+        // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult Create([Bind(Include = "ID_BaoGia,ID_Customers,BaoGia_ID_Default,TongTien,LamMau,NgayCoMau,NgayBaoGia,DuyetBaoGia,CodeDonHang,NgayBatDauDuKien,NgayKetThucDuKien,NgayBatDauThucTe,NgayKetThucThucTe,NgayGiao,QuyTrinh,ChiTietQuyTrinh")] tbl_BaoGia tbl_BaoGia)
+        {
+            if (ModelState.IsValid)
+            {
+                db.tbl_BaoGia.Add(tbl_BaoGia);
+                db.SaveChanges();
+                return RedirectToAction("Index");
+            }
+
+            return View(tbl_BaoGia);
+        }
+
+        // GET: BaoGia/Edit/5
+        public ActionResult Edit(int? id)
+        {
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            tbl_BaoGia tbl_BaoGia = db.tbl_BaoGia.Find(id);
+            if (tbl_BaoGia == null)
+            {
+                return HttpNotFound();
+            }
+            return View(tbl_BaoGia);
+        }
+
+        // POST: BaoGia/Edit/5
+        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
+        // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult Edit([Bind(Include = "ID_BaoGia,ID_Customers,BaoGia_ID_Default,TongTien,LamMau,NgayCoMau,NgayBaoGia,DuyetBaoGia,CodeDonHang,NgayBatDauDuKien,NgayKetThucDuKien,NgayBatDauThucTe,NgayKetThucThucTe,NgayGiao,QuyTrinh,ChiTietQuyTrinh")] tbl_BaoGia tbl_BaoGia)
+        {
+            if (ModelState.IsValid)
+            {
+                db.Entry(tbl_BaoGia).State = EntityState.Modified;
+                db.SaveChanges();
+                return RedirectToAction("Index");
+            }
+            return View(tbl_BaoGia);
+        }
+
+        // GET: BaoGia/Delete/5
+        public ActionResult Delete(int? id)
+        {
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            tbl_BaoGia tbl_BaoGia = db.tbl_BaoGia.Find(id);
+            if (tbl_BaoGia == null)
+            {
+                return HttpNotFound();
+            }
+            return View(tbl_BaoGia);
+        }
+
+        // POST: BaoGia/Delete/5
+        [HttpPost, ActionName("Delete")]
+        [ValidateAntiForgeryToken]
+        public ActionResult DeleteConfirmed(int id)
+        {
+            tbl_BaoGia tbl_BaoGia = db.tbl_BaoGia.Find(id);
+            db.tbl_BaoGia.Remove(tbl_BaoGia);
+            db.SaveChanges();
+            return RedirectToAction("Index");
+        }
+
+        protected override void Dispose(bool disposing)
+        {
+            if (disposing)
+            {
+                db.Dispose();
+            }
+            base.Dispose(disposing);
+        }
+    }
+}
