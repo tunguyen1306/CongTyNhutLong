@@ -982,13 +982,6 @@
     <Content Include="Views\Login\Edit.cshtml" />
     <Content Include="Views\Login\Index.cshtml" />
     <Content Include="Views\Login\Login.cshtml" />
-    <Content Include="Views\DonHang\Create.cshtml" />
-    <Content Include="Views\DonHang\Delete.cshtml" />
-    <Content Include="Views\DonHang\Details.cshtml" />
-    <Content Include="Views\DonHang\Edit.cshtml" />
-    <Content Include="Views\DonHang\Index.cshtml" />
-    <Content Include="Views\DonHang\ChitietDonhang.cshtml" />
-    <Content Include="Views\DonHang\BaoCao.cshtml" />
     <Content Include="Views\Email\Send.cshtml" />
     <Content Include="Views\Email\Index.cshtml" />
     <Content Include="Views\Email\success.cshtml" />
