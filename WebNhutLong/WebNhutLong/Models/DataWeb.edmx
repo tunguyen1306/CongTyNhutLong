@@ -65,7 +65,6 @@
           <Property Name="LoaigiayProducts" Type="nvarchar" MaxLength="500" />
           <Property Name="OffsetFlexoProducts" Type="nvarchar" MaxLength="500" />
           <Property Name="DanKimProducts" Type="nvarchar" MaxLength="50" />
-          <Property Name="SoluongProducts" Type="int" />
           <Property Name="GiaProducts" Type="nvarchar" MaxLength="50" />
           <Property Name="CreatedDateProducts" Type="datetime" />
           <Property Name="ModifyDateProducts" Type="datetime" />
@@ -137,7 +136,6 @@
           <Property Name="LoaigiayProducts" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
           <Property Name="OffsetFlexoProducts" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
           <Property Name="DanKimProducts" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="SoluongProducts" Type="Int32" />
           <Property Name="GiaProducts" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="CreatedDateProducts" Type="DateTime" Precision="3" />
           <Property Name="ModifyDateProducts" Type="DateTime" Precision="3" />
@@ -229,7 +227,6 @@
                 <ScalarProperty Name="ModifyDateProducts" ColumnName="ModifyDateProducts" />
                 <ScalarProperty Name="CreatedDateProducts" ColumnName="CreatedDateProducts" />
                 <ScalarProperty Name="GiaProducts" ColumnName="GiaProducts" />
-                <ScalarProperty Name="SoluongProducts" ColumnName="SoluongProducts" />
                 <ScalarProperty Name="DanKimProducts" ColumnName="DanKimProducts" />
                 <ScalarProperty Name="OffsetFlexoProducts" ColumnName="OffsetFlexoProducts" />
                 <ScalarProperty Name="LoaigiayProducts" ColumnName="LoaigiayProducts" />

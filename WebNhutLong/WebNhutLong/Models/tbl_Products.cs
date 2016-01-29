@@ -7,8 +7,6 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-using Newtonsoft.Json;
-
 namespace WebNhutLong.Models
 {
     using System;
@@ -22,7 +20,6 @@ namespace WebNhutLong.Models
         public string LoaigiayProducts { get; set; }
         public string OffsetFlexoProducts { get; set; }
         public string DanKimProducts { get; set; }
-        public Nullable<int> SoluongProducts { get; set; }
         public string GiaProducts { get; set; }
         public Nullable<System.DateTime> CreatedDateProducts { get; set; }
         public Nullable<System.DateTime> ModifyDateProducts { get; set; }
@@ -32,5 +29,4 @@ namespace WebNhutLong.Models
         public string CodeProducts { get; set; }
         public string QuyCachProducts { get; set; }
     }
- 
 }

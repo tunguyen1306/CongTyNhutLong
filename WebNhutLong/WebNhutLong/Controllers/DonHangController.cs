@@ -169,7 +169,7 @@ namespace WebNhutLong.Controllers
                     pro.LoaigiayProducts,
                     pro.OffsetFlexoProducts,
                     pro.DanKimProducts,
-                    pro.SoluongProducts,
+                   
                     pro.GiaProducts,
                     pro.CreatedDateProducts,
                     pro.ModifyDateProducts,
@@ -191,7 +191,7 @@ namespace WebNhutLong.Controllers
                         LoaigiayProducts = x.LoaigiayProducts,
                         OffsetFlexoProducts = x.OffsetFlexoProducts,
                         DanKimProducts = x.DanKimProducts,
-                        SoluongProducts = x.SoluongProducts,
+                       
                         GiaProducts = x.GiaProducts,
                         CreatedDateProducts = x.CreatedDateProducts,
                         ModifyDateProducts = x.ModifyDateProducts,
