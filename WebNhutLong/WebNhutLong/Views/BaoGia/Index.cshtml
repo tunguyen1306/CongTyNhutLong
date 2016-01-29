@@ -1,5 +1,5 @@
 ﻿@using WebNhutLong.Models
-@model IEnumerable<WebNhutLong.Models.tbl_BaoGia>
+@model IEnumerable<BaoGiaColumn>
 
 
 <div class="row">
@@ -17,7 +17,7 @@
         <div class="panel panel-default">
 
             <div class="panel-heading">
-                @Html.ActionLink("Thêm báo giá", "Create", "", new { @class = "btn btn-primary" })
+                @Html.ActionLink("Thêm báo giá", "Create", "", new {@class = "btn btn-primary"})
             </div>
             <!-- /.panel-heading -->
             <div class="panel-body">
@@ -31,7 +31,7 @@
                                     Mã đơn hàng
                                 </th>
                                 <th>
-                                   Khách hàng
+                                    Khách hàng
                                 </th>
                                 <th>
                                     Tổng tiền
@@ -40,19 +40,19 @@
                                     Làm mẫu
                                 </th>
                                 <th>
-                                   Ngày có mẫu
+                                    Ngày có mẫu
                                 </th>
                                 <th>
-                                   Ngày báo giá
+                                    Ngày báo giá
                                 </th>
                                 <th>
                                     Lần báo giá
                                 </th>
                                 <th>
-                                   Duyệt báo giá
+                                    Duyệt báo giá
                                 </th>
                                 <th>
-                                   Ngày bắt đầu dự kiến
+                                    Ngày bắt đầu dự kiến
                                 </th>
                                 <th>
                                     Ngày kết thúc dự kiến
@@ -63,56 +63,71 @@
                                 <th>
                                     Ngày kết thúc thức tế
                                 </th>
-                                <th>Trạng thái</th>
+                                <th>
+                                    Ngày giao hàng
+                                </th>
+                                <th>
+                                    Quy trình
+                                </th>
+                                <th>
+                                    Chi tiết quy trình
+                                </th>
+                              
                                 <th></th>
                             </tr>
                         </thead>
                         <tbody>
-                            @foreach (tbl_BaoGia item in Model)
+                            @foreach (BaoGiaColumn item in Model)
                             {
                                 <tr>
                                     <td>
-                                        @Html.DisplayFor(modelItem => item.CodeProducts)
+                                        @Html.DisplayFor(modelItem => item.CodeDonHang)
                                     </td>
                                     <td>
-                                        @Html.DisplayFor(modelItem => item.NameProducts)
+                                        @Html.DisplayFor(modelItem => item.NameCustomers)
 
                                     </td>
                                     <td>
-                                        @Html.DisplayFor(modelItem => item.SolopProducts)
+                                        @Html.DisplayFor(modelItem => item.TongTien)
 
                                     </td>
                                     <td>
-                                        @Html.DisplayFor(modelItem => item.LoaigiayProducts)
+                                        @Html.DisplayFor(modelItem => item.LamMau)
                                     </td>
                                     <td>
-                                        @Html.DisplayFor(modelItem => item.OffsetFlexoProducts)
+                                        @Html.DisplayFor(modelItem => item.NgayCoMau)
 
                                     </td>
                                     <td>
-                                        @Html.DisplayFor(modelItem => item.DanKimProducts)
+                                        @Html.DisplayFor(modelItem => item.NgayBaoGia)
                                     </td>
                                     <td>
-                                        @Html.DisplayFor(modelItem => item.QuyCachProducts)
+                                        @Html.DisplayFor(modelItem => item.LanBaoGia)
 
                                     </td>
                                     <td>
-                                        @Html.DisplayFor(modelItem => item.SoluongProducts)
+                                        @Html.DisplayFor(modelItem => item.DuyetBaoGia)
 
                                     </td>
                                     <td>
-                                        @Html.DisplayFor(modelItem => item.GiaProducts)
+                                        @Html.DisplayFor(modelItem => item.NgayBatDauDuKien)
                                     </td>
                                     <td>
-                                        @Html.DisplayFor(modelItem => item.CreatedDateProducts)
+                                        @Html.DisplayFor(modelItem => item.NgayKetThucDuKien)
                                     </td>
                                     <td>
-                                        @(item.StatusProducts == 1 ? "Hoạt động" : "Không hoạt động")
+                                        @Html.DisplayFor(modelItem => item.NgayGiao)
                                     </td>
                                     <td>
-                                        @Html.ActionLink("Sửa", "Edit", new { id = item.ID_Products }, htmlAttributes: new { @class = "btn btn-outline btn-primary btn-xs" })
+                                        @Html.DisplayFor(modelItem => item.QuyTrinh)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.ChiTietQuyTrinh)
+                                    </td>
+                                    <td>
+                                        @Html.ActionLink("Sửa", "Edit", new {id = item.ID_BaoGia}, new {@class = "btn btn-outline btn-primary btn-xs"})
 
-                                        @Html.ActionLink("Xóa", "Delete", new { id = item.ID_Products }, htmlAttributes: new { @class = "btn btn-outline btn-primary btn-xs" })
+                                        @Html.ActionLink("Xóa", "Delete", new {id = item.ID_BaoGia}, new {@class = "btn btn-outline btn-primary btn-xs"})
                                     </td>
                                 </tr>
                             }

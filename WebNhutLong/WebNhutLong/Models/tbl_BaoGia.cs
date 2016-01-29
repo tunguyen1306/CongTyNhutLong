@@ -30,14 +30,6 @@ namespace WebNhutLong.Models
         public Nullable<System.DateTime> NgayGiao { get; set; }
         public Nullable<int> QuyTrinh { get; set; }
         public string ChiTietQuyTrinh { get; set; }
-        public string NameCustomers { get; set; }
-        public string ChucvuCustomers { get; set; }
-        public string CongTyCustomers { get; set; }
-        public string CodeCustomers { get; set; }
-        public string EmailCustomers { get; set; }
-        public string PhoneCustomers { get; set; }
-        public string FaxCustomers { get; set; }
-        public string DiachiCustomers { get; set; }
-        public string MasothueCustomers { get; set; }
+        public Nullable<int> LanBaoGia { get; set; }
     }
 }

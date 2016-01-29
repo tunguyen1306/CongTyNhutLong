@@ -1,10 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Data;
-using System.Data.Entity;
 using System.Linq;
 using System.Net;
-using System.Web;
 using System.Web.Mvc;
 using WebNhutLong.Models;
 
@@ -12,12 +9,47 @@ namespace WebNhutLong.Controllers
 {
     public class BaoGiaController : Controller
     {
-        private WebNhutLongEntities db = new WebNhutLongEntities();
+        private readonly WebNhutLongEntities db = new WebNhutLongEntities();
 
         // GET: BaoGia
         public ActionResult Index()
         {
-            return View(db.tbl_BaoGia.ToList());
+            var query = (from bao in db.tbl_BaoGia
+                join cus in db.tbl_Customers on bao.ID_Customers equals cus.IDCustomers
+                select new
+                {
+                    bao,
+                    cus
+                }).ToList().Select(x => new BaoGiaColumn
+                {
+                    ID_BaoGia = x.bao.ID_BaoGia,
+                    NameCustomers = x.cus.NameCustomers,
+                    BaoGia_ID_Default = x.bao.BaoGia_ID_Default,
+                    TongTien = x.bao.TongTien,
+                    LamMau = x.bao.LamMau,
+                    NgayCoMau = x.bao.NgayCoMau,
+                    NgayBaoGia = x.bao.NgayBaoGia,
+                    DuyetBaoGia = x.bao.DuyetBaoGia,
+                    CodeDonHang = x.bao.CodeDonHang,
+                    NgayBatDauDuKien = x.bao.NgayBatDauDuKien,
+                    NgayKetThucDuKien = x.bao.NgayKetThucDuKien,
+                    NgayBatDauThucTe = x.bao.NgayBatDauThucTe,
+                    NgayKetThucThucTe = x.bao.NgayKetThucThucTe,
+                    NgayGiao = x.bao.NgayGiao,
+                    QuyTrinh = x.bao.QuyTrinh,
+                    ChiTietQuyTrinh = x.bao.ChiTietQuyTrinh,
+                    LanBaoGia = x.bao.LanBaoGia,
+                    ChucvuCustomers = x.cus.ChucvuCustomers,
+                    CongTyCustomers = x.cus.CongTyCustomers,
+                    CodeCustomers = x.cus.CodeCustomers,
+                    EmailCustomers = x.cus.EmailCustomers,
+                    PhoneCustomers = x.cus.PhoneCustomers,
+                    FaxCustomers = x.cus.FaxCustomers,
+                    DiachiCustomers = x.cus.DiachiCustomers,
+                    MasothueCustomers = x.cus.MasothueCustomers,
+                });
+
+            return View(query.ToList());
         }
 
         // GET: BaoGia/Details/5
@@ -46,7 +78,11 @@ namespace WebNhutLong.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "ID_BaoGia,ID_Customers,BaoGia_ID_Default,TongTien,LamMau,NgayCoMau,NgayBaoGia,DuyetBaoGia,CodeDonHang,NgayBatDauDuKien,NgayKetThucDuKien,NgayBatDauThucTe,NgayKetThucThucTe,NgayGiao,QuyTrinh,ChiTietQuyTrinh")] tbl_BaoGia tbl_BaoGia)
+        public ActionResult Create(
+            [Bind(
+                Include =
+                    "ID_BaoGia,ID_Customers,BaoGia_ID_Default,TongTien,LamMau,NgayCoMau,NgayBaoGia,DuyetBaoGia,CodeDonHang,NgayBatDauDuKien,NgayKetThucDuKien,NgayBatDauThucTe,NgayKetThucThucTe,NgayGiao,QuyTrinh,ChiTietQuyTrinh,LanBaoGia"
+                )] tbl_BaoGia tbl_BaoGia)
         {
             if (ModelState.IsValid)
             {
@@ -78,7 +114,11 @@ namespace WebNhutLong.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "ID_BaoGia,ID_Customers,BaoGia_ID_Default,TongTien,LamMau,NgayCoMau,NgayBaoGia,DuyetBaoGia,CodeDonHang,NgayBatDauDuKien,NgayKetThucDuKien,NgayBatDauThucTe,NgayKetThucThucTe,NgayGiao,QuyTrinh,ChiTietQuyTrinh")] tbl_BaoGia tbl_BaoGia)
+        public ActionResult Edit(
+            [Bind(
+                Include =
+                    "ID_BaoGia,ID_Customers,BaoGia_ID_Default,TongTien,LamMau,NgayCoMau,NgayBaoGia,DuyetBaoGia,CodeDonHang,NgayBatDauDuKien,NgayKetThucDuKien,NgayBatDauThucTe,NgayKetThucThucTe,NgayGiao,QuyTrinh,ChiTietQuyTrinh,LanBaoGia"
+                )] tbl_BaoGia tbl_BaoGia)
         {
             if (ModelState.IsValid)
             {

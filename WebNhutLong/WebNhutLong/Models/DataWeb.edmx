@@ -25,6 +25,7 @@
           <Property Name="NgayGiao" Type="datetime" />
           <Property Name="QuyTrinh" Type="int" />
           <Property Name="ChiTietQuyTrinh" Type="ntext" />
+          <Property Name="LanBaoGia" Type="int" />
         </EntityType>
         <EntityType Name="tbl_BaoGiaChiTiet">
           <Key>
@@ -204,6 +205,7 @@
           <Property Name="NgayGiao" Type="DateTime" Precision="3" />
           <Property Name="QuyTrinh" Type="Int32" />
           <Property Name="ChiTietQuyTrinh" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="LanBaoGia" Type="Int32" />
         </EntityType>
         <EntityType Name="tbl_BaoGiaChiTiet">
           <Key>
@@ -292,6 +294,7 @@
           <EntitySetMapping Name="tbl_BaoGia">
             <EntityTypeMapping TypeName="WebNhutLongModel.tbl_BaoGia">
               <MappingFragment StoreEntitySet="tbl_BaoGia">
+                <ScalarProperty Name="LanBaoGia" ColumnName="LanBaoGia" />
                 <ScalarProperty Name="ChiTietQuyTrinh" ColumnName="ChiTietQuyTrinh" />
                 <ScalarProperty Name="QuyTrinh" ColumnName="QuyTrinh" />
                 <ScalarProperty Name="NgayGiao" ColumnName="NgayGiao" />
