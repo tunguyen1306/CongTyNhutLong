@@ -25,36 +25,6 @@
           <Property Name="CreateUserCustomers" Type="nvarchar" MaxLength="50" />
           <Property Name="ModifyUserCustomers" Type="nvarchar" MaxLength="50" />
         </EntityType>
-        <EntityType Name="tbl_DonHang">
-          <Key>
-            <PropertyRef Name="ID_Donhang" />
-          </Key>
-          <Property Name="ID_Donhang" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="ID_Products" Type="int" />
-          <Property Name="ID_Customers" Type="int" />
-          <Property Name="CreateDate" Type="datetime" />
-          <Property Name="ModifyDate" Type="datetime" />
-          <Property Name="CreateUser" Type="nvarchar" MaxLength="50" />
-          <Property Name="ModifyUser" Type="nvarchar" MaxLength="50" />
-          <Property Name="Status" Type="int" />
-          <Property Name="CodeDonHang" Type="varchar" MaxLength="50" />
-          <Property Name="TimeGiaohang" Type="int" />
-          <Property Name="DiaChiGiaoHang" Type="nvarchar" MaxLength="500" />
-          <Property Name="TotalDonHang" Type="nvarchar" MaxLength="50" />
-        </EntityType>
-        <EntityType Name="tbl_HoaDon">
-          <Key>
-            <PropertyRef Name="ID_HoaDon" />
-          </Key>
-          <Property Name="ID_HoaDon" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="ID_Products" Type="int" />
-          <Property Name="ID_Customers" Type="int" />
-          <Property Name="Status" Type="int" />
-          <Property Name="CreateDate" Type="datetime" />
-          <Property Name="ModifyDate" Type="datetime" />
-          <Property Name="CreateUser" Type="nvarchar" MaxLength="250" />
-          <Property Name="ModifyUser" Type="nvarchar" MaxLength="250" />
-        </EntityType>
         <EntityType Name="tbl_Products">
           <Key>
             <PropertyRef Name="ID_Products" />
@@ -74,6 +44,17 @@
           <Property Name="CodeProducts" Type="nvarchar" MaxLength="50" />
           <Property Name="QuyCachProducts" Type="nvarchar" MaxLength="500" />
         </EntityType>
+        <EntityType Name="tbl_QuyTrinh">
+          <Key>
+            <PropertyRef Name="ID_BaoGia" />
+          </Key>
+          <Property Name="ID_BaoGia" Type="int" Nullable="false" />
+          <Property Name="TenBuoc" Type="nvarchar" MaxLength="250" />
+          <Property Name="ThuTu" Type="int" />
+          <Property Name="TrangThai" Type="int" />
+          <Property Name="NgayBatDauKetThuc" Type="datetime" />
+          <Property Name="NgayKetThucThucTe" Type="datetime" />
+        </EntityType>
         <EntityType Name="tbl_User">
           <Key>
             <PropertyRef Name="IDUser" />
@@ -90,9 +71,8 @@
         </EntityType>
         <EntityContainer Name="WebNhutLongModelStoreContainer">
           <EntitySet Name="tbl_Customers" EntityType="Self.tbl_Customers" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="tbl_DonHang" EntityType="Self.tbl_DonHang" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="tbl_HoaDon" EntityType="Self.tbl_HoaDon" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="tbl_Products" EntityType="Self.tbl_Products" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tbl_QuyTrinh" EntityType="Self.tbl_QuyTrinh" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="tbl_User" EntityType="Self.tbl_User" Schema="dbo" store:Type="Tables" />
         </EntityContainer>
       </Schema></edmx:StorageModels>
@@ -122,9 +102,8 @@
         <EntityContainer Name="WebNhutLongEntities" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="tbl_Customers" EntityType="Self.tbl_Customers" />
           <EntitySet Name="tbl_Products" EntityType="WebNhutLongModel.tbl_Products" />
-          <EntitySet Name="tbl_DonHang" EntityType="WebNhutLongModel.tbl_DonHang" />
           <EntitySet Name="tbl_User" EntityType="WebNhutLongModel.tbl_User" />
-          <EntitySet Name="tbl_HoaDon" EntityType="WebNhutLongModel.tbl_HoaDon" />
+          <EntitySet Name="tbl_QuyTrinh" EntityType="WebNhutLongModel.tbl_QuyTrinh" />
         </EntityContainer>
         <EntityType Name="tbl_Products">
           <Key>
@@ -145,23 +124,6 @@
           <Property Name="CodeProducts" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="QuyCachProducts" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
         </EntityType>
-        <EntityType Name="tbl_DonHang">
-          <Key>
-            <PropertyRef Name="ID_Donhang" />
-          </Key>
-          <Property Name="ID_Donhang" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="ID_Products" Type="Int32" />
-          <Property Name="ID_Customers" Type="Int32" />
-          <Property Name="CreateDate" Type="DateTime" Precision="3" />
-          <Property Name="ModifyDate" Type="DateTime" Precision="3" />
-          <Property Name="CreateUser" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="ModifyUser" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="Status" Type="Int32" />
-          <Property Name="CodeDonHang" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="TimeGiaohang" Type="Int32" />
-          <Property Name="TotalDonHang" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="DiaChiGiaoHang" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
-        </EntityType>
         <EntityType Name="tbl_User">
           <Key>
             <PropertyRef Name="IDUser" />
@@ -176,18 +138,16 @@
           <Property Name="CreateDate" Type="DateTime" Precision="3" />
           <Property Name="Password" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
         </EntityType>
-        <EntityType Name="tbl_HoaDon">
+        <EntityType Name="tbl_QuyTrinh">
           <Key>
-            <PropertyRef Name="ID_HoaDon" />
+            <PropertyRef Name="ID_BaoGia" />
           </Key>
-          <Property Name="ID_HoaDon" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="ID_Products" Type="Int32" />
-          <Property Name="ID_Customers" Type="Int32" />
-          <Property Name="Status" Type="Int32" />
-          <Property Name="CreateDate" Type="DateTime" Precision="3" />
-          <Property Name="ModifyDate" Type="DateTime" Precision="3" />
-          <Property Name="CreateUser" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
-          <Property Name="ModifyUser" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+          <Property Name="ID_BaoGia" Type="Int32" Nullable="false" />
+          <Property Name="TenBuoc" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+          <Property Name="ThuTu" Type="Int32" />
+          <Property Name="TrangThai" Type="Int32" />
+          <Property Name="NgayBatDauKetThuc" Type="DateTime" Precision="3" />
+          <Property Name="NgayKetThucThucTe" Type="DateTime" Precision="3" />
         </EntityType>
       </Schema>
     </edmx:ConceptualModels>
@@ -236,24 +196,6 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="tbl_DonHang">
-            <EntityTypeMapping TypeName="WebNhutLongModel.tbl_DonHang">
-              <MappingFragment StoreEntitySet="tbl_DonHang">
-                <ScalarProperty Name="DiaChiGiaoHang" ColumnName="DiaChiGiaoHang" />
-                <ScalarProperty Name="TotalDonHang" ColumnName="TotalDonHang" />
-                <ScalarProperty Name="TimeGiaohang" ColumnName="TimeGiaohang" />
-                <ScalarProperty Name="CodeDonHang" ColumnName="CodeDonHang" />
-                <ScalarProperty Name="Status" ColumnName="Status" />
-                <ScalarProperty Name="ModifyUser" ColumnName="ModifyUser" />
-                <ScalarProperty Name="CreateUser" ColumnName="CreateUser" />
-                <ScalarProperty Name="ModifyDate" ColumnName="ModifyDate" />
-                <ScalarProperty Name="CreateDate" ColumnName="CreateDate" />
-                <ScalarProperty Name="ID_Customers" ColumnName="ID_Customers" />
-                <ScalarProperty Name="ID_Products" ColumnName="ID_Products" />
-                <ScalarProperty Name="ID_Donhang" ColumnName="ID_Donhang" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="tbl_User">
             <EntityTypeMapping TypeName="WebNhutLongModel.tbl_User">
               <MappingFragment StoreEntitySet="tbl_User">
@@ -269,17 +211,15 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="tbl_HoaDon">
-            <EntityTypeMapping TypeName="WebNhutLongModel.tbl_HoaDon">
-              <MappingFragment StoreEntitySet="tbl_HoaDon">
-                <ScalarProperty Name="ModifyUser" ColumnName="ModifyUser" />
-                <ScalarProperty Name="CreateUser" ColumnName="CreateUser" />
-                <ScalarProperty Name="ModifyDate" ColumnName="ModifyDate" />
-                <ScalarProperty Name="CreateDate" ColumnName="CreateDate" />
-                <ScalarProperty Name="Status" ColumnName="Status" />
-                <ScalarProperty Name="ID_Customers" ColumnName="ID_Customers" />
-                <ScalarProperty Name="ID_Products" ColumnName="ID_Products" />
-                <ScalarProperty Name="ID_HoaDon" ColumnName="ID_HoaDon" />
+          <EntitySetMapping Name="tbl_QuyTrinh">
+            <EntityTypeMapping TypeName="WebNhutLongModel.tbl_QuyTrinh">
+              <MappingFragment StoreEntitySet="tbl_QuyTrinh">
+                <ScalarProperty Name="NgayKetThucThucTe" ColumnName="NgayKetThucThucTe" />
+                <ScalarProperty Name="NgayBatDauKetThuc" ColumnName="NgayBatDauKetThuc" />
+                <ScalarProperty Name="TrangThai" ColumnName="TrangThai" />
+                <ScalarProperty Name="ThuTu" ColumnName="ThuTu" />
+                <ScalarProperty Name="TenBuoc" ColumnName="TenBuoc" />
+                <ScalarProperty Name="ID_BaoGia" ColumnName="ID_BaoGia" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

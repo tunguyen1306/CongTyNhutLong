@@ -12,15 +12,13 @@ namespace WebNhutLong.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class tbl_HoaDon
+    public partial class tbl_QuyTrinh
     {
-        public int ID_HoaDon { get; set; }
-        public Nullable<int> ID_Products { get; set; }
-        public Nullable<int> ID_Customers { get; set; }
-        public Nullable<int> Status { get; set; }
-        public Nullable<System.DateTime> CreateDate { get; set; }
-        public Nullable<System.DateTime> ModifyDate { get; set; }
-        public string CreateUser { get; set; }
-        public string ModifyUser { get; set; }
+        public int ID_BaoGia { get; set; }
+        public string TenBuoc { get; set; }
+        public Nullable<int> ThuTu { get; set; }
+        public Nullable<int> TrangThai { get; set; }
+        public Nullable<System.DateTime> NgayBatDauKetThuc { get; set; }
+        public Nullable<System.DateTime> NgayKetThucThucTe { get; set; }
     }
 }

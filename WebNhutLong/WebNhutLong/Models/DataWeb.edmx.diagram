@@ -7,9 +7,8 @@
       <Diagram DiagramId="937c6d547e8e4a45a72d983d0719a375" Name="Diagram1" ZoomLevel="106">
         <EntityTypeShape EntityType="WebNhutLongModel.tbl_Customers" Width="1.5" PointX="0.75" PointY="0.75" IsExpanded="true" />
         <EntityTypeShape EntityType="WebNhutLongModel.tbl_Products" PointX="5.125" PointY="0.875" Width="1.5" />
-        <EntityTypeShape EntityType="WebNhutLongModel.tbl_DonHang" Width="1.5" PointX="2.625" PointY="1" />
         <EntityTypeShape EntityType="WebNhutLongModel.tbl_User" Width="1.5" PointX="8" PointY="1.375" />
-        <EntityTypeShape EntityType="WebNhutLongModel.tbl_HoaDon" Width="1.5" PointX="0.75" PointY="5.75" />
+        <EntityTypeShape EntityType="WebNhutLongModel.tbl_QuyTrinh" Width="1.5" PointX="2.75" PointY="1" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>
