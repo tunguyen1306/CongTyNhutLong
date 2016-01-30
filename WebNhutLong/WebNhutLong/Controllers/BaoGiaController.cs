@@ -52,7 +52,6 @@ namespace WebNhutLong.Controllers
                     DiachiCustomers = x.cus.DiachiCustomers,
                     MasothueCustomers = x.cus.MasothueCustomers,
                 });
-
             return View(query.ToList());
         }
 
@@ -94,7 +93,7 @@ namespace WebNhutLong.Controllers
             {
                 db.tbl_BaoGia.Add(tbl_BaoGia);
                 db.SaveChanges();
-                return RedirectToAction("Index");
+                return RedirectToAction("Index", "Customers");
             }
 
             return View(tbl_BaoGia);
@@ -175,7 +174,7 @@ namespace WebNhutLong.Controllers
             {
                 db.Entry(tbl_BaoGia).State = EntityState.Modified;
                 db.SaveChanges();
-                return RedirectToAction("Index");
+                return RedirectToAction("Index", "Customers");
             }
             return View(tbl_BaoGia);
         }
@@ -203,7 +202,7 @@ namespace WebNhutLong.Controllers
             tbl_BaoGia tbl_BaoGia = db.tbl_BaoGia.Find(id);
             db.tbl_BaoGia.Remove(tbl_BaoGia);
             db.SaveChanges();
-            return RedirectToAction("Index");
+            return RedirectToAction("Index", "Customers");
         }
 
         protected override void Dispose(bool disposing)
