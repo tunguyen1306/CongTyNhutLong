@@ -12,10 +12,13 @@ namespace WebNhutLong.Controllers
         private readonly WebNhutLongEntities db = new WebNhutLongEntities();
 
         // GET: BaoGia
-        public ActionResult Index()
+      
+
+        public ActionResult Index(int id)
         {
             var query = (from bao in db.tbl_BaoGia
                 join cus in db.tbl_Customers on bao.ID_Customers equals cus.IDCustomers
+                         where bao.ID_Customers==id
                 select new
                 {
                     bao,
@@ -23,6 +26,7 @@ namespace WebNhutLong.Controllers
                 }).ToList().Select(x => new BaoGiaColumn
                 {
                     ID_BaoGia = x.bao.ID_BaoGia,
+                    ID_Customers = x.cus.IDCustomers,
                     NameCustomers = x.cus.NameCustomers,
                     BaoGia_ID_Default = x.bao.BaoGia_ID_Default,
                     TongTien = x.bao.TongTien,

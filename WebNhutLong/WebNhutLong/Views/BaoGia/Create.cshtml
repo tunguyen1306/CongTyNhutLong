@@ -92,7 +92,9 @@
                             <div class="form-group">
 
                                 <input type="submit" value="Thêm" class="btn btn-primary" />
-                                @Html.ActionLink("Hủy", "Index", "", new {@class = "btn btn-primary"})
+                              
+                                @Html.ActionLink("Hủy", "Index",1, htmlAttributes: new { @class = "btn btn-primary" })
+
 
                             </div>
 

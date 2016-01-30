@@ -69,7 +69,7 @@
                             @foreach (tbl_Customers item in Model)
                             {
                                 <tr><td>
-                                        @Html.ActionLink("Thêm báo giá", "Index","BaoGia", new { id = item.IDCustomers }, htmlAttributes: new { @class = "btn btn-outline btn-primary btn-xs" })
+                                        @Html.ActionLink("Thêm báo giá", "Index", "BaoGia", new { id = item.IDCustomers }, htmlAttributes: new { @class = "btn btn-outline btn-primary btn-xs" })
 </td>
                                     <td>
                                         @Html.DisplayFor(modelItem => item.CodeCustomers)
