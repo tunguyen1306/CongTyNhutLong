@@ -34,5 +34,8 @@ namespace WebNhutLong.Models
         public string FaxCustomers { get; set; }
         public string DiachiCustomers { get; set; }
         public string MasothueCustomers { get; set; }
+
+
+        public List<tbl_Products> Products { get; set; }
     }
 }

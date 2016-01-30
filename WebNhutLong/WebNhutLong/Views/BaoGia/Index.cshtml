@@ -51,28 +51,6 @@
                                 <th>
                                     Duyệt báo giá
                                 </th>
-                                <th>
-                                    Ngày bắt đầu dự kiến
-                                </th>
-                                <th>
-                                    Ngày kết thúc dự kiến
-                                </th>
-                                <th>
-                                    Ngày bắt đầu thực tế
-                                </th>
-                                <th>
-                                    Ngày kết thúc thức tế
-                                </th>
-                                <th>
-                                    Ngày giao hàng
-                                </th>
-                                <th>
-                                    Quy trình
-                                </th>
-                                <th>
-                                    Chi tiết quy trình
-                                </th>
-                              
                                 <th></th>
                             </tr>
                         </thead>
@@ -92,7 +70,7 @@
 
                                     </td>
                                     <td>
-                                        @Html.DisplayFor(modelItem => item.LamMau)
+                                        @(item.LamMau==1?"Có":"Không")
                                     </td>
                                     <td>
                                         @Html.DisplayFor(modelItem => item.NgayCoMau)
@@ -106,28 +84,15 @@
 
                                     </td>
                                     <td>
-                                        @Html.DisplayFor(modelItem => item.DuyetBaoGia)
+                                        @(item.LamMau == 1 ? "Đã duyệt" : "Chưa duyệt")
 
                                     </td>
-                                    <td>
-                                        @Html.DisplayFor(modelItem => item.NgayBatDauDuKien)
-                                    </td>
-                                    <td>
-                                        @Html.DisplayFor(modelItem => item.NgayKetThucDuKien)
-                                    </td>
-                                    <td>
-                                        @Html.DisplayFor(modelItem => item.NgayGiao)
-                                    </td>
-                                    <td>
-                                        @Html.DisplayFor(modelItem => item.QuyTrinh)
-                                    </td>
-                                    <td>
-                                        @Html.DisplayFor(modelItem => item.ChiTietQuyTrinh)
-                                    </td>
+                                 
                                     <td>
                                         @Html.ActionLink("Sửa", "Edit", new {id = item.ID_BaoGia}, new {@class = "btn btn-outline btn-primary btn-xs"})
 
                                         @Html.ActionLink("Xóa", "Delete", new {id = item.ID_BaoGia}, new {@class = "btn btn-outline btn-primary btn-xs"})
+                                        @Html.ActionLink("Xem chi tiết", "Detail", new { id = item.ID_BaoGia }, new { @class = "btn btn-outline btn-primary btn-xs" })
                                     </td>
                                 </tr>
                             }

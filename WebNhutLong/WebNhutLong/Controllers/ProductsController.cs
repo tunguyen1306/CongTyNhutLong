@@ -60,7 +60,7 @@ namespace WebNhutLong.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "ID_Products,NameProducts,SolopProducts,QuyCachProducts,LoaigiayProducts,OffsetFlexoProducts,DanKimProducts,SoluongProducts,GiaProducts,CreatedDateProducts,ModifyDateProducts,CreateUserProducts,ModifyUserProducts,StatusProducts,CodeProducts")] tbl_Products tbl_Products)
+        public ActionResult Create([Bind(Include = "ID_Products,NameProducts,SolopProducts,QuyCachProducts,LoaigiayProducts,OffsetFlexoProducts,DanKimProducts,GiaProducts,CreatedDateProducts,ModifyDateProducts,CreateUserProducts,ModifyUserProducts,StatusProducts,CodeProducts")] tbl_Products tbl_Products)
         {
             if (Session["username"] == null)
             {
@@ -100,7 +100,7 @@ namespace WebNhutLong.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "ID_Products,NameProducts,SolopProducts,QuyCachProducts,LoaigiayProducts,OffsetFlexoProducts,DanKimProducts,SoluongProducts,GiaProducts,CreatedDateProducts,ModifyDateProducts,CreateUserProducts,ModifyUserProducts,StatusProducts,CodeProducts")] tbl_Products tbl_Products)
+        public ActionResult Edit([Bind(Include = "ID_Products,NameProducts,SolopProducts,QuyCachProducts,LoaigiayProducts,OffsetFlexoProducts,DanKimProducts,GiaProducts,CreatedDateProducts,ModifyDateProducts,CreateUserProducts,ModifyUserProducts,StatusProducts,CodeProducts")] tbl_Products tbl_Products)
         {
             if (Session["username"] == null)
             {
