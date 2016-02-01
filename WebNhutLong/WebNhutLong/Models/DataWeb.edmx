@@ -57,6 +57,39 @@
           <Property Name="CreateUserCustomers" Type="nvarchar" MaxLength="50" />
           <Property Name="ModifyUserCustomers" Type="nvarchar" MaxLength="50" />
         </EntityType>
+        <EntityType Name="tbl_OrderTem">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="code" Type="nvarchar" MaxLength="50" />
+          <Property Name="date_begin" Type="datetime" />
+          <Property Name="date_end" Type="datetime" />
+          <Property Name="customer_id" Type="int" />
+          <Property Name="status" Type="int" />
+        </EntityType>
+        <EntityType Name="tbl_OrderTem_BaoGia">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="order_id" Type="int" />
+          <Property Name="total_money" Type="float" />
+          <Property Name="date_begin" Type="datetime" />
+          <Property Name="date_end" Type="datetime" />
+          <Property Name="status" Type="int" />
+          <Property Name="offset" Type="int" />
+        </EntityType>
+        <EntityType Name="tbl_OrderTem_BaoGia_Detail">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="baogia_id" Type="int" />
+          <Property Name="sanpam_id" Type="int" />
+          <Property Name="soluong" Type="int" />
+          <Property Name="money" Type="float" />
+        </EntityType>
         <EntityType Name="tbl_Products">
           <Key>
             <PropertyRef Name="ID_Products" />
@@ -105,6 +138,9 @@
           <EntitySet Name="tbl_BaoGia" EntityType="Self.tbl_BaoGia" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="tbl_BaoGiaChiTiet" EntityType="Self.tbl_BaoGiaChiTiet" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="tbl_Customers" EntityType="Self.tbl_Customers" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tbl_OrderTem" EntityType="Self.tbl_OrderTem" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tbl_OrderTem_BaoGia" EntityType="Self.tbl_OrderTem_BaoGia" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tbl_OrderTem_BaoGia_Detail" EntityType="Self.tbl_OrderTem_BaoGia_Detail" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="tbl_Products" EntityType="Self.tbl_Products" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="tbl_QuyTrinh" EntityType="Self.tbl_QuyTrinh" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="tbl_User" EntityType="Self.tbl_User" Schema="dbo" store:Type="Tables" />
@@ -140,6 +176,9 @@
           <EntitySet Name="tbl_QuyTrinh" EntityType="WebNhutLongModel.tbl_QuyTrinh" />
           <EntitySet Name="tbl_BaoGia" EntityType="WebNhutLongModel.tbl_BaoGia" />
           <EntitySet Name="tbl_BaoGiaChiTiet" EntityType="WebNhutLongModel.tbl_BaoGiaChiTiet" />
+          <EntitySet Name="tbl_OrderTem" EntityType="WebNhutLongModel.tbl_OrderTem" />
+          <EntitySet Name="tbl_OrderTem_BaoGia" EntityType="WebNhutLongModel.tbl_OrderTem_BaoGia" />
+          <EntitySet Name="tbl_OrderTem_BaoGia_Detail" EntityType="WebNhutLongModel.tbl_OrderTem_BaoGia_Detail" />
         </EntityContainer>
         <EntityType Name="tbl_Products">
           <Key>
@@ -216,6 +255,39 @@
           <Property Name="ID_SanPham" Type="Int32" />
           <Property Name="SoLuong" Type="Int32" />
           <Property Name="Tien" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="tbl_OrderTem">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="code" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="date_begin" Type="DateTime" Precision="3" />
+          <Property Name="date_end" Type="DateTime" Precision="3" />
+          <Property Name="customer_id" Type="Int32" />
+          <Property Name="status" Type="Int32" />
+        </EntityType>
+        <EntityType Name="tbl_OrderTem_BaoGia">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="order_id" Type="Int32" />
+          <Property Name="total_money" Type="Double" />
+          <Property Name="date_begin" Type="DateTime" Precision="3" />
+          <Property Name="date_end" Type="DateTime" Precision="3" />
+          <Property Name="status" Type="Int32" />
+          <Property Name="offset" Type="Int32" />
+        </EntityType>
+        <EntityType Name="tbl_OrderTem_BaoGia_Detail">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="baogia_id" Type="Int32" />
+          <Property Name="sanpam_id" Type="Int32" />
+          <Property Name="soluong" Type="Int32" />
+          <Property Name="money" Type="Double" />
         </EntityType>
       </Schema>
     </edmx:ConceptualModels>
@@ -322,6 +394,42 @@
                 <ScalarProperty Name="ID_SanPham" ColumnName="ID_SanPham" />
                 <ScalarProperty Name="ID_BaoGia" ColumnName="ID_BaoGia" />
                 <ScalarProperty Name="ID_BaoGiaChiTiet" ColumnName="ID_BaoGiaChiTiet" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tbl_OrderTem">
+            <EntityTypeMapping TypeName="WebNhutLongModel.tbl_OrderTem">
+              <MappingFragment StoreEntitySet="tbl_OrderTem">
+                <ScalarProperty Name="status" ColumnName="status" />
+                <ScalarProperty Name="customer_id" ColumnName="customer_id" />
+                <ScalarProperty Name="date_end" ColumnName="date_end" />
+                <ScalarProperty Name="date_begin" ColumnName="date_begin" />
+                <ScalarProperty Name="code" ColumnName="code" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tbl_OrderTem_BaoGia">
+            <EntityTypeMapping TypeName="WebNhutLongModel.tbl_OrderTem_BaoGia">
+              <MappingFragment StoreEntitySet="tbl_OrderTem_BaoGia">
+                <ScalarProperty Name="offset" ColumnName="offset" />
+                <ScalarProperty Name="status" ColumnName="status" />
+                <ScalarProperty Name="date_end" ColumnName="date_end" />
+                <ScalarProperty Name="date_begin" ColumnName="date_begin" />
+                <ScalarProperty Name="total_money" ColumnName="total_money" />
+                <ScalarProperty Name="order_id" ColumnName="order_id" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tbl_OrderTem_BaoGia_Detail">
+            <EntityTypeMapping TypeName="WebNhutLongModel.tbl_OrderTem_BaoGia_Detail">
+              <MappingFragment StoreEntitySet="tbl_OrderTem_BaoGia_Detail">
+                <ScalarProperty Name="money" ColumnName="money" />
+                <ScalarProperty Name="soluong" ColumnName="soluong" />
+                <ScalarProperty Name="sanpam_id" ColumnName="sanpam_id" />
+                <ScalarProperty Name="baogia_id" ColumnName="baogia_id" />
+                <ScalarProperty Name="id" ColumnName="id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

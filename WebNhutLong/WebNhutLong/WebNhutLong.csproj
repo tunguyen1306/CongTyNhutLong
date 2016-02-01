@@ -20,6 +20,7 @@
     <IISExpressAnonymousAuthentication />
     <IISExpressWindowsAuthentication />
     <IISExpressUseClassicPipelineMode />
+    <UseGlobalApplicationHostFile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -39,14 +40,17 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="EntityFramework, Version=5.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
-      <HintPath>..\packages\EntityFramework.5.0.0\lib\net45\EntityFramework.dll</HintPath>
+    <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.SqlServer.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System" />
     <Reference Include="System.Data" />
-    <Reference Include="System.Data.Entity" />
     <Reference Include="System.Drawing" />
     <Reference Include="System.Runtime.Serialization" />
     <Reference Include="System.Security" />
@@ -125,6 +129,9 @@
     <Compile Include="Controllers\LoginController.cs" />
     <Compile Include="Controllers\NavbarController.cs" />
     <Compile Include="Controllers\ProductsController.cs" />
+    <Compile Include="Controllers\tbl_OrderTemController.cs" />
+    <Compile Include="Controllers\tbl_OrderTem_BaoGiaController.cs" />
+    <Compile Include="Controllers\tbl_OrderTem_BaoGia_DetailController.cs" />
     <Compile Include="Domain\Data.cs" />
     <Compile Include="Domain\DataLoaiGiay.cs" />
     <Compile Include="Global.asax.cs">
@@ -156,6 +163,15 @@
       <DependentUpon>DataWeb.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\tbl_Customers.cs">
+      <DependentUpon>DataWeb.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\tbl_OrderTem.cs">
+      <DependentUpon>DataWeb.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\tbl_OrderTem_BaoGia.cs">
+      <DependentUpon>DataWeb.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\tbl_OrderTem_BaoGia_Detail.cs">
       <DependentUpon>DataWeb.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\tbl_Products.cs">
@@ -999,6 +1015,23 @@
     <Content Include="Views\BaoGia\Edit.cshtml" />
     <Content Include="Views\BaoGia\Index.cshtml" />
     <Content Include="Views\BaoGia\BaoGiaCus.cshtml" />
+    <Content Include="Views\tbl_OrderTem\Create.cshtml" />
+    <Content Include="Views\tbl_OrderTem\Delete.cshtml" />
+    <Content Include="Views\tbl_OrderTem\Details.cshtml" />
+    <Content Include="Views\tbl_OrderTem\Edit.cshtml" />
+    <Content Include="Views\tbl_OrderTem\Index.cshtml" />
+    <Content Include="Views\tbl_OrderTem_BaoGia\Create.cshtml" />
+    <Content Include="Views\tbl_OrderTem_BaoGia\Delete.cshtml" />
+    <Content Include="Views\tbl_OrderTem_BaoGia\Details.cshtml" />
+    <Content Include="Views\tbl_OrderTem_BaoGia\Edit.cshtml" />
+    <Content Include="Views\tbl_OrderTem_BaoGia\Index.cshtml" />
+    <Content Include="Views\tbl_OrderTem_BaoGia_Detail\Create.cshtml" />
+    <Content Include="Views\tbl_OrderTem_BaoGia_Detail\Delete.cshtml" />
+    <Content Include="Views\tbl_OrderTem_BaoGia_Detail\Details.cshtml" />
+    <Content Include="Views\tbl_OrderTem_BaoGia_Detail\Edit.cshtml" />
+    <Content Include="Views\tbl_OrderTem_BaoGia_Detail\Index.cshtml" />
+    <Content Include="Views\Shared\_Layout_1.cshtml" />
+    <Content Include="Views\Shared\_Navbar_1.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

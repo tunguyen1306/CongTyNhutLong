@@ -11,6 +11,9 @@
         <EntityTypeShape EntityType="WebNhutLongModel.tbl_QuyTrinh" Width="1.5" PointX="2.75" PointY="1" />
         <EntityTypeShape EntityType="WebNhutLongModel.tbl_BaoGia" Width="1.5" PointX="0.75" PointY="5.75" />
         <EntityTypeShape EntityType="WebNhutLongModel.tbl_BaoGiaChiTiet" Width="1.5" PointX="2.75" PointY="5.75" />
+        <EntityTypeShape EntityType="WebNhutLongModel.tbl_OrderTem" Width="1.5" PointX="5.25" PointY="5.125" />
+        <EntityTypeShape EntityType="WebNhutLongModel.tbl_OrderTem_BaoGia" Width="1.5" PointX="7.25" PointY="5.75" />
+        <EntityTypeShape EntityType="WebNhutLongModel.tbl_OrderTem_BaoGia_Detail" Width="1.5" PointX="5.375" PointY="8.125" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>
