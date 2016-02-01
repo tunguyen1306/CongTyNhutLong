@@ -42,18 +42,30 @@
 {
     @Html.AntiForgeryToken()
     @Html.ValidationSummary(true, "", new {@class = "text-danger"})
+    <div class="row">
+        <div class="col-lg-4">
+            <div class="well">
 
+
+                
+                Mã khách hàng:NTT001 <br />
+                Tên khách hàng:Nguyễn Tấn Tú <br />
+                Công ty:Ringier
+            </div>
+        </div>
+
+    </div>
     <div class="panel panel-default">
         <div class="panel-heading">
             Form Elements
         </div>
         <div class="panel-body">
-            <div class="row">
+            <div class="row form-horizontal">
 
                 <div class="col-lg-6">
-                   
-                    <div class="form-group" >
-                        
+
+                    <div class="form-group">
+
                         <label class="col-md-4">Mã báo giá</label>
 
 
@@ -67,9 +79,9 @@
 
                     </div>
                     <div class="form-group">
-                     
+
                         <label class="col-md-4">Ngày bắt đầu</label>
-                      
+
                         <div class="col-md-8">
                             @Html.EditorFor(model => model.date_begin, new {htmlAttributes = new {@class = "form-control"}})
                             @Html.ValidationMessageFor(model => model.date_begin, "", new {@class = "text-danger"})
@@ -81,18 +93,18 @@
                 <div class="col-lg-6">
 
                     <div class="form-group">
-                      
+
                         <label class="col-md-4">Ngày kết thúc</label>
-                   
+
                         <div class="col-md-8">
                             @Html.EditorFor(model => model.date_end, new {htmlAttributes = new {@class = "form-control"}})
                             @Html.ValidationMessageFor(model => model.date_end, "", new {@class = "text-danger"})
                         </div>
                     </div>
                     <div class="form-group">
-                       
+
                         <label class="col-md-4">Trạng thái</label>
-                       
+
                         <div class="col-md-10">
                             @Html.HiddenFor(model => model.status)
                         </div>
@@ -113,7 +125,7 @@
         </div>
         <div class="panel-body">
             <div class="row">
-                <div class="col-lg-12">
+                <div class="col-lg-12 form-horizontal">
                     <div class="col-lg-6">
                         <div class="form-group">
                             <label class="col-md-4" for="date_begin">Ngày bất đầu</label>
@@ -124,7 +136,7 @@
                         </div>
 
                         <div class="form-group">
-                           
+
                             <label class="col-md-4" for="date_end">Ngày kết thúc</label>
                             <div class=" col-md-8">
                                 <input class="form-control " data-val="true" data-val-date="The field date_end must be a date." id="date_end" name="date_end" value="" type="datetime">
@@ -136,7 +148,7 @@
                     <div class="col-lg-6">
 
                         <div class="form-group">
-                       
+
                             <label class="col-md-4" for="total_money">Tổng tiền</label>
                             <div class="col-md-8">
                                 <input class="form-control " data-val="true" data-val-number="The field total_money must be a number." id="total_money" name="total_money" value="" type="text">
@@ -144,7 +156,7 @@
                             </div>
                         </div>
                         <div class="form-group">
-                          
+
                             <label class="col-md-4" for="status">Trạng thái</label>
                             <div class=" col-md-8">
 
@@ -153,7 +165,7 @@
                             </div>
                         </div>
                     </div>
-                      
+
 
                 </div>
             </div>
@@ -253,10 +265,11 @@
         </div>
         <div class="panel-body">
             <div class="row">
-                <div class="col-lg-12">
-                    <div class="col-lg-6">
+                <div class="col-lg-12 form-horizontal">
+                    <div class="col-lg-6 ">
+
                         <div class="form-group">
-                            <label class="col-md-4" for="date_begin">Ngày bất đầu</label>
+                            <label class="control-label col-md-4" for="date_begin">Ngày bất đầu</label>
                             <div class=" col-md-8">
                                 <input class="form-control " data-val="true" data-val-date="The field date_begin must be a date." id="date_begin" name="date_begin" value="" type="datetime">
                                 <span class="field-validation-valid text-danger" data-valmsg-for="date_begin" data-valmsg-replace="true"></span>
@@ -265,7 +278,7 @@
 
                         <div class="form-group">
 
-                            <label class="col-md-4" for="date_end">Ngày kết thúc</label>
+                            <label class=" control-label col-md-4" for="date_end">Ngày kết thúc</label>
                             <div class=" col-md-8">
                                 <input class="form-control " data-val="true" data-val-date="The field date_end must be a date." id="date_end" name="date_end" value="" type="datetime">
                                 <span class="field-validation-valid text-danger" data-valmsg-for="date_end" data-valmsg-replace="true"></span>
@@ -273,11 +286,11 @@
 
                         </div>
                     </div>
-                    <div class="col-lg-6">
+                    <div class="col-lg-6 ">
 
-                        <div class="form-group">
+                        <div class="form-group ">
 
-                            <label class="col-md-4" for="total_money">Tổng tiền</label>
+                            <label class="control-label col-md-4" for="total_money">Tổng tiền</label>
                             <div class="col-md-8">
                                 <input class="form-control " data-val="true" data-val-number="The field total_money must be a number." id="total_money" name="total_money" value="" type="text">
                                 <span class="field-validation-valid text-danger" data-valmsg-for="total_money" data-valmsg-replace="true"></span>
@@ -285,7 +298,7 @@
                         </div>
                         <div class="form-group">
 
-                            <label class="col-md-4" for="status">Trạng thái</label>
+                            <label class="control-label col-md-4" for="status">Trạng thái</label>
                             <div class=" col-md-8">
 
                                 <input class="form-control " data-val="true" data-val-number="The field status must be a number." id="status" name="status" value="Bị từ chối" type="text">
