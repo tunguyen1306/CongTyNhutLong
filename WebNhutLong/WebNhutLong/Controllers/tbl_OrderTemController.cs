@@ -36,9 +36,14 @@ namespace WebNhutLong.Controllers
         }
 
         // GET: tbl_OrderTem/Create
-        public ActionResult Create()
+        public ActionResult Create(int? id)
         {
-            return View();
+            DonHangView d = new DonHangView();
+            d.customer_id = id;
+            d.code = "DDH" + DateTime.Now.ToString("ddMMyyyyHHmmss");
+            var list = from tt in db.tbl_Customers where tt.IDCustomers == id.Value select tt;
+            d.Customer = list.ToList()[0];
+            return View(d);
         }
 
         // POST: tbl_OrderTem/Create
@@ -46,12 +51,12 @@ namespace WebNhutLong.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "id,code,date_begin,date_end,customer_id,status")] tbl_OrderTem tbl_OrderTem)
+        public ActionResult Create(DonHangView tbl_OrderTem)
         {
             if (ModelState.IsValid)
             {
-                db.tbl_OrderTem.Add(tbl_OrderTem);
-                db.SaveChanges();
+                //db.tbl_OrderTem.Add(tbl_OrderTem);
+                //db.SaveChanges();
                 return RedirectToAction("Index");
             }
 
