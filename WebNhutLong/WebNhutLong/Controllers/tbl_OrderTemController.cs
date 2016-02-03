@@ -40,7 +40,11 @@ namespace WebNhutLong.Controllers
         {
             DonHangView d = new DonHangView();
             d.customer_id = id;
-            d.code = "DDH" + DateTime.Now.ToString("ddMMyyyyHHmmss");
+            var queryMax = (from u in db.tbl_OrderTem
+                            orderby u.id descending
+                            select u).Take(1);
+            int max =  queryMax.ToList().Count==0?1: queryMax.ToList()[0].id+1;
+            d.code = String.Format("DDH_N{0}T{1}N{2}_{3}", +DateTime.Now.Year, DateTime.Now.Month.ToString("00"), DateTime.Now.Day.ToString("00"), max.ToString("000"));
             var list = from tt in db.tbl_Customers where tt.IDCustomers == id.Value select tt;
             d.Customer = list.ToList()[0];
             return View(d);
@@ -51,16 +55,58 @@ namespace WebNhutLong.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create(DonHangView tbl_OrderTem)
+        public ActionResult Create(DonHangView donHang)
         {
             if (ModelState.IsValid)
             {
-                //db.tbl_OrderTem.Add(tbl_OrderTem);
-                //db.SaveChanges();
+              
+                donHang.status = 0;
+                donHang.BaoGiaTemView.status = 0;
+                tbl_OrderTem temValue = new tbl_OrderTem { customer_id=donHang.customer_id,code=donHang.code,date_begin=donHang.date_begin,date_end=donHang.date_end,status=donHang.status,id=donHang.id };
+                temValue=db.tbl_OrderTem.Add(temValue);
+                db.SaveChanges();
+                donHang.id = temValue.id;
+                tbl_OrderTem_BaoGia tbl_OrderTem_BaoGia = new tbl_OrderTem_BaoGia { date_begin = donHang.BaoGiaTemView.date_begin, date_end = donHang.BaoGiaTemView.date_end, id = donHang.BaoGiaTemView.id, order_id = donHang.id, status = donHang.BaoGiaTemView.status, offset = donHang.BaoGiaTemView.offset, total_money = donHang.BaoGiaTemView.total_money };
+                tbl_OrderTem_BaoGia = db.tbl_OrderTem_BaoGia.Add(tbl_OrderTem_BaoGia);
+                db.SaveChanges();
+                donHang.BaoGiaTemView.id = tbl_OrderTem_BaoGia.id;
+                foreach (var item in donHang.BaoGiaTemView.BaoGiaTemDetailViews)
+                {
+                    item.StatusProducts = -1;
+                    item.CreatedDateProducts = DateTime.Now;
+                    item.CreatedDateProducts = DateTime.Now;
+                    var queryMax = (from u in db.tbl_Products
+                                    orderby u.ID_Products descending
+                                    select u).Take(1);
+                    int maxSP = queryMax.ToList().Count == 0 ? 1 : queryMax.ToList()[0].ID_Products + 1; 
+                    String masp = String.Format("SP{0}", maxSP.ToString("000000"));
+                    item.CodeProducts = masp;
+                    tbl_Products itemP = new tbl_Products { CodeProducts = "",
+                        CreatedDateProducts = item.CreatedDateProducts,
+                        CreateUserProducts = item.CreateUserProducts,
+                        DanKimProducts = item.DanKimProducts,
+                        GiaProducts = item.GiaProducts,
+                        ID_Products = item.ID_Products,
+                        LoaigiayProducts = item.LoaigiayProducts,
+                        ModifyDateProducts = item.ModifyDateProducts,
+                        ModifyUserProducts = item.ModifyUserProducts,
+                        NameProducts = item.NameProducts,
+                        OffsetFlexoProducts = item.OffsetFlexoProducts,
+                        QuyCachProducts = item.QuyCachProducts,
+                        SolopProducts = item.SolopProducts,
+                        StatusProducts = item.StatusProducts
+                    };
+                    itemP= db.tbl_Products.Add(itemP);
+                    db.SaveChanges();
+                    item.ID_Products = itemP.ID_Products;
+                    tbl_OrderTem_BaoGia_Detail detail = new tbl_OrderTem_BaoGia_Detail { baogia_id = donHang.BaoGiaTemView.id, money = double.Parse(item.GiaProducts), soluong = item.SoLuong, sanpam_id = itemP.ID_Products };
+                    db.tbl_OrderTem_BaoGia_Detail.Add(detail);
+                    db.SaveChanges();
+                }
                 return RedirectToAction("Index");
             }
 
-            return View(tbl_OrderTem);
+            return View(donHang);
         }
 
         // GET: tbl_OrderTem/Edit/5

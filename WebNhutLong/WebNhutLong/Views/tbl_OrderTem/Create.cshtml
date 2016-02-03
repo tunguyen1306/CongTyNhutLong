@@ -8,38 +8,81 @@
 <h2>Create</h2>
 
 <script type="text/javascript">
-  
+    $(document).ready(function () {
+        $("input[type=number]").keydown(function (e) {
+            // Allow: backspace, delete, tab, escape, enter and .
+            if ($.inArray(e.keyCode, [46, 8, 9, 27, 13, 110, 190]) !== -1 ||
+                // Allow: Ctrl+A, Command+A
+                (e.keyCode == 65 && (e.ctrlKey === true || e.metaKey === true)) ||
+                // Allow: home, end, left, right, down, up
+                (e.keyCode >= 35 && e.keyCode <= 40)) {
+                // let it happen, don't do anything
+                return;
+            }
+            // Ensure that it is a number and stop the keypress
+            if ((e.shiftKey || (e.keyCode < 48 || e.keyCode > 57)) && (e.keyCode < 96 || e.keyCode > 105)) {
+                e.preventDefault();
+            }
+        });
+
+    });
     function updateProduct(el) {
         var id = new Date().getTime();
         var tr = $(el).parents('tr').eq(0);
         var trdata = "<tr id='ext_" + id + "'><input name='BaoGiaTemView.BaoGiaTemDetailViews.Index' value='" + id + "' type='hidden'/>";
         tr.find('.form-control').each(function() {
             if ($(this).attr('name') == 'SoLuong') {
-                trdata += "<td><input class='form-control text-box single-line' value='" + this.value + "' type='number'/><input name='BaoGiaTemView.BaoGiaTemDetailViews[" + id + "]." + this.name + "' value='" + this.value + "' type='hidden'/></td>";
+                trdata += "<td><input class='form-control text-box single-line updateSL " + this.name + "'  min='1' value='" + this.value + "' type='number' name='BaoGiaTemView.BaoGiaTemDetailViews[" + id + "]." + this.name + "'/></td>";
             } else {
-                trdata += "<td>" + this.value + "<input name='BaoGiaTemView.BaoGiaTemDetailViews[" + id + "]." + this.name + "' value='" + this.value + "' type='hidden'/></td>";
+                trdata += "<td>" + this.value + "<input class='" + this.name + "' name='BaoGiaTemView.BaoGiaTemDetailViews[" + id + "]." + this.name + "' value='" + this.value + "' type='hidden'/></td>";
             }
             this.value = $(this).attr('default-value');
         });
         trdata += "<td><input type='submit' style='float: left; margin-left: 10px' value='Xóa' class='btn btn-primary' onclick='delProduct(this); return false;' /></td></tr>";
         $(el).parents('tbody').eq(0).append(trdata);
         updateMoney(el);
+        updateEvent();
     } 
+    function updateEvent()
+    {
+        $('.updateSL').on("change", function () {           
+            updateMoney(this);
+        });
+        $("input[type=number]").keydown(function (e) {
+            // Allow: backspace, delete, tab, escape, enter and .
+            if ($.inArray(e.keyCode, [46, 8, 9, 27, 13, 110, 190]) !== -1 ||
+                // Allow: Ctrl+A, Command+A
+                (e.keyCode == 65 && (e.ctrlKey === true || e.metaKey === true)) ||
+                // Allow: home, end, left, right, down, up
+                (e.keyCode >= 35 && e.keyCode <= 40)) {
+                // let it happen, don't do anything
+                return;
+            }
+            // Ensure that it is a number and stop the keypress
+            if ((e.shiftKey || (e.keyCode < 48 || e.keyCode > 57)) && (e.keyCode < 96 || e.keyCode > 105)) {
+                e.preventDefault();
+            }
+        });
+    }
 
     function delProduct(el) {
         var tr = $(el).parents('tr').eq(0);
         tr.remove();
         updateMoney(el);
-
+          updateEvent();
     }
+  
     function updateMoney(el)
     {
+        var money = 0;
         $(el).parents('.body_data').eq(0).find('tr').each(function () {
             if($(this).attr('id')!=null)
             {
-
+              
+                money += parseInt($(this).find('.SoLuong').eq(0).val()) * parseFloat($(this).find('.GiaProducts').eq(0).val());
             }
         });
+        $('.BaoGiaTemView_total_money').val(money);
     }
 
 </script>
@@ -108,7 +151,7 @@
 
                             <label class="col-md-4" for="total_money">Tổng tiền</label>
                             <div class="col-md-8">
-                                <input class="form-control " data-val="true" data-val-number="The field total_money must be a number."  name="BaoGiaTemView.total_money" value="" type="text">
+                                <input class="form-control BaoGiaTemView_total_money" data-val="true" data-val-number="The field total_money must be a number."  name="BaoGiaTemView.total_money" value="" type="text">
                                 
                             </div>
                         </div>
@@ -141,10 +184,11 @@
                         <thead>
                             <tr>
                                 <th width="150px" align="center" valign="middle">
-                                    Mã sản phẩm
-                                </th>
-                                <th  width="150px" align="center" valign="middle">
+                                   
                                     Tên sản phẩm
+                                </th>
+                                <th  width="100px" align="center" valign="middle">
+                                   Số lớp
                                 </th>
                                 <th width="*" align="center" valign="middle">
                                     Loại giấy
@@ -170,10 +214,10 @@
                         <tbody class="body_data">
                             <tr>
                                 <td align="center">
-                                    <input class="form-control text-box single-line" default-value="" name="CodeProducts" type="text">
+                                    <input class="form-control text-box single-line" default-value="" name="NameProducts" type="text">
                                 </td>
                                 <td align="center">
-                                    <input class="form-control text-box single-line" default-value="" name="NameProducts" type="text">
+                                    <input class="form-control text-box single-line" value="1" default-value="1" min="1" name="SolopProducts" type="number">
                                 </td>
                                 <td align="center">
                                     <select name="LoaigiayProducts" default-value="0"  class="form-control valid">
@@ -207,10 +251,10 @@
                                 </td>
 
                                 <td align="center">
-                                    <input class="form-control text-box single-line" name="GiaProducts" default-value="0" value="0" type="number">
+                                    <input class="form-control text-box single-line" name="GiaProducts" step="500"  min="0" default-value="0" value="0" type="number">
                                 </td>
                                 <td align="center">
-                                    <input class="form-control text-box single-line" default-value="1" name="SoLuong" value="1" type="number">
+                                    <input class="form-control text-box single-line" default-value="1"  min="1" name="SoLuong" value="1" type="number">
                                 </td>
                                 <td align="center"><input type="submit" style="float: left; margin-left: 10px" value="Thêm" class="btn btn-primary" onclick="updateProduct(this); return false;" /></td>
 
