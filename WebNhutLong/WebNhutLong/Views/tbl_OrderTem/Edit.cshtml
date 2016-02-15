@@ -62,7 +62,7 @@
                     <div class="form-group">
                         <label class="col-md-4">Ngày bắt đầu thực tế</label>
                         <div class="col-md-8">
-                            @Html.EditorFor(model => model.date_begin, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.EditorFor(model => model.date_begin, new { htmlAttributes = new { @class = "form-control date" } })
                             @Html.ValidationMessageFor(model => model.date_begin, "", new { @class = "text-danger" })
                         </div>
                     </div>
@@ -79,7 +79,7 @@
                     <div class="form-group">
                         <label class="col-md-4">Ngày kết thúc thực tế</label>
                         <div class="col-md-8">
-                            @Html.EditorFor(model => model.date_end, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.EditorFor(model => model.date_end, new { htmlAttributes = new { @class = "form-control date" } })
                             @Html.ValidationMessageFor(model => model.date_end, "", new { @class = "text-danger" })
                         </div>
                     </div>
@@ -121,7 +121,7 @@
                         <div class="form-group">
                             <label class="col-md-4" for="date_begin">Ngày bất đầu</label>
                             <div class=" col-md-8">
-                                <input class="form-control " data-val="true" data-val-date="The field date_begin must be a date." id="date_begin" name="date_begin" value="" type="datetime">
+                                <input class="form-control date" data-val="true" data-val-date="The field date_begin must be a date." id="date_begin" name="date_begin" value="" type="datetime">
                                 <span class="field-validation-valid text-danger" data-valmsg-for="date_begin" data-valmsg-replace="true"></span>
                             </div>
                         </div>
@@ -141,7 +141,7 @@
 
                             <label class="col-md-4" for="date_end">Ngày kết thúc</label>
                             <div class=" col-md-8">
-                                <input class="form-control " data-val="true" data-val-date="The field date_end must be a date." id="date_end" name="date_end" value="" type="datetime">
+                                <input class="form-control date" data-val="true" data-val-date="The field date_end must be a date." id="date_end" name="date_end" value="" type="datetime">
                                 <span class="field-validation-valid text-danger" data-valmsg-for="date_end" data-valmsg-replace="true"></span>
                             </div>
 
