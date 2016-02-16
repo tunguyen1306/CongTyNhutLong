@@ -1,4 +1,4 @@
-﻿@model WebNhutLong.Models.tbl_OrderTem
+﻿@model WebNhutLong.Models.DonHangView
 
 @{
     ViewBag.Title = "Edit";
@@ -7,42 +7,87 @@
 
 <h2>Create</h2>
 
-<script type="text/javascript">
 
+<script type="text/javascript">
+    $(document).ready(function () {
+        $("input[type=number]").keydown(function (e) {
+            // Allow: backspace, delete, tab, escape, enter and .
+            if ($.inArray(e.keyCode, [46, 8, 9, 27, 13, 110, 190]) !== -1 ||
+                // Allow: Ctrl+A, Command+A
+                (e.keyCode == 65 && (e.ctrlKey === true || e.metaKey === true)) ||
+                // Allow: home, end, left, right, down, up
+                (e.keyCode >= 35 && e.keyCode <= 40)) {
+                // let it happen, don't do anything
+                return;
+            }
+            // Ensure that it is a number and stop the keypress
+            if ((e.shiftKey || (e.keyCode < 48 || e.keyCode > 57)) && (e.keyCode < 96 || e.keyCode > 105)) {
+                e.preventDefault();
+            }
+        });
+
+    });
     function updateProduct(el) {
         var id = new Date().getTime();
         var tr = $(el).parents('tr').eq(0);
-        var trdata = "<tr id='ext_" + id + "'><input name='products.Index' value='" + id + "' type='hidden'/>";
+        var trdata = "<tr id='ext_" + id + "'><input name='BaoGiaTemView.BaoGiaTemDetailViews.Index' value='" + id + "' type='hidden'/>";
         tr.find('.form-control').each(function() {
             if ($(this).attr('name') == 'SoLuong') {
-                trdata += "<td><input class='form-control text-box single-line' value='" + this.value + "' type='number'/><input name='products[" + id + "]." + this.name + "' value='" + this.value + "' type='hidden'/></td>";
+                trdata += "<td><input class='form-control text-box single-line updateSL " + this.name + "'  min='1' value='" + this.value + "' type='number' name='BaoGiaTemView.BaoGiaTemDetailViews[" + id + "]." + this.name + "'/></td>";
             } else {
-                trdata += "<td>" + this.value + "<input name='products[" + id + "]." + this.name + "' value='" + this.value + "' type='hidden'/></td>";
+                trdata += "<td>" + this.value + "<input class='" + this.name + "' name='BaoGiaTemView.BaoGiaTemDetailViews[" + id + "]." + this.name + "' value='" + this.value + "' type='hidden'/></td>";
             }
             this.value = $(this).attr('default-value');
         });
         trdata += "<td><input type='submit' style='float: left; margin-left: 10px' value='Xóa' class='btn btn-primary' onclick='delProduct(this); return false;' /></td></tr>";
         $(el).parents('tbody').eq(0).append(trdata);
         updateMoney(el);
+        updateEvent();
+    }
+    function updateEvent()
+    {
+        $('.updateSL').on("change", function () {
+            updateMoney(this);
+        });
+        $("input[type=number]").keydown(function (e) {
+            // Allow: backspace, delete, tab, escape, enter and .
+            if ($.inArray(e.keyCode, [46, 8, 9, 27, 13, 110, 190]) !== -1 ||
+                // Allow: Ctrl+A, Command+A
+                (e.keyCode == 65 && (e.ctrlKey === true || e.metaKey === true)) ||
+                // Allow: home, end, left, right, down, up
+                (e.keyCode >= 35 && e.keyCode <= 40)) {
+                // let it happen, don't do anything
+                return;
+            }
+            // Ensure that it is a number and stop the keypress
+            if ((e.shiftKey || (e.keyCode < 48 || e.keyCode > 57)) && (e.keyCode < 96 || e.keyCode > 105)) {
+                e.preventDefault();
+            }
+        });
     }
 
     function delProduct(el) {
         var tr = $(el).parents('tr').eq(0);
         tr.remove();
         updateMoney(el);
-
+          updateEvent();
     }
+
     function updateMoney(el)
     {
+        var money = 0;
         $(el).parents('.body_data').eq(0).find('tr').each(function () {
             if($(this).attr('id')!=null)
             {
 
+                money += parseInt($(this).find('.SoLuong').eq(0).val()) * parseFloat($(this).find('.GiaProducts').eq(0).val());
             }
         });
+        $('.BaoGiaTemView_total_money').val(money);
     }
 
 </script>
+
 
 @using (Html.BeginForm())
 {
@@ -51,9 +96,9 @@
 
     <div class="panel panel-default">
         <div class="panel-heading">
-            Mã khách hàng:<b>NTT001</b><br />
-            Tên khách hàng:<b>Nguyễn Tấn Tú</b><br />
-            Công ty:<b>Ringier</b>
+            Mã khách hàng:<b>@Model.Customer.CodeCustomers</b><br />
+            Tên khách hàng:<b>@Model.Customer.NameCustomers</b><br />
+            Công ty:<b>@Model.Customer.CongTyCustomers</b>
         </div>
         <div class="panel-body">
             <div class="row form-horizontal">
@@ -87,15 +132,26 @@
                         <label class="col-md-4">Trạng thái</label>
                         <div class="col-md-8">
                             @Html.HiddenFor(model => model.status)
-                            Đang báo giá
+                            @if (Model.status == 0)
+                            {
+                                <span>Đang báo giá</span>
+                            }
+                            @if (Model.status == 1)
+                            {
+                                <span>Đang sản xuất</span>
+                            }
+                            @if (Model.status == 2)
+                            {
+                                <span>Kết thúc đơn hàng</span>
+                            }
                         </div>
                     </div>
                 </div>
                 <div class="col-lg-12">
                     <div class="form-group" style="text-align:center">
-
+                        <input type="submit"  value="Thêm mới báo giá" class="btn btn-primary" />
                         <input type="submit" value="Cập nhật" class="btn btn-primary" />
-                        <a class="btn btn-primary" href="@Url.Action("Index", "BaoGia", new { id =1 })">
+                        <a class="btn btn-primary" href="@Url.Action("Index", "BaoGia", new { id = 1 })">
                             Hủy
                         </a>
                     </div>
@@ -110,28 +166,29 @@
         <div class="panel-heading">
             <div class="row">
                 <span style="margin-left: 10px;line-height:33px">Báo giá lần 2</span>
-                <input type="submit" style="float: right; margin-right: 10px" value="In báo giá" class="btn btn-primary" />
-                <input type="submit" style="float: right; margin-right: 10px" value="Kết quả báo giá" class="btn btn-primary" />
+             
+              
             </div>
         </div>
         <div class="panel-body">
+           
+
             <div class="row">
                 <div class="col-lg-12 form-horizontal">
                     <div class="col-lg-6">
                         <div class="form-group">
                             <label class="col-md-4" for="date_begin">Ngày bất đầu</label>
-                            <div class=" col-md-8">
-                                <input class="form-control date" data-val="true" data-val-date="The field date_begin must be a date." id="date_begin" name="date_begin" value="" type="datetime">
-                                <span class="field-validation-valid text-danger" data-valmsg-for="date_begin" data-valmsg-replace="true"></span>
+                            <div class="col-md-8">
+                                <input class="form-control date" data-val="true" data-val-date="The field date_begin must be a date." name="BaoGiaTemView.date_begin" value="" type="datetime">
+
                             </div>
                         </div>
-
                         <div class="form-group">
 
                             <label class="col-md-4" for="total_money">Tổng tiền</label>
                             <div class="col-md-8">
-                                <input class="form-control " data-val="true" data-val-number="The field total_money must be a number." id="total_money" name="total_money" value="" type="text">
-                                <span class="field-validation-valid text-danger" data-valmsg-for="total_money" data-valmsg-replace="true"></span>
+                                <input class="form-control BaoGiaTemView_total_money" data-val="true" data-val-number="The field total_money must be a number." name="BaoGiaTemView.total_money" value="" type="text">
+
                             </div>
                         </div>
 
@@ -140,17 +197,16 @@
                         <div class="form-group">
 
                             <label class="col-md-4" for="date_end">Ngày kết thúc</label>
-                            <div class=" col-md-8">
-                                <input class="form-control date" data-val="true" data-val-date="The field date_end must be a date." id="date_end" name="date_end" value="" type="datetime">
-                                <span class="field-validation-valid text-danger" data-valmsg-for="date_end" data-valmsg-replace="true"></span>
+                            <div class="col-md-8">
+                                <input class="form-control date" data-val="true" data-val-date="The field date_end must be a date." name="BaoGiaTemView.date_end" value="" type="datetime">
+
                             </div>
 
                         </div>
                         <div class="form-group">
-
                             <label class="col-md-4" for="status">Trạng thái</label>
                             <div class="col-md-8">
-                                Chờ kết quả báo giá
+                                Tạo mới báo giá
                             </div>
                         </div>
                     </div>
@@ -164,10 +220,11 @@
                         <thead>
                             <tr>
                                 <th width="150px" align="center" valign="middle">
-                                    Mã sản phẩm
-                                </th>
-                                <th width="150px" align="center" valign="middle">
+
                                     Tên sản phẩm
+                                </th>
+                                <th width="100px" align="center" valign="middle">
+                                    Số lớp
                                 </th>
                                 <th width="*" align="center" valign="middle">
                                     Loại giấy
@@ -193,13 +250,13 @@
                         <tbody class="body_data">
                             <tr>
                                 <td align="center">
-                                    <input class="form-control text-box single-line" default-value="" name="MaSP" type="text">
+                                    <input class="form-control text-box single-line" default-value="" name="NameProducts" type="text">
                                 </td>
                                 <td align="center">
-                                    <input class="form-control text-box single-line" default-value="" name="TenSP" type="text">
+                                    <input class="form-control text-box single-line" value="1" default-value="1" min="1" name="SolopProducts" type="number">
                                 </td>
                                 <td align="center">
-                                    <select name="LoaiGiay" default-value="0" class="form-control valid">
+                                    <select name="LoaigiayProducts" default-value="0" class="form-control valid">
                                         <option value="0">Chọn loại giấy</option>
                                         <option value="3 lớp: 2 Vàng 1 Xeo">3 lớp: 2 Vàng 1 Xeo</option>
                                         <option value="3 lớp: 1 Trắng 1 Xeo 1 Vàng">3 lớp: 1 Trắng 1 Xeo 1 Vàng</option>
@@ -214,26 +271,26 @@
 
                                 </td>
                                 <td align="center">
-                                    <select name="OffsetFlexo" default-value="Offset" class="form-control">
+                                    <select name="OffsetFlexoProducts" default-value="Offset" class="form-control">
                                         <option value="Offset">Offset</option>
                                         <option value="Flexo">Flexo</option>
                                     </select>
                                 </td>
                                 <td align="center">
-                                    <select name="DanKeoDongKim" default-value="Dán keo" class="form-control">
+                                    <select name="DanKimProducts" default-value="Dán keo" class="form-control">
                                         <option value="Dán keo">Dán keo</option>
                                         <option value="Đóng kim">Đóng kim</option>
                                     </select>
                                 </td>
                                 <td align="center">
-                                    <input class="form-control text-box single-line" default-value="" type="text">
+                                    <input class="form-control text-box single-line" default-value="" name="QuyCachProducts" type="text">
                                 </td>
 
                                 <td align="center">
-                                    <input class="form-control text-box single-line" default-value="0" value="0" type="number">
+                                    <input class="form-control text-box single-line" name="GiaProducts" step="500" min="0" default-value="0" value="0" type="number">
                                 </td>
                                 <td align="center">
-                                    <input class="form-control text-box single-line" default-value="1" name="SoLuong" value="1" type="number">
+                                    <input class="form-control text-box single-line" default-value="1" min="1" name="SoLuong" value="1" type="number">
                                 </td>
                                 <td align="center"><input type="submit" style="float: left; margin-left: 10px" value="Thêm" class="btn btn-primary" onclick="updateProduct(this); return false;" /></td>
 
@@ -263,14 +320,14 @@
                         <div class="form-group">
                             <label class="control-label col-md-4" for="date_begin">Ngày bất đầu</label>
                             <div class="col-md-8" style="padding-top:7px">
-                                20/12/2015
+                                @Model.BaoGiaTemView.date_begin.Value.ToString("dd/MM/yyyy")
                             </div>
                         </div>
                         <div class="form-group ">
 
                             <label class="control-label col-md-4" for="total_money">Tổng tiền</label>
                             <div class="col-md-8" style="padding-top:7px">
-                                5.000.000 đ
+                               @Model.BaoGiaTemView.total_money.Value đ
                             </div>
                         </div>
 
@@ -280,7 +337,7 @@
 
                             <label class="control-label col-md-4" for="date_end">Ngày kết thúc</label>
                             <div class="col-md-8" style="padding-top:7px">
-                                21/12/2015
+                               @Model.BaoGiaTemView.date_end.Value.ToString("dd/MM/yyyy")
                             </div>
 
                         </div>
@@ -289,7 +346,18 @@
 
                             <label class="control-label col-md-4" for="status">Trạng thái</label>
                             <div class="col-md-8" style="padding-top:7px">
-                                Bị từ chối
+                               @if (Model.BaoGiaTemView.status == 0)
+                               {
+                                    <span>Chờ kết quả báo giá</span>
+                               }
+                                @if (Model.BaoGiaTemView.status == 1)
+                                {
+                                    <span>Đồng ý</span>
+                                }
+                                @if (Model.BaoGiaTemView.status == 2)
+                                {
+                                    <span>Từ chối</span>
+                                }
                             </div>
                         </div>
                     </div>
@@ -305,10 +373,10 @@
                         <thead>
                             <tr>
                                 <th>
-                                    Mã sản phẩm
+                                    Tên sản phẩm
                                 </th>
                                 <th>
-                                    Tên sản phẩm
+                                   Số lớp
                                 </th>
                                 <th>
                                     Loại giấy
@@ -332,9 +400,19 @@
                             </tr>
                         </thead>
                         <tbody class="body_data">
-
-                            <tr id="ext_1454341520837"><td>er<input type="hidden" value="er" name="MaSP"></td><td>ewrewrew<input type="hidden" value="ewrewrew" name="TenSP"></td><td>2 lớp: 1 Vàng 1 Xeo - sóng E<input type="hidden" value="2 lớp: 1 Vàng 1 Xeo - sóng E" name="LoaiGiay"></td><td>Flexo<input type="hidden" value="Flexo" name="OffsetFlexo"></td><td>Đóng kim<input type="hidden" value="Đóng kim" name="DanKeoDongKim"></td><td>2222<input type="hidden" name="value='2222'"></td><td><input type="hidden" name="value=''"></td><td>1</td></tr>
-                            <tr id="ext_1454341558421"><td>eee<input type="hidden" value="eee" name="MaSP"></td><td>eee<input type="hidden" value="eee" name="TenSP"></td><td>2 lớp: 1 Vàng 1 Xeo - sóng E<input type="hidden" value="2 lớp: 1 Vàng 1 Xeo - sóng E" name="LoaiGiay"></td><td>Flexo<input type="hidden" value="Flexo" name="OffsetFlexo"></td><td>Đóng kim<input type="hidden" value="Đóng kim" name="DanKeoDongKim"></td><td>eeee<input type="hidden" name="value='eeee'"></td><td>0<input type="hidden" name="value='0'"></td><td>1</td></tr>
+                            @foreach (var item in Model.BaoGiaTemView.BaoGiaTemDetailViews)
+                            {
+                                <tr >
+                                    <td>@item.NameProducts</td>
+                                    <td>@item.SolopProducts</td>
+                                    <td>@item.LoaigiayProducts</td>
+                                    <td>@item.OffsetFlexoProducts</td>
+                                    <td>@item.DanKimProducts</td>
+                                    <td>@item.QuyCachProducts</td>
+                                    <td>@item.GiaProducts</td>
+                                    <td>@item.SoLuong</td>
+                                </tr>
+                            }                            
                         </tbody>
                     </table>
 
