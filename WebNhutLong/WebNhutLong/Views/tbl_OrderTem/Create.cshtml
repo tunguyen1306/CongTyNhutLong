@@ -83,6 +83,7 @@
             }
         });
         $('.BaoGiaTemView_total_money').val(money);
+        $('#BaoGiaTemView_total_money').text(money);
     }
 
 </script>
@@ -90,7 +91,7 @@
 @using (Html.BeginForm())
 {
     @Html.AntiForgeryToken()
-    @Html.ValidationSummary(true, "", new {@class = "text-danger"})
+    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
 
     <div class="panel panel-default">
         <div class="panel-heading">
@@ -143,29 +144,29 @@
                         <div class="form-group">
                             <label class="col-md-4" for="date_begin">Ngày bất đầu</label>
                             <div class="col-md-8">
-                                <input class="form-control date" data-val="true" data-val-date="The field date_begin must be a date."  name="BaoGiaTemView.date_begin" value="" type="datetime">
-                              
+                                <input class="form-control date" data-val="true" data-val-date="The field date_begin must be a date."  name="BaoGiaTemView.date_begin" value="@DateTime.Now.ToString("MM/mm/yyyy")" type="hidden">
+                                @DateTime.Now.ToString("MM/dd/yyyy")
                             </div>
-                        </div>
-                        <div class="form-group">
+
+                            </div>
+
+                            <div class="form-group">
 
                             <label class="col-md-4" for="total_money">Tổng tiền</label>
                             <div class="col-md-8">
-                                <input class="form-control BaoGiaTemView_total_money" data-val="true" data-val-number="The field total_money must be a number."  name="BaoGiaTemView.total_money" value="" type="text">
-                                
+                                <input class="form-control BaoGiaTemView_total_money" data-val="true" data-val-number="The field total_money must be a number."  name="BaoGiaTemView.total_money" value="" type="hidden">
+                                <span id="BaoGiaTemView_total_money">0</span> đ
                             </div>
                         </div>
                        
                     </div>
                     <div class="col-lg-6">
                         <div class="form-group">
-
                             <label class="col-md-4" for="date_end">Ngày kết thúc</label>
                             <div class="col-md-8">
-                                <input class="form-control date" data-val="true" data-val-date="The field date_end must be a date."  name="BaoGiaTemView.date_end" value="" type="datetime">
-                               
+                                <input class="form-control date" data-val="true" data-val-date="The field date_end must be a date."  name="BaoGiaTemView.date_end" value="" type="hidden">
+                                Chờ cập nhật
                             </div>
-
                         </div>
                         <div class="form-group">
                             <label class="col-md-4" for="status">Trạng thái</label>
@@ -174,8 +175,6 @@
                             </div>
                         </div>
                     </div>
-
-
                 </div>
             </div>
             <div class="row">

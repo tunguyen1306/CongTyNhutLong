@@ -130,20 +130,27 @@ namespace WebNhutLong.Controllers
             d.id = tbl_OrderTem.id;
             d.status = tbl_OrderTem.status;
 
-            var queryBaoGia = from u in db.tbl_OrderTem_BaoGia where u.order_id.Value.Equals(tbl_OrderTem.id) && (u.status == 2 || u.status == 3) orderby u.id descending select u;
+            var queryBaoGia = from u in db.tbl_OrderTem_BaoGia where u.order_id.Value.Equals(tbl_OrderTem.id) orderby u.id descending select u;
             List<tbl_OrderTem_BaoGia> lisBG = queryBaoGia.ToList<tbl_OrderTem_BaoGia>();
             List<BaoGiaTemView> lisBGTem = new List<BaoGiaTemView>();
-            foreach (var item in lisBG)
+
+            if (lisBG.Count>1)
             {
-                BaoGiaTemView temBG = new BaoGiaTemView { date_begin = item.date_begin, date_end = item.date_end, id = item.id, offset = item.offset, order_id = item.order_id, status = item.status, total_money = item.total_money };
-                var queryGiaoGiaCT = from u in db.tbl_OrderTem_BaoGia_Detail
-                                     join y in db.tbl_Products on u.sanpam_id equals y.ID_Products where u.baogia_id.Value.Equals(temBG.id)
-                                     select new BaoGiaTemDetailView { ID_Products=u.sanpam_id.Value,CodeProducts=y.CodeProducts, CreatedDateProducts=y.CreatedDateProducts,CreateUserProducts=y.CreateUserProducts,DanKimProducts=y.DanKimProducts,GiaProducts=u.money.Value.ToString(),LoaigiayProducts=y.LoaigiayProducts,ModifyDateProducts=y.ModifyDateProducts,ModifyUserProducts=y.ModifyUserProducts,NameProducts=y.NameProducts,OffsetFlexoProducts=y.OffsetFlexoProducts,QuyCachProducts=y.QuyCachProducts,SolopProducts=y.SolopProducts,SoLuong=u.soluong.Value,StatusProducts=y.StatusProducts };
-                temBG.BaoGiaTemDetailViews = queryGiaoGiaCT.ToList<BaoGiaTemDetailView>();
-                lisBGTem.Add(temBG);
-            }
+                for (int i = 1; i < lisBG.Count; i++)
+                {
+                    var item = lisBG[i];
+                    BaoGiaTemView temBG = new BaoGiaTemView { date_begin = item.date_begin, date_end = item.date_end, id = item.id, offset = item.offset, order_id = item.order_id, status = item.status, total_money = item.total_money };
+                    var queryGiaoGiaCT = from u in db.tbl_OrderTem_BaoGia_Detail
+                                         join y in db.tbl_Products on u.sanpam_id equals y.ID_Products
+                                         where u.baogia_id.Value.Equals(temBG.id)
+                                         select new BaoGiaTemDetailView { ID_Products = u.sanpam_id.Value, CodeProducts = y.CodeProducts, CreatedDateProducts = y.CreatedDateProducts, CreateUserProducts = y.CreateUserProducts, DanKimProducts = y.DanKimProducts, GiaProducts = u.money.Value.ToString(), LoaigiayProducts = y.LoaigiayProducts, ModifyDateProducts = y.ModifyDateProducts, ModifyUserProducts = y.ModifyUserProducts, NameProducts = y.NameProducts, OffsetFlexoProducts = y.OffsetFlexoProducts, QuyCachProducts = y.QuyCachProducts, SolopProducts = y.SolopProducts, SoLuong = u.soluong.Value, StatusProducts = y.StatusProducts };
+                    temBG.BaoGiaTemDetailViews = queryGiaoGiaCT.ToList<BaoGiaTemDetailView>();
+                    lisBGTem.Add(temBG);
+                }
+            }         
+           
             d.BaoGiaTemViews = lisBGTem;
-            queryBaoGia = from u in db.tbl_OrderTem_BaoGia where u.order_id.Value.Equals(tbl_OrderTem.id) && (u.status == 0 || u.status == 1) orderby u.id descending select u;
+            queryBaoGia = from u in db.tbl_OrderTem_BaoGia where u.order_id.Value.Equals(tbl_OrderTem.id)  orderby u.id descending select u;
             lisBG = queryBaoGia.ToList<tbl_OrderTem_BaoGia>();
             foreach (var item in lisBG)
             {
@@ -209,6 +216,24 @@ namespace WebNhutLong.Controllers
                 db.Dispose();
             }
             base.Dispose(disposing);
+        }
+        [HttpPost]
+        public JsonResult UpdateResultBaoGia(String id,String status,String note)
+        {
+            tbl_OrderTem_BaoGia baogia = db.tbl_OrderTem_BaoGia.Find(int.Parse(id));
+            baogia.status = int.Parse(status);
+            db.Entry(baogia).State = EntityState.Modified;
+            db.SaveChanges();
+            return Json("Sucesss");
+        }
+        [HttpPost]
+        public JsonResult UpdateStatusOrder(String id, String status)
+        {
+            tbl_OrderTem order = db.tbl_OrderTem.Find(int.Parse(id));
+            order.status = int.Parse(status);
+            db.Entry(order).State = EntityState.Modified;
+            db.SaveChanges();
+            return Json("Sucesss");
         }
     }
 }
