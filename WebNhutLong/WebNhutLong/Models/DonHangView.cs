@@ -16,7 +16,11 @@ namespace WebNhutLong.Models
         public tbl_Customers Customer { get; set; }
         public BaoGiaTemView BaoGiaTemView { get; set; }
         public List<BaoGiaTemView> BaoGiaTemViews { get; set; }
-        public int action { get; set; } = 0;
+        public int action { get; set; }
+        public  DonHangView()
+        {
+            action = 0;
+        }
 
     }
 }

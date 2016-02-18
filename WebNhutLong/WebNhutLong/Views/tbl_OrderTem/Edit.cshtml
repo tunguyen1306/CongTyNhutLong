@@ -361,11 +361,13 @@
         </div>
 
         }
+       
      <div class="panel panel-default">
         <div class="panel-heading">
             <div class="row">
                 <span style="margin-left: 10px;line-height:33px">Báo giá lần 1</span>
                 <input type="submit" style="float: right; margin-right: 10px" value="In báo giá" class="btn btn-primary" />
+                
                 @if (Model.BaoGiaTemView.status.Value == 0)
                 {
                     <input type="button"  data-toggle="modal" data-target="#modal-container"  style="float: right; margin-right: 10px" value="Cập nhật kết quả" class="btn btn-primary" />
