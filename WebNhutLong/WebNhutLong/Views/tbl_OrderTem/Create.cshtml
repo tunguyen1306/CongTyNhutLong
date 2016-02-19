@@ -27,31 +27,35 @@
 
     });
     function updateProduct(el) {
-        if ($('.NameProducts').val() == '') {
-            $('.NameProducts').after('<label class="errorLabel">Nhập tên sản phẩm</label>');
+        if ($('.NameProducts1').val() == '') {
+            $('.NameProducts1').after('<label class="errorLabel lblNameProducts">Nhập tên sản phẩm</label>');
          
             return false;
         }
        
-        else if ($('.QuyCachProducts').val() == '') {
-            $('.QuyCachProducts').after('<label class="errorLabel">Nhập quy cách</label>');
+        else if ($('.QuyCachProducts1').val() == '') {
+            $('.QuyCachProducts1').after('<label class="errorLabel lblQuyCachProducts">Nhập quy cách</label>');
             return false;
         }
       
-        else if ($('.SolopProducts').val() < 0) {
-            $('.SolopProducts').after('<label class="errorLabel">Số lớp phải lớn hơn 0</label>');
+        else if ($('.SolopProducts1').val() < 0) {
+            $('.SolopProducts1').after('<label class="errorLabel lblSolopProducts">Số lớp phải lớn hơn 0</label>');
             return false;
         }
-        else if ($('.GiaProducts').val() < 0) {
-            $('.GiaProducts').after('<label class="errorLabel">Giá phải lớn hơn 0</label>');
+        else if ($('.GiaProducts1').val() < 0) {
+            $('.GiaProducts1').after('<label class="errorLabel lblGiaProducts">Giá phải lớn hơn 0</label>');
             return false;
         }
         else if ($('select[name=LoaigiayProducts]').val() == 0) {
-            $('select[name=LoaigiayProducts]').after('<label class="errorLabel">Chọn loại giấy</label>');
+            $('.LoaigiayProducts1').after('<label class="errorLabel lblLoaigiayProducts">Chọn loại giấy</label>');
             return false;
         }
         else {
-           
+            $('.lblNameProducts').addClass('hidden');
+            $('.lblQuyCachProducts').addClass('hidden');
+            $('.lblGiaProducts').addClass('hidden');
+            $('.lblSolopProducts').addClass('hidden');
+            $('.lblLoaigiayProducts').addClass('hidden');
             var id = new Date().getTime();
             var tr = $(el).parents('tr').eq(0);
             var trdata = "<tr id='ext_" + id + "'><input name='BaoGiaTemView.BaoGiaTemDetailViews.Index' value='" + id + "' type='hidden'/>";
@@ -243,16 +247,16 @@
                         <tbody class="body_data">
                             <tr>
                                 <td align="center">
-                                    <input class="form-control text-box single-line NameProducts" default-value="" name="NameProducts" type="text">
+                                    <input class="form-control text-box single-line NameProducts1" default-value="" name="NameProducts" type="text">
                                    
                                 </td>
                                 <td align="center">
-                                    <input class="form-control text-box single-line SolopProducts" value="1" default-value="1" min="1" name="SolopProducts" type="number">
+                                    <input class="form-control text-box single-line SolopProducts1" value="1" default-value="1" min="1" name="SolopProducts" type="number">
                                    
                                   
                                 </td>
                                 <td align="center">
-                                    <select name="LoaigiayProducts" default-value="0" class="form-control valid LoaigiayProducts">
+                                    <select name="LoaigiayProducts" default-value="0" class="form-control valid LoaigiayProducts1">
                                         <option value="0">Chọn loại giấy</option>
                                         <option value="3 lớp: 2 Vàng 1 Xeo">3 lớp: 2 Vàng 1 Xeo</option>
                                         <option value="3 lớp: 1 Trắng 1 Xeo 1 Vàng">3 lớp: 1 Trắng 1 Xeo 1 Vàng</option>
@@ -280,12 +284,12 @@
                                     </select>
                                 </td>
                                 <td align="center">
-                                    <input class="form-control text-box single-line QuyCachProducts" default-value="" name="QuyCachProducts" type="text">
+                                    <input class="form-control text-box single-line QuyCachProducts1" default-value="" name="QuyCachProducts" type="text">
                          
                                 </td>
 
                                 <td align="center">
-                                    <input class="form-control text-box single-line GiaProducts" name="GiaProducts" step="500" min="0" default-value="0" value="0" type="number">
+                                    <input class="form-control text-box single-line GiaProducts1" name="GiaProducts" step="500" min="0" default-value="0" value="0" type="number">
                                
                                 </td>
                                 <td align="center">
