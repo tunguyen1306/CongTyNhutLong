@@ -27,21 +27,51 @@
 
     });
     function updateProduct(el) {
-        var id = new Date().getTime();
-        var tr = $(el).parents('tr').eq(0);
-        var trdata = "<tr id='ext_" + id + "'><input name='BaoGiaTemView.BaoGiaTemDetailViews.Index' value='" + id + "' type='hidden'/>";
-        tr.find('.form-control').each(function() {
-            if ($(this).attr('name') == 'SoLuong') {
-                trdata += "<td><input class='form-control text-box single-line updateSL " + this.name + "'  min='1' value='" + this.value + "' type='number' name='BaoGiaTemView.BaoGiaTemDetailViews[" + id + "]." + this.name + "'/></td>";
-            } else {
-                trdata += "<td>" + this.value + "<input class='" + this.name + "' name='BaoGiaTemView.BaoGiaTemDetailViews[" + id + "]." + this.name + "' value='" + this.value + "' type='hidden'/></td>";
-            }
-            this.value = $(this).attr('default-value');
-        });
-        trdata += "<td><input type='submit' style='float: left; margin-left: 10px' value='Xóa' class='btn btn-primary' onclick='delProduct(this); return false;' /></td></tr>";
-        $(el).parents('tbody').eq(0).append(trdata);
-        updateMoney(el);
-        updateEvent();
+        if ($('.NameProducts').val() == '') {
+            $('.NameProducts').after('<label class="errorLabel">Nhập tên sản phẩm</label>');
+         
+            return false;
+        }
+       
+        else if ($('.QuyCachProducts').val() == '') {
+            $('.QuyCachProducts').after('<label class="errorLabel">Nhập quy cách</label>');
+            return false;
+        }
+      
+        else if ($('.SolopProducts').val() < 0) {
+            $('.SolopProducts').after('<label class="errorLabel">Số lớp phải lớn hơn 0</label>');
+            return false;
+        }
+        else if ($('.GiaProducts').val() < 0) {
+            $('.GiaProducts').after('<label class="errorLabel">Giá phải lớn hơn 0</label>');
+            return false;
+        }
+        else if ($('select[name=LoaigiayProducts]').val() == 0) {
+            $('select[name=LoaigiayProducts]').after('<label class="errorLabel">Chọn loại giấy</label>');
+            return false;
+        }
+        else {
+           
+            var id = new Date().getTime();
+            var tr = $(el).parents('tr').eq(0);
+            var trdata = "<tr id='ext_" + id + "'><input name='BaoGiaTemView.BaoGiaTemDetailViews.Index' value='" + id + "' type='hidden'/>";
+            tr.find('.form-control').each(function () {
+                if ($(this).attr('name') == 'SoLuong') {
+                    trdata += "<td><input class='form-control text-box single-line updateSL " + this.name + "'  min='1' value='" + this.value + "' type='number' name='BaoGiaTemView.BaoGiaTemDetailViews[" + id + "]." + this.name + "'/></td>";
+                } else {
+                    trdata += "<td>" + this.value + "<input class='" + this.name + "' name='BaoGiaTemView.BaoGiaTemDetailViews[" + id + "]." + this.name + "' value='" + this.value + "' type='hidden'/></td>";
+                }
+                this.value = $(this).attr('default-value');
+            });
+            trdata += "<td><input type='submit' style='float: left; margin-left: 10px' value='Xóa' class='btn btn-primary' onclick='delProduct(this); return false;' /></td></tr>";
+            $(el).parents('tbody').eq(0).append(trdata);
+            updateMoney(el);
+            updateEvent();
+            
+        }
+        return true;
+        
+       
     } 
     function updateEvent()
     {
@@ -91,14 +121,14 @@
 @using (Html.BeginForm())
 {
     @Html.AntiForgeryToken()
-    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+    @Html.ValidationSummary(true, "", new {@class = "text-danger"})
 
     <div class="panel panel-default">
         <div class="panel-heading">
             Mã khách hàng:<b>@Model.Customer.CodeCustomers</b><br />
             Tên khách hàng:<b>@Model.Customer.NameCustomers</b><br />
             Công ty:<b>@Model.Customer.CongTyCustomers</b>
-</div>
+        </div>
         <div class="panel-body">
             <div class="row form-horizontal">
                 <div class="col-lg-6">                  
@@ -109,7 +139,7 @@
                             @Model.code
                             @Html.HiddenFor(model => model.customer_id)
                         </div>
-                     </div>
+                    </div>
                 </div>
                 <div class="col-lg-6">                   
                     <div class="form-group">
@@ -121,16 +151,16 @@
                     </div>                   
                 </div>
                 <div class="col-lg-12">
-                    <div class="form-group" style="text-align:center">
+                    <div class="form-group" style="text-align: center">
                         <input type="submit" value="Thêm mới" class="btn btn-primary" />                       
                     </div>
 
                 </div>
-                </div>
+            </div>
             <!-- /.row (nested) -->
         </div>
     </div>
-
+}
     <div class="panel panel-default">
         <div class="panel-heading">
             <div class="row">
@@ -213,13 +243,16 @@
                         <tbody class="body_data">
                             <tr>
                                 <td align="center">
-                                    <input class="form-control text-box single-line" default-value="" name="NameProducts" type="text">
+                                    <input class="form-control text-box single-line NameProducts" default-value="" name="NameProducts" type="text">
+                                   
                                 </td>
                                 <td align="center">
-                                    <input class="form-control text-box single-line" value="1" default-value="1" min="1" name="SolopProducts" type="number">
+                                    <input class="form-control text-box single-line SolopProducts" value="1" default-value="1" min="1" name="SolopProducts" type="number">
+                                   
+                                  
                                 </td>
                                 <td align="center">
-                                    <select name="LoaigiayProducts" default-value="0"  class="form-control valid">
+                                    <select name="LoaigiayProducts" default-value="0" class="form-control valid LoaigiayProducts">
                                         <option value="0">Chọn loại giấy</option>
                                         <option value="3 lớp: 2 Vàng 1 Xeo">3 lớp: 2 Vàng 1 Xeo</option>
                                         <option value="3 lớp: 1 Trắng 1 Xeo 1 Vàng">3 lớp: 1 Trắng 1 Xeo 1 Vàng</option>
@@ -231,6 +264,7 @@
                                         <option value="2 lớp: 1 Vàng 1 Xeo - sóng C">2 lớp: 1 Vàng 1 Xeo - sóng C</option>
                                         <option value="2 lớp: 1 Trắng 1 Xeo - sóng E">2 lớp: 1 Trắng 1 Xeo - sóng E</option>
                                     </select>
+                             
 
                                 </td>
                                 <td align="center">
@@ -246,11 +280,13 @@
                                     </select>
                                 </td>
                                 <td align="center">
-                                    <input class="form-control text-box single-line" default-value="" name="QuyCachProducts" type="text">
+                                    <input class="form-control text-box single-line QuyCachProducts" default-value="" name="QuyCachProducts" type="text">
+                         
                                 </td>
 
                                 <td align="center">
-                                    <input class="form-control text-box single-line" name="GiaProducts" step="500"  min="0" default-value="0" value="0" type="number">
+                                    <input class="form-control text-box single-line GiaProducts" name="GiaProducts" step="500" min="0" default-value="0" value="0" type="number">
+                               
                                 </td>
                                 <td align="center">
                                     <input class="form-control text-box single-line" default-value="1"  min="1" name="SoLuong" value="1" type="number">
@@ -269,7 +305,6 @@
         </div>
     </div>
    
-}
 
 
 <div>
