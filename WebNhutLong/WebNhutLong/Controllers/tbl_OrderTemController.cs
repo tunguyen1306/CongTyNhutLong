@@ -57,9 +57,7 @@ namespace WebNhutLong.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Create(DonHangView donHang)
         {
-            if (ModelState.IsValid)
-            {
-
+           
                 donHang.status = 0;
                 donHang.BaoGiaTemView.status = 0;
                 tbl_OrderTem temValue = new tbl_OrderTem { customer_id = donHang.customer_id, code = donHang.code, date_begin = donHang.date_begin, date_end = donHang.date_end, status = donHang.status, id = donHang.id };
@@ -104,9 +102,7 @@ namespace WebNhutLong.Controllers
                     db.SaveChanges();
                 }
                 return RedirectToAction("Index");
-            }
-
-            return View(donHang);
+           
         }
 
         // GET: tbl_OrderTem/Edit/5

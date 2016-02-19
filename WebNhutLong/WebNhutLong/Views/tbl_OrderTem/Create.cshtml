@@ -136,7 +136,7 @@
 @using (Html.BeginForm())
 {
     @Html.AntiForgeryToken()
-    @Html.ValidationSummary(true, "", new {@class = "text-danger"})
+    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
 
     <div class="panel panel-default">
         <div class="panel-heading">
@@ -175,7 +175,7 @@
             <!-- /.row (nested) -->
         </div>
     </div>
-}
+
     <div class="panel panel-default">
         <div class="panel-heading">
             <div class="row">
@@ -319,7 +319,7 @@
 
         </div>
     </div>
-   
+}
 
 
 <div>
