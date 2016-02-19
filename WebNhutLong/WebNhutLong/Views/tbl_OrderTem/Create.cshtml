@@ -42,30 +42,41 @@
             $('.NameProducts1').after('<label class="errorLabel lblNameProducts">Nhập tên sản phẩm</label>');
 
             m++;
+        } else {
+            $('.lblNameProducts').addClass('hidden');
         }
 
         if ($('.QuyCachProducts1').val() == '') {
             $('.lblQuyCachProducts').addClass('hidden');
             $('.QuyCachProducts1').after('<label class="errorLabel lblQuyCachProducts">Nhập quy cách</label>');
             m++;
+        } else {
+            $('.lblQuyCachProducts').addClass('hidden');
         }
 
         if ($('.SolopProducts1').val() <= 0) {
             $('.lblSolopProducts').addClass('hidden');
             $('.SolopProducts1').after('<label class="errorLabel lblSolopProducts">Số lớp phải lớn hơn 0</label>');
             m++;
+        } else {
+            $('.lblSolopProducts').addClass('hidden');
         }
         if ($('.GiaProducts1').val() <= 0) {
             $('.lblGiaProducts').addClass('hidden');
             $('.GiaProducts1').after('<label class="errorLabel lblGiaProducts">Giá phải lớn hơn 0</label>');
             m++;
+        } else {
+            $('.lblGiaProducts').addClass('hidden');
         }
         if ($('select[name=LoaigiayProducts]').val() == 0) {
             $('.lblLoaigiayProducts').addClass('hidden');
             $('.LoaigiayProducts1').after('<label class="errorLabel lblLoaigiayProducts">Chọn loại giấy</label>');
             m++;
+        } else {
+            $('.lblLoaigiayProducts').addClass('hidden');
         }
         if (m == 0) {
+
             $('.lblNameProducts').addClass('hidden');
             $('.lblQuyCachProducts').addClass('hidden');
             $('.lblGiaProducts').addClass('hidden');
