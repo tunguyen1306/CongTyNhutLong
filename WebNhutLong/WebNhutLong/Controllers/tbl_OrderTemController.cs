@@ -101,7 +101,7 @@ namespace WebNhutLong.Controllers
                     db.tbl_OrderTem_BaoGia_Detail.Add(detail);
                     db.SaveChanges();
                 }
-                return RedirectToAction("Index");
+                return RedirectToAction("Edit", donHang);
            
         }
 
