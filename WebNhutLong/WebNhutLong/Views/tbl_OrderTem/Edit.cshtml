@@ -284,7 +284,7 @@
                             <div class="form-group">
                                 <label class="col-md-4" for="date_begin">Ngày bất đầu</label>
                                 <div class="col-md-8">
-                                    <input class="form-control date" data-val="true" data-val-date="The field date_begin must be a date." name="BaoGiaTemView.date_begin" value="@DateTime.Now.ToString("dd/MM/yyyy")" type="hidden">
+                                    <input class="form-control date" data-val="true" data-val-date="The field date_begin must be a date." name="BaoGiaTemView.date_begin" value="@DateTime.Now.ToString("MM/dd/yyyy")" type="hidden">
                                     @DateTime.Now.ToString("dd/MM/yyyy")
                                 </div>
 
@@ -702,7 +702,7 @@
 
     <!-- Modal -->
     <div id="modal-container" class="modal fade" tabindex="-1" role="dialog">
-        <div class="modal-dialog" role="document">
+        <div class="modal-dialog" role="document" >
             <div class="modal-content">
                 <div class="modal-header">
                     Cập nhật plan
@@ -724,7 +724,7 @@
 
 
     <div id="modal-container-donhang" class="modal fade" tabindex="-1" role="dialog">
-        <div class="modal-dialog" role="document">
+        <div class="modal-dialog" role="document" style="width:300px">
             <div class="modal-content">
                 <div class="modal-header">
                     Cập nhật thời gian kế hoạch
@@ -737,6 +737,13 @@
                     <div class="form-group">
                         <label for="pwd">Ngày kết thúc :</label>
                         @Html.EditorFor(model => model.date_begin_plan, new {htmlAttributes = new {@class = "form-control date"}})
+                    </div>
+                    <div class="form-group">
+                        <label for="pwd">Quy trình :</label>
+                        <select class="form-control valid" default-value="1" name="BaoGiaTemView.flow">
+                            <option value="1" selected="selected">Quy trình 1</option>
+                            <option value="2">Quy trình 2</option>
+                        </select>
                     </div>
             
                 </div>
