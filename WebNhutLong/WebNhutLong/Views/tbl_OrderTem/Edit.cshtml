@@ -215,7 +215,7 @@
                     <div class="form-group">
                         <label class="col-md-4">Ngày bắt đầu dự kiến</label>
                         <div class="col-md-8">
-                            @Html.HiddenFor(model => model.date_begin_plan)
+                            
                             @(Model.date_begin_plan.HasValue ? Model.date_begin_plan.Value.ToString("MM/dd/yyyy") : "Chưa cập nhập")
                         </div>
                     </div>
@@ -224,7 +224,7 @@
                     <div class="form-group">
                         <label class="col-md-4">Ngày kết thúc dự kiến</label>
                         <div class="col-md-8">
-                            @Html.HiddenFor(model => model.date_end_plan)
+                           
                             @(Model.date_end_plan.HasValue ? Model.date_end_plan.Value.ToString("MM/dd/yyyy") : "Chưa cập nhập")
                         </div>
                     </div>
@@ -233,7 +233,7 @@
                     <div class="form-group">
                         <label class="col-md-4">Ngày bắt đầu thực tế</label>
                         <div class="col-md-8">
-                            @Html.HiddenFor(model => model.date_begin)
+                           
                             @(Model.date_begin.HasValue ? Model.date_begin.Value.ToString("dd/MM/yyyy") : "Chưa cập nhập")
                         </div>
                     </div>
@@ -242,7 +242,7 @@
                     <div class="form-group">
                         <label class="col-md-4">Ngày kết thúc thực tế</label>
                         <div class="col-md-8">
-                            @Html.HiddenFor(model => model.date_end)
+                           
                             @(Model.date_end.HasValue ? Model.date_end.Value.ToString("dd/MM/yyyy") : "Chưa cập nhập")
                         </div>
                     </div>
@@ -736,7 +736,7 @@
                     </div>
                     <div class="form-group">
                         <label for="pwd">Ngày kết thúc :</label>
-                        @Html.EditorFor(model => model.date_begin_plan, new {htmlAttributes = new {@class = "form-control date"}})
+                        @Html.EditorFor(model => model.date_end_plan, new {htmlAttributes = new {@class = "form-control date"}})
                     </div>
                     <div class="form-group">
                         <label for="pwd">Quy trình :</label>
