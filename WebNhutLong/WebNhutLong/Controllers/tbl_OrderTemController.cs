@@ -64,6 +64,7 @@ namespace WebNhutLong.Controllers
                 temValue = db.tbl_OrderTem.Add(temValue);
                 db.SaveChanges();
                 donHang.id = temValue.id;
+                donHang.BaoGiaTemView.date_begin = DateTime.Now;
                 tbl_OrderTem_BaoGia tbl_OrderTem_BaoGia = new tbl_OrderTem_BaoGia { date_begin = donHang.BaoGiaTemView.date_begin, date_end = donHang.BaoGiaTemView.date_end, id = donHang.BaoGiaTemView.id, order_id = donHang.id, status = donHang.BaoGiaTemView.status, offset = donHang.BaoGiaTemView.offset, total_money = donHang.BaoGiaTemView.total_money };
                 tbl_OrderTem_BaoGia = db.tbl_OrderTem_BaoGia.Add(tbl_OrderTem_BaoGia);
                 db.SaveChanges();
@@ -101,7 +102,10 @@ namespace WebNhutLong.Controllers
                     db.tbl_OrderTem_BaoGia_Detail.Add(detail);
                     db.SaveChanges();
                 }
-                return RedirectToAction("Edit", donHang);
+            return RedirectToAction("Edit", new
+            {
+                id = donHang.id 
+                    });
            
         }
 
@@ -232,6 +236,7 @@ namespace WebNhutLong.Controllers
                 tbl_OrderTem_BaoGia baogia = db.tbl_OrderTem_BaoGia.Find(donHang.BaoGiaTemView.id);
                 baogia.status =donHang.BaoGiaTemView.status.Value;
                 baogia.date_end = DateTime.Now;
+                baogia.note = donHang.BaoGiaTemView.note;
                 db.Entry(baogia).State = EntityState.Modified;
                 db.SaveChanges();
                
@@ -240,8 +245,16 @@ namespace WebNhutLong.Controllers
             {
                 donHang.action = 0;
                 tbl_OrderTem order = db.tbl_OrderTem.Find(donHang.id);
+                order.date_begin_plan = donHang.date_begin_plan.Value;
+                order.date_end_plan = donHang.date_end_plan.Value;
                 order.status = donHang.status.Value;
                 db.Entry(order).State = EntityState.Modified;
+                db.SaveChanges();
+
+
+                tbl_OrderTem_BaoGia baogia = db.tbl_OrderTem_BaoGia.Find(donHang.BaoGiaTemView.id);
+                baogia.flow = donHang.BaoGiaTemView.flow;             
+                db.Entry(baogia).State = EntityState.Modified;
                 db.SaveChanges();
             }
             DonHangView d = new DonHangView();

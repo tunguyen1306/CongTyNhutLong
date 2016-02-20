@@ -21,5 +21,7 @@ namespace WebNhutLong.Models
         public Nullable<System.DateTime> date_end { get; set; }
         public Nullable<int> status { get; set; }
         public Nullable<int> offset { get; set; }
+        public Nullable<int> flow { get; set; }
+        public string note { get; set; }
     }
 }

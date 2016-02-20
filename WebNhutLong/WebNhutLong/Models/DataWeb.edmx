@@ -62,11 +62,19 @@
             <PropertyRef Name="id" />
           </Key>
           <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="customer_id" Type="int" />
           <Property Name="code" Type="nvarchar" MaxLength="50" />
           <Property Name="date_begin" Type="datetime" />
           <Property Name="date_end" Type="datetime" />
-          <Property Name="customer_id" Type="int" />
+          <Property Name="date_begin_plan" Type="datetime" />
+          <Property Name="date_end_plan" Type="datetime" />
+          <Property Name="date_deliver" Type="datetime" />
+          <Property Name="address_deliver" Type="nvarchar" MaxLength="250" />
           <Property Name="status" Type="int" />
+          <Property Name="create_date" Type="datetime" />
+          <Property Name="create_user" Type="nvarchar" MaxLength="100" />
+          <Property Name="update_date" Type="datetime" />
+          <Property Name="update_user" Type="nvarchar" MaxLength="100" />
         </EntityType>
         <EntityType Name="tbl_OrderTem_BaoGia">
           <Key>
@@ -79,6 +87,8 @@
           <Property Name="date_end" Type="datetime" />
           <Property Name="status" Type="int" />
           <Property Name="offset" Type="int" />
+          <Property Name="flow" Type="int" />
+          <Property Name="note" Type="nvarchar" MaxLength="200" />
         </EntityType>
         <EntityType Name="tbl_OrderTem_BaoGia_Detail">
           <Key>
@@ -260,30 +270,40 @@
           <Key>
             <PropertyRef Name="id" />
           </Key>
-          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="code" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="date_begin" Type="DateTime" Precision="3" />
-          <Property Name="date_end" Type="DateTime" Precision="3" />
+          <Property Name="id" Nullable="false" annotation:StoreGeneratedPattern="Identity" Type="Int32" />
+          <Property Name="code" MaxLength="50" FixedLength="false" Unicode="true" Type="String" />
+          <Property Name="date_begin" Precision="3" Type="DateTime" />
+          <Property Name="date_end" Precision="3" Type="DateTime" />
           <Property Name="customer_id" Type="Int32" />
           <Property Name="status" Type="Int32" />
+          <Property Name="date_begin_plan" Type="DateTime" Precision="3" />
+          <Property Name="date_end_plan" Type="DateTime" Precision="3" />
+          <Property Name="date_deliver" Type="DateTime" Precision="3" />
+          <Property Name="address_deliver" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+          <Property Name="create_date" Type="DateTime" Precision="3" />
+          <Property Name="create_user" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="update_date" Type="DateTime" Precision="3" />
+          <Property Name="update_user" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
         </EntityType>
         <EntityType Name="tbl_OrderTem_BaoGia">
           <Key>
             <PropertyRef Name="id" />
           </Key>
-          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="id" Nullable="false" annotation:StoreGeneratedPattern="Identity" Type="Int32" />
           <Property Name="order_id" Type="Int32" />
           <Property Name="total_money" Type="Double" />
-          <Property Name="date_begin" Type="DateTime" Precision="3" />
-          <Property Name="date_end" Type="DateTime" Precision="3" />
+          <Property Name="date_begin" Precision="3" Type="DateTime" />
+          <Property Name="date_end" Precision="3" Type="DateTime" />
           <Property Name="status" Type="Int32" />
           <Property Name="offset" Type="Int32" />
+          <Property Name="flow" Type="Int32" />
+          <Property Name="note" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
         </EntityType>
         <EntityType Name="tbl_OrderTem_BaoGia_Detail">
           <Key>
             <PropertyRef Name="id" />
           </Key>
-          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="id" Nullable="false" annotation:StoreGeneratedPattern="Identity" Type="Int32" />
           <Property Name="baogia_id" Type="Int32" />
           <Property Name="sanpam_id" Type="Int32" />
           <Property Name="soluong" Type="Int32" />
@@ -400,6 +420,14 @@
           <EntitySetMapping Name="tbl_OrderTem">
             <EntityTypeMapping TypeName="WebNhutLongModel.tbl_OrderTem">
               <MappingFragment StoreEntitySet="tbl_OrderTem">
+                <ScalarProperty Name="update_user" ColumnName="update_user" />
+                <ScalarProperty Name="update_date" ColumnName="update_date" />
+                <ScalarProperty Name="create_user" ColumnName="create_user" />
+                <ScalarProperty Name="create_date" ColumnName="create_date" />
+                <ScalarProperty Name="address_deliver" ColumnName="address_deliver" />
+                <ScalarProperty Name="date_deliver" ColumnName="date_deliver" />
+                <ScalarProperty Name="date_end_plan" ColumnName="date_end_plan" />
+                <ScalarProperty Name="date_begin_plan" ColumnName="date_begin_plan" />
                 <ScalarProperty Name="status" ColumnName="status" />
                 <ScalarProperty Name="customer_id" ColumnName="customer_id" />
                 <ScalarProperty Name="date_end" ColumnName="date_end" />
@@ -412,6 +440,8 @@
           <EntitySetMapping Name="tbl_OrderTem_BaoGia">
             <EntityTypeMapping TypeName="WebNhutLongModel.tbl_OrderTem_BaoGia">
               <MappingFragment StoreEntitySet="tbl_OrderTem_BaoGia">
+                <ScalarProperty Name="note" ColumnName="note" />
+                <ScalarProperty Name="flow" ColumnName="flow" />
                 <ScalarProperty Name="offset" ColumnName="offset" />
                 <ScalarProperty Name="status" ColumnName="status" />
                 <ScalarProperty Name="date_end" ColumnName="date_end" />
