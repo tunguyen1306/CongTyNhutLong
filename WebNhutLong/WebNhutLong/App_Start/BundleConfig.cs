@@ -27,7 +27,8 @@ namespace WebNhutLong
                       "~/bower_components/bootstrap/dist/css/bootstrap.min.css",
                       "~/bower_components/metisMenu/dist/metisMenu.min.css",
                       "~/Content/timeline.css",
-                      "~/Content/sb-admin-2.css"));
+                      "~/Content/sb-admin-2.css",
+                      "~/Content/CusWeb.css"));
         }
     }
 }

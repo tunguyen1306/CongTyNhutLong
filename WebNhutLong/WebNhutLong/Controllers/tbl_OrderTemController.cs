@@ -326,6 +326,23 @@ namespace WebNhutLong.Controllers
             }
             base.Dispose(disposing);
         }
+        public ActionResult PrintOrder()
+        {
+            return View();
+        }
+         [HttpPost]
+        public ActionResult PrintOrder(int id)
+        {
+            var qr = (from data in db.tbl_OrderTem
+                     join cus in db.tbl_Customers on data.id equals cus.IDCustomers
+                     where data.id==id
+                     select new { data ,cus}).ToList().Select(x=>new DonHangView
+                     {
+                         customer_id = x.cus.IDCustomers
+                     });
+           
+            return View(qr.ToList());
+        }
        
     }
 }

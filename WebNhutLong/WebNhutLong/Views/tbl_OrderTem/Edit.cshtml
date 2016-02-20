@@ -216,7 +216,7 @@
                         <label class="col-md-4">Ngày bắt đầu dự kiến</label>
                         <div class="col-md-8">
                             @Html.HiddenFor(model => model.date_begin_plan)
-                            @(Model.date_begin_plan.HasValue ? Model.date_begin_plan.Value.ToString("dd/MM/yyyy") : "Chưa cập nhập")
+                            @(Model.date_begin_plan.HasValue ? Model.date_begin_plan.Value.ToString("MM/dd/yyyy") : "Chưa cập nhập")
                         </div>
                     </div>
                 </div>
@@ -225,7 +225,7 @@
                         <label class="col-md-4">Ngày kết thúc dự kiến</label>
                         <div class="col-md-8">
                             @Html.HiddenFor(model => model.date_end_plan)
-                            @(Model.date_end_plan.HasValue ? Model.date_end_plan.Value.ToString("dd/MM/yyyy") : "Chưa cập nhập")
+                            @(Model.date_end_plan.HasValue ? Model.date_end_plan.Value.ToString("MM/dd/yyyy") : "Chưa cập nhập")
                         </div>
                     </div>
                 </div>
@@ -421,6 +421,7 @@
             <div class="row">
                 <span style="margin-left: 10px; line-height: 33px">Báo giá lần @(Model.BaoGiaTemViews.Count + 1)</span>
                 <input type="submit" style="float: right; margin-right: 10px" value="In báo giá" class="btn btn-primary" />
+                @Html.ActionLink("In báo giá", "PrintOrder", new { id = Model.id}, htmlAttributes: new { @class = "btn btn-primary", @style = "float: right; margin-right: 10px" })
                 
                 @if (Model.BaoGiaTemView.status.Value == 0)
                 {
