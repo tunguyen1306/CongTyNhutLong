@@ -70,12 +70,21 @@
                                         @Html.DisplayFor(modelItem => item.date_end)
                                        
                                     </td>
-                                    <td>
-                                        @Html.DisplayFor(modelItem => item.status)
+                                    <td >
+
+                                       
+                                            @(
+ item.status == 1 ? "Hoạt động" : "Không hoạt động"
+                                            )
+                                  
+
+
 
                                     </td>
+
                                    
                                     <td>
+                                     
                                         @Html.ActionLink("Sửa", "Edit", new { id = item.id }, htmlAttributes: new { @class = "btn btn-outline btn-primary btn-xs" })
 
                                         @Html.ActionLink("Xóa", "Delete", new { id = item.id }, htmlAttributes: new { @class = "btn btn-outline btn-primary btn-xs" })
