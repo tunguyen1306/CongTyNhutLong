@@ -127,31 +127,18 @@
         <div class="panel-body">
             <div class="row form-horizontal">
                 <input type="hidden" value="@Model.action" name="action" id="action" >
+
                 <div class="col-lg-6">
-                    <div class="form-group">
-                        <label class="col-md-4">Ngày bắt đầu thực tế</label>
-                        <div class="col-md-8">
-                            @Html.EditorFor(model => model.date_begin, new { htmlAttributes = new { @class = "form-control date" } })
-                            @Html.ValidationMessageFor(model => model.date_begin, "", new { @class = "text-danger" })
-                        </div>
-                    </div>
                     <div class="form-group">
                         <label class="col-md-4">Mã đơn hàng</label>
                         <div class="col-md-8">
-                            @Html.EditorFor(model => model.code, new { htmlAttributes = new { @class = "form-control" } })
-                            @Html.ValidationMessageFor(model => model.code, "", new { @class = "text-danger" })
+                            @Html.HiddenFor(model => model.code)
+                            @Model.code
                             @Html.HiddenFor(model => model.customer_id)
                         </div>
                     </div>
                 </div>
                 <div class="col-lg-6">
-                    <div class="form-group">
-                        <label class="col-md-4">Ngày kết thúc thực tế</label>
-                        <div class="col-md-8">
-                            @Html.EditorFor(model => model.date_end, new { htmlAttributes = new { @class = "form-control date" } })
-                            @Html.ValidationMessageFor(model => model.date_end, "", new { @class = "text-danger" })
-                        </div>
-                    </div>
                     <div class="form-group">
                         <label class="col-md-4">Trạng thái</label>
                         <div class="col-md-8">
@@ -175,6 +162,47 @@
                         </div>
                     </div>
                 </div>
+
+                <div class="col-lg-6">
+                    <div class="form-group">
+                        <label class="col-md-4">Ngày bắt đầu dự kiến</label>
+                        <div class="col-md-8">
+                            @Html.HiddenFor(model => model.date_begin_plan)
+                            @(Model.date_begin_plan.HasValue? Model.date_begin_plan.Value.ToString("dd/MM/yyyy"): "Chưa cập nhập")
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-6">
+                    <div class="form-group">
+                        <label class="col-md-4">Ngày kết thúc dự kiến</label>
+                        <div class="col-md-8">
+                            @Html.HiddenFor(model => model.date_end_plan)
+                            @(Model.date_end_plan.HasValue ? Model.date_end_plan.Value.ToString("dd/MM/yyyy") : "Chưa cập nhập")
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-6">
+                    <div class="form-group">
+                        <label class="col-md-4">Ngày bắt đầu thực tế</label>
+                        <div class="col-md-8">
+                            @Html.HiddenFor(model => model.date_begin)
+                            @(Model.date_begin.HasValue ? Model.date_begin.Value.ToString("dd/MM/yyyy") : "Chưa cập nhập")
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-6">
+                    <div class="form-group">
+                        <label class="col-md-4">Ngày kết thúc thực tế</label>
+                        <div class="col-md-8">
+                            @Html.HiddenFor(model => model.date_end)
+                            @(Model.date_end.HasValue ? Model.date_end.Value.ToString("dd/MM/yyyy") : "Chưa cập nhập")
+                        </div>
+                    </div>
+                </div>
+
+                
+                
+              
                 @*<div class="col-lg-12">
                     <div class="form-group" style="text-align:center">
                        
@@ -243,7 +271,14 @@
                                 </div>
                             </div>
                         </div>
-
+                        <div class="col-lg-6">
+                            <div class="form-group">
+                                <label class="col-md-4">Quy trình</label>
+                                <div class="col-md-8">
+                                    Chưa cập nhập
+                                </div>
+                            </div>
+                        </div>
 
                     </div>
                 </div>
@@ -415,7 +450,15 @@
                             </div>
                         </div>
                     </div>
+                    <div class="col-lg-6">
+                        <div class="form-group">
+                            <label class="control-label col-md-4">Quy trình</label>
+                            <div class="col-md-4" style="padding-top:7px">
+                                @(Model.BaoGiaTemView.flow.HasValue ? "Quy trình" + Model.BaoGiaTemView.flow.Value : "Chưa cập nhập")
 
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
 
@@ -545,7 +588,15 @@
                                 </div>
                             </div>
                         </div>
+                        <div class="col-lg-6">
+                            <div class="form-group">
+                                <label class="control-label col-md-4">Quy trình</label>
+                                <div class="col-md-4" style="padding-top:7px">
+                                    @(Model.BaoGiaTemViews[i].flow.HasValue ? "Quy trình" + Model.BaoGiaTemViews[i].flow.Value : "Chưa cập nhập")
 
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
 
