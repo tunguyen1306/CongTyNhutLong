@@ -352,7 +352,7 @@ namespace WebNhutLong.Controllers
                          customer_id = x.cus.IDCustomers
                      });
            
-            return View(qr.ToList());
+            return View();
         }
        
     }
