@@ -8,6 +8,17 @@
 <h2>Thêm báo giá</h2>
 
 <script type="text/javascript">
+    function numberParse(nStr) {
+        nStr += '';
+        x = nStr.split('.');
+        x1 = x[0];
+        x2 = x.length > 1 ? '.' + x[1] : '';
+        var rgx = /(\d+)(\d{3})/;
+        while (rgx.test(x1)) {
+            x1 = x1.replace(rgx, '$1' + ',' + '$2');
+        }
+        return x1 + x2;
+    }
     $(document).ready(function () {
         $("input[type=number]").keydown(function (e) {
             // Allow: backspace, delete, tab, escape, enter and .
@@ -89,7 +100,11 @@
                 if ($(this).attr('name') == 'SoLuong') {
                     trdata += "<td><input class='form-control text-box single-line updateSL " + this.name + "'  min='1' value='" + this.value + "' type='number' name='BaoGiaTemView.BaoGiaTemDetailViews[" + id + "]." + this.name + "'/></td>";
                 } else {
-                    trdata += "<td>" + this.value + "<input class='" + this.name + "' name='BaoGiaTemView.BaoGiaTemDetailViews[" + id + "]." + this.name + "' value='" + this.value + "' type='hidden'/></td>";
+                    var text = this.value;
+                    if ($(this).attr('name') == 'GiaProducts') {
+                        text = numberParse(this.value) + " đ";
+                    }
+                    trdata += "<td>" + text + "<input class='" + this.name + "' name='BaoGiaTemView.BaoGiaTemDetailViews[" + id + "]." + this.name + "' value='" + this.value + "' type='hidden'/></td>";
                 }
                 this.value = $(this).attr('default-value');
             });
@@ -140,7 +155,7 @@
             }
         });
         $('.BaoGiaTemView_total_money').val(money);
-        $('#BaoGiaTemView_total_money').text(money);
+        $('#BaoGiaTemView_total_money').text(numberParse(money));
     }
 
 </script>

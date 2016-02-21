@@ -343,16 +343,32 @@ namespace WebNhutLong.Controllers
         
         public ActionResult PrintOrder(int id)
         {
-            var qr = (from data in db.tbl_OrderTem
-                     join cus in db.tbl_Customers on data.customer_id equals cus.IDCustomers
-                     where data.id==id
-                     select new { data ,cus}).ToList().Select(x=>new DonHangView
-                     {
-                         id =x.data.id,
-                         customer_id = x.cus.IDCustomers
-                     });
-           
-            return View();
+            tbl_OrderTem_BaoGia item = db.tbl_OrderTem_BaoGia.Find(id);
+            tbl_OrderTem tbl_OrderTem = db.tbl_OrderTem.Find(item.order_id);
+            DonHangView d = new DonHangView();
+            d.customer_id = tbl_OrderTem.customer_id;
+            d.code = tbl_OrderTem.code;
+            d.date_begin = tbl_OrderTem.date_begin;
+            d.date_end = tbl_OrderTem.date_end;
+            d.id = tbl_OrderTem.id;
+            d.status = tbl_OrderTem.status;
+            d.date_begin_plan = tbl_OrderTem.date_begin_plan;
+            d.date_end_plan = tbl_OrderTem.date_end_plan;
+
+
+            
+           BaoGiaTemView temBG = new BaoGiaTemView { flow = item.flow, note = item.note, date_begin = item.date_begin, date_end = item.date_end, id = item.id, offset = item.offset, order_id = item.order_id, status = item.status, total_money = item.total_money };
+           var queryGiaoGiaCT = from u in db.tbl_OrderTem_BaoGia_Detail
+                                     join y in db.tbl_Products on u.sanpam_id equals y.ID_Products
+                                     where u.baogia_id.Value.Equals(temBG.id)
+                                     select new BaoGiaTemDetailView { ID_Products = u.sanpam_id.Value, CodeProducts = y.CodeProducts, CreatedDateProducts = y.CreatedDateProducts, CreateUserProducts = y.CreateUserProducts, DanKimProducts = y.DanKimProducts, GiaProducts = u.money.Value.ToString(), LoaigiayProducts = y.LoaigiayProducts, ModifyDateProducts = y.ModifyDateProducts, ModifyUserProducts = y.ModifyUserProducts, NameProducts = y.NameProducts, OffsetFlexoProducts = y.OffsetFlexoProducts, QuyCachProducts = y.QuyCachProducts, SolopProducts = y.SolopProducts, SoLuong = u.soluong.Value, StatusProducts = y.StatusProducts };
+            temBG.BaoGiaTemDetailViews = queryGiaoGiaCT.ToList<BaoGiaTemDetailView>();
+
+            d.BaoGiaTemView = temBG;
+            d.BaoGiaTemView.buildPrint();
+            var list = from tt in db.tbl_Customers where tt.IDCustomers == d.customer_id select tt;
+            d.Customer = list.ToList()[0];
+            return View(d);
         }
        
     }
