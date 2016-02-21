@@ -350,9 +350,12 @@ namespace WebNhutLong.Controllers
                      {
                          id =x.data.id,
                          customer_id = x.cus.IDCustomers
+                        
+                         
                      });
+            ;
            
-            return View();
+            return View(qr.ToList()[0]);
         }
        
     }
