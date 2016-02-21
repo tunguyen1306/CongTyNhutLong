@@ -25,8 +25,8 @@ namespace WebNhutLong.Controllers
                     customer_id = cus.IDCustomers,
                     Customer = cus,
                     code=data.code,
-                    date_begin = data.date_begin,
-                    date_end = data.date_end,
+                    date_begin_plan = data.date_begin_plan,
+                    date_end_plan = data.date_end_plan,
                     status = data.status
                         
 
@@ -89,7 +89,11 @@ namespace WebNhutLong.Controllers
                 d.BaoGiaTemView = temBG;
                 break;
             }
-            var list = from tt in db.tbl_Customers where tt.IDCustomers == d.customer_id select tt;
+
+            var queryQT = from u in db.tbl_QuyTrinh where u.ID_BaoGia.Equals(d.BaoGiaTemView.id) orderby u.ThuTu ascending select u;
+            d.BaoGiaTemView.QuyTrinhs = queryQT.ToList<tbl_QuyTrinh>();
+
+           var list = from tt in db.tbl_Customers where tt.IDCustomers == d.customer_id select tt;
             d.Customer = list.ToList()[0];
             return View(d);
         }

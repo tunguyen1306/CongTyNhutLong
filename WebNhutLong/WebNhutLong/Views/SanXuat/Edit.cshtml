@@ -125,60 +125,32 @@
                                         <th colspan="20">Kế hoạch sản xuất</th>
                                     </tr>
                                     <tr>
-                                        <th colspan="2">Sản xuất giấy tấm </th>
-                                        <th colspan="2">
-                                            Xã biên,cán lằn
-                                        </th>
-                                        <th colspan="2">
-                                            In Flexo
-                                        </th>
-                                        <th colspan="2">
-                                            Chạp khoe
-                                        </th>
 
-                                        <th colspan="2">
-                                            Đóng kim/Dán
-                                        </th>
-                                        <th colspan="2">
-                                            Đóng gói
-                                        </th>
-                                        <th colspan="2">
-                                            Giao hàng
-                                        </th>
+                                       @for (int i = 0; i < Model.BaoGiaTemView.QuyTrinhs.Count; i++)
+                                       {
+                                           var item = Model.BaoGiaTemView.QuyTrinhs[i];
+                                           <th colspan="2">@item.TenBuoc</th>
+                                       }
+                                     
+                                       
                                     </tr>
                                 </thead>
                                 <tbody>
                                     <tr>
-                                        <th>Bắt đầu</th>
-                                        <th>Kết thúc</th>
-                                        <th>Bắt đầu</th>
-                                        <th>Kết thúc</th>
-                                        <th>Bắt đầu</th>
-                                        <th>Kết thúc</th>
-                                        <th>Bắt đầu</th>
-                                        <th>Kết thúc</th>
-                                        <th>Bắt đầu</th>
-                                        <th>Kết thúc</th>
-                                        <th>Bắt đầu</th>
-                                        <th>Kết thúc</th>
-                                        <th>Bắt đầu</th>
-                                        <th>Kết thúc</th>
+                                        @for (int i = 0; i < Model.BaoGiaTemView.QuyTrinhs.Count; i++)
+                                        {
+                                            <th>Bắt đầu</th>
+                                            <th>Kết thúc</th>
+                                        }
+                                      
+                                       
                                     </tr>
                                     <tr>
-                                        <td>01/01/2016</td>
-                                        <td>01/01/2016</td>
-                                        <td>01/01/2016</td>
-                                        <td>01/01/2016</td>
-                                        <td>01/01/2016</td>
-                                        <td>01/01/2016</td>
-                                        <td>01/01/2016</td>
-                                        <td>01/01/2016</td>
-                                        <td>01/01/2016</td>
-                                        <td>01/01/2016</td>
-                                        <td>01/01/2016</td>
-                                        <td>01/01/2016</td>
-                                        <td>01/01/2016</td>
-                                        <td>01/01/2016</td>
+                                        @for (int i = 0; i < Model.BaoGiaTemView.QuyTrinhs.Count; i++)
+                                        {
+                                            <td>01/01/2016</td>
+                                            <td>01/01/2016</td>
+                                        }                                      
                                     </tr>
 
                                 </tbody>

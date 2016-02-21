@@ -269,10 +269,62 @@ namespace WebNhutLong.Controllers
                 db.SaveChanges();
 
 
+
+
+
                 tbl_OrderTem_BaoGia baogia = db.tbl_OrderTem_BaoGia.Find(donHang.BaoGiaTemView.id);
                 baogia.flow = donHang.BaoGiaTemView.flow;             
                 db.Entry(baogia).State = EntityState.Modified;
                 db.SaveChanges();
+                if (donHang.BaoGiaTemView.flow==1)
+                {
+                    tbl_QuyTrinh qt1 = new tbl_QuyTrinh { ID_BaoGia = baogia.id, ThuTu = 0, TrangThai = 0, TenBuoc = "Sản xuất giấy tấm" };
+                    db.tbl_QuyTrinh.Add(qt1);
+                    tbl_QuyTrinh qt2 = new tbl_QuyTrinh { ID_BaoGia = baogia.id, ThuTu = 1, TrangThai = 0, TenBuoc = "Xã biên,cán lằn" };
+                    db.tbl_QuyTrinh.Add(qt2);
+                    tbl_QuyTrinh qt3 = new tbl_QuyTrinh { ID_BaoGia = baogia.id, ThuTu = 2, TrangThai = 0, TenBuoc = "In Flexo " };
+                    db.tbl_QuyTrinh.Add(qt3);
+                    tbl_QuyTrinh qt4 = new tbl_QuyTrinh { ID_BaoGia = baogia.id, ThuTu = 3, TrangThai = 0, TenBuoc = "Chạp khoe" };
+                    db.tbl_QuyTrinh.Add(qt4);
+                    tbl_QuyTrinh qt5 = new tbl_QuyTrinh { ID_BaoGia = baogia.id, ThuTu = 4, TrangThai = 0, TenBuoc = "Đóng kim/Dán" };
+                    db.tbl_QuyTrinh.Add(qt5);
+                    tbl_QuyTrinh qt6 = new tbl_QuyTrinh { ID_BaoGia = baogia.id, ThuTu = 5, TrangThai = 0, TenBuoc = "Đóng gói" };
+                    db.tbl_QuyTrinh.Add(qt6);
+                    tbl_QuyTrinh qt7 = new tbl_QuyTrinh { ID_BaoGia = baogia.id, ThuTu = 6, TrangThai = 0, TenBuoc = "Giao hàng" };
+                    db.tbl_QuyTrinh.Add(qt7);
+                    tbl_QuyTrinh qt8 = new tbl_QuyTrinh { ID_BaoGia = baogia.id, ThuTu = 7, TrangThai = 0, TenBuoc = "Thanh toán" };
+                    db.tbl_QuyTrinh.Add(qt8);
+                    tbl_QuyTrinh qt9 = new tbl_QuyTrinh { ID_BaoGia = baogia.id, ThuTu = 8, TrangThai = 0, TenBuoc = "Kết thúc đơn hàng" };
+                    db.tbl_QuyTrinh.Add(qt9);
+                    db.SaveChanges();
+                }
+                else if (donHang.BaoGiaTemView.flow==2)
+                {
+                    tbl_QuyTrinh qt1 = new tbl_QuyTrinh { ID_BaoGia = baogia.id, ThuTu = 0, TrangThai = 0, TenBuoc = "Nhận tờ in offset" };
+                    db.tbl_QuyTrinh.Add(qt1);
+                    tbl_QuyTrinh qt2 = new tbl_QuyTrinh { ID_BaoGia = baogia.id, ThuTu = 1, TrangThai = 0, TenBuoc = "Sản xuất giấy tấm" };
+                    db.tbl_QuyTrinh.Add(qt2);
+                    tbl_QuyTrinh qt3 = new tbl_QuyTrinh { ID_BaoGia = baogia.id, ThuTu = 2, TrangThai = 0, TenBuoc = "Bồi" };
+                    db.tbl_QuyTrinh.Add(qt3);
+                    tbl_QuyTrinh qt4 = new tbl_QuyTrinh { ID_BaoGia = baogia.id, ThuTu = 3, TrangThai = 0, TenBuoc = "Bế" };
+                    db.tbl_QuyTrinh.Add(qt4);
+                    tbl_QuyTrinh qt5 = new tbl_QuyTrinh { ID_BaoGia = baogia.id, ThuTu = 4, TrangThai = 0, TenBuoc = "Bấm kim/dán" };
+                    db.tbl_QuyTrinh.Add(qt5);
+                    tbl_QuyTrinh qt6 = new tbl_QuyTrinh { ID_BaoGia = baogia.id, ThuTu = 5, TrangThai = 0, TenBuoc = "Đóng gói" };
+                    db.tbl_QuyTrinh.Add(qt6);
+                    tbl_QuyTrinh qt7 = new tbl_QuyTrinh { ID_BaoGia = baogia.id, ThuTu = 6, TrangThai = 0, TenBuoc = "Giao hàng" };
+                    db.tbl_QuyTrinh.Add(qt7);
+                    tbl_QuyTrinh qt8 = new tbl_QuyTrinh { ID_BaoGia = baogia.id, ThuTu = 7, TrangThai = 0, TenBuoc = "Thanh toán" };
+                    db.tbl_QuyTrinh.Add(qt8);
+                    tbl_QuyTrinh qt9 = new tbl_QuyTrinh { ID_BaoGia = baogia.id, ThuTu = 8, TrangThai = 0, TenBuoc = "Kết thúc đơn hàng" };
+                    db.tbl_QuyTrinh.Add(qt9);
+                
+                    db.SaveChanges();
+                }
+               
+
+
+
             }
             DonHangView d = new DonHangView();
             d.customer_id = tbl_OrderTem.customer_id;

@@ -121,14 +121,17 @@
         </EntityType>
         <EntityType Name="tbl_QuyTrinh">
           <Key>
-            <PropertyRef Name="ID_BaoGia" />
+            <PropertyRef Name="ID" />
           </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="ID_BaoGia" Type="int" Nullable="false" />
           <Property Name="TenBuoc" Type="nvarchar" MaxLength="250" />
           <Property Name="ThuTu" Type="int" />
           <Property Name="TrangThai" Type="int" />
-          <Property Name="NgayBatDauKetThuc" Type="datetime" />
-          <Property Name="NgayKetThucThucTe" Type="datetime" />
+          <Property Name="NgayBatDau_DK" Type="datetime" />
+          <Property Name="NgayKetThuc_DK" Type="datetime" />
+          <Property Name="NgayBatDau_TT" Type="datetime" />
+          <Property Name="NgayKetThuc_TT" Type="datetime" />
         </EntityType>
         <EntityType Name="tbl_User">
           <Key>
@@ -183,12 +186,12 @@
           <EntitySet Name="tbl_Customers" EntityType="Self.tbl_Customers" />
           <EntitySet Name="tbl_Products" EntityType="WebNhutLongModel.tbl_Products" />
           <EntitySet Name="tbl_User" EntityType="WebNhutLongModel.tbl_User" />
-          <EntitySet Name="tbl_QuyTrinh" EntityType="WebNhutLongModel.tbl_QuyTrinh" />
           <EntitySet Name="tbl_BaoGia" EntityType="WebNhutLongModel.tbl_BaoGia" />
           <EntitySet Name="tbl_BaoGiaChiTiet" EntityType="WebNhutLongModel.tbl_BaoGiaChiTiet" />
           <EntitySet Name="tbl_OrderTem" EntityType="WebNhutLongModel.tbl_OrderTem" />
           <EntitySet Name="tbl_OrderTem_BaoGia" EntityType="WebNhutLongModel.tbl_OrderTem_BaoGia" />
           <EntitySet Name="tbl_OrderTem_BaoGia_Detail" EntityType="WebNhutLongModel.tbl_OrderTem_BaoGia_Detail" />
+          <EntitySet Name="tbl_QuyTrinh" EntityType="WebNhutLongModel.tbl_QuyTrinh" />
         </EntityContainer>
         <EntityType Name="tbl_Products">
           <Key>
@@ -222,17 +225,6 @@
           <Property Name="CreateUser" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
           <Property Name="CreateDate" Type="DateTime" Precision="3" />
           <Property Name="Password" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
-        </EntityType>
-        <EntityType Name="tbl_QuyTrinh">
-          <Key>
-            <PropertyRef Name="ID_BaoGia" />
-          </Key>
-          <Property Name="ID_BaoGia" Type="Int32" Nullable="false" />
-          <Property Name="TenBuoc" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
-          <Property Name="ThuTu" Type="Int32" />
-          <Property Name="TrangThai" Type="Int32" />
-          <Property Name="NgayBatDauKetThuc" Type="DateTime" Precision="3" />
-          <Property Name="NgayKetThucThucTe" Type="DateTime" Precision="3" />
         </EntityType>
         <EntityType Name="tbl_BaoGia">
           <Key>
@@ -309,6 +301,20 @@
           <Property Name="soluong" Type="Int32" />
           <Property Name="money" Type="Double" />
         </EntityType>
+        <EntityType Name="tbl_QuyTrinh">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ID_BaoGia" Type="Int32" Nullable="false" />
+          <Property Name="TenBuoc" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+          <Property Name="ThuTu" Type="Int32" />
+          <Property Name="TrangThai" Type="Int32" />
+          <Property Name="NgayBatDau_DK" Type="DateTime" Precision="3" />
+          <Property Name="NgayKetThuc_DK" Type="DateTime" Precision="3" />
+          <Property Name="NgayBatDau_TT" Type="DateTime" Precision="3" />
+          <Property Name="NgayKetThuc_TT" Type="DateTime" Precision="3" />
+        </EntityType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -368,18 +374,6 @@
                 <ScalarProperty Name="FullName" ColumnName="FullName" />
                 <ScalarProperty Name="Username" ColumnName="Username" />
                 <ScalarProperty Name="IDUser" ColumnName="IDUser" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="tbl_QuyTrinh">
-            <EntityTypeMapping TypeName="WebNhutLongModel.tbl_QuyTrinh">
-              <MappingFragment StoreEntitySet="tbl_QuyTrinh">
-                <ScalarProperty Name="NgayKetThucThucTe" ColumnName="NgayKetThucThucTe" />
-                <ScalarProperty Name="NgayBatDauKetThuc" ColumnName="NgayBatDauKetThuc" />
-                <ScalarProperty Name="TrangThai" ColumnName="TrangThai" />
-                <ScalarProperty Name="ThuTu" ColumnName="ThuTu" />
-                <ScalarProperty Name="TenBuoc" ColumnName="TenBuoc" />
-                <ScalarProperty Name="ID_BaoGia" ColumnName="ID_BaoGia" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -460,6 +454,21 @@
                 <ScalarProperty Name="sanpam_id" ColumnName="sanpam_id" />
                 <ScalarProperty Name="baogia_id" ColumnName="baogia_id" />
                 <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tbl_QuyTrinh">
+            <EntityTypeMapping TypeName="WebNhutLongModel.tbl_QuyTrinh">
+              <MappingFragment StoreEntitySet="tbl_QuyTrinh">
+                <ScalarProperty Name="NgayKetThuc_TT" ColumnName="NgayKetThuc_TT" />
+                <ScalarProperty Name="NgayBatDau_TT" ColumnName="NgayBatDau_TT" />
+                <ScalarProperty Name="NgayKetThuc_DK" ColumnName="NgayKetThuc_DK" />
+                <ScalarProperty Name="NgayBatDau_DK" ColumnName="NgayBatDau_DK" />
+                <ScalarProperty Name="TrangThai" ColumnName="TrangThai" />
+                <ScalarProperty Name="ThuTu" ColumnName="ThuTu" />
+                <ScalarProperty Name="TenBuoc" ColumnName="TenBuoc" />
+                <ScalarProperty Name="ID_BaoGia" ColumnName="ID_BaoGia" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

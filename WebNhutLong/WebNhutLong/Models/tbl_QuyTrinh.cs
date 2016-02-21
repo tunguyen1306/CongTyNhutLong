@@ -14,11 +14,14 @@ namespace WebNhutLong.Models
     
     public partial class tbl_QuyTrinh
     {
+        public int ID { get; set; }
         public int ID_BaoGia { get; set; }
         public string TenBuoc { get; set; }
         public Nullable<int> ThuTu { get; set; }
         public Nullable<int> TrangThai { get; set; }
-        public Nullable<System.DateTime> NgayBatDauKetThuc { get; set; }
-        public Nullable<System.DateTime> NgayKetThucThucTe { get; set; }
+        public Nullable<System.DateTime> NgayBatDau_DK { get; set; }
+        public Nullable<System.DateTime> NgayKetThuc_DK { get; set; }
+        public Nullable<System.DateTime> NgayBatDau_TT { get; set; }
+        public Nullable<System.DateTime> NgayKetThuc_TT { get; set; }
     }
 }
