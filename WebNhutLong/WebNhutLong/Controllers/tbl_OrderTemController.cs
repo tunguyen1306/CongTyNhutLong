@@ -129,7 +129,8 @@ namespace WebNhutLong.Controllers
             d.date_end = tbl_OrderTem.date_end;
             d.id = tbl_OrderTem.id;
             d.status = tbl_OrderTem.status;
-
+            d.date_begin_plan = tbl_OrderTem.date_begin_plan;
+            d.date_end_plan = tbl_OrderTem.date_end_plan;
             var queryBaoGia = from u in db.tbl_OrderTem_BaoGia where u.order_id.Value.Equals(tbl_OrderTem.id) orderby u.id descending select u;
             List<tbl_OrderTem_BaoGia> lisBG = queryBaoGia.ToList<tbl_OrderTem_BaoGia>();
             List<BaoGiaTemView> lisBGTem = new List<BaoGiaTemView>();
@@ -139,7 +140,7 @@ namespace WebNhutLong.Controllers
                 for (int i = 1; i < lisBG.Count; i++)
                 {
                     var item = lisBG[i];
-                    BaoGiaTemView temBG = new BaoGiaTemView { date_begin = item.date_begin, date_end = item.date_end, id = item.id, offset = item.offset, order_id = item.order_id, status = item.status, total_money = item.total_money };
+                    BaoGiaTemView temBG = new BaoGiaTemView {flow=item.flow,note=item.note,  date_begin = item.date_begin, date_end = item.date_end, id = item.id, offset = item.offset, order_id = item.order_id, status = item.status, total_money = item.total_money };
                     var queryGiaoGiaCT = from u in db.tbl_OrderTem_BaoGia_Detail
                                          join y in db.tbl_Products on u.sanpam_id equals y.ID_Products
                                          where u.baogia_id.Value.Equals(temBG.id)
@@ -154,7 +155,7 @@ namespace WebNhutLong.Controllers
             lisBG = queryBaoGia.ToList<tbl_OrderTem_BaoGia>();
             foreach (var item in lisBG)
             {
-                BaoGiaTemView temBG = new BaoGiaTemView { date_begin = item.date_begin, date_end = item.date_end, id = item.id, offset = item.offset, order_id = item.order_id, status = item.status, total_money = item.total_money };
+                BaoGiaTemView temBG = new BaoGiaTemView { flow=item.flow,note=item.note, date_begin = item.date_begin, date_end = item.date_end, id = item.id, offset = item.offset, order_id = item.order_id, status = item.status, total_money = item.total_money };
                 var queryGiaoGiaCT = from u in db.tbl_OrderTem_BaoGia_Detail
                                      join y in db.tbl_Products on u.sanpam_id equals y.ID_Products where u.baogia_id.Value.Equals(temBG.id)
                                      select new BaoGiaTemDetailView { ID_Products = u.sanpam_id.Value, CodeProducts = y.CodeProducts, CreatedDateProducts = y.CreatedDateProducts, CreateUserProducts = y.CreateUserProducts, DanKimProducts = y.DanKimProducts, GiaProducts = u.money.Value.ToString(), LoaigiayProducts = y.LoaigiayProducts, ModifyDateProducts = y.ModifyDateProducts, ModifyUserProducts = y.ModifyUserProducts, NameProducts = y.NameProducts, OffsetFlexoProducts = y.OffsetFlexoProducts, QuyCachProducts = y.QuyCachProducts, SolopProducts = y.SolopProducts, SoLuong = u.soluong.Value, StatusProducts = y.StatusProducts };
@@ -258,15 +259,14 @@ namespace WebNhutLong.Controllers
                 db.SaveChanges();
             }
             DonHangView d = new DonHangView();
-            d.id = donHang.id;
-            d.action = donHang.action;
             d.customer_id = tbl_OrderTem.customer_id;
             d.code = tbl_OrderTem.code;
             d.date_begin = tbl_OrderTem.date_begin;
             d.date_end = tbl_OrderTem.date_end;
             d.id = tbl_OrderTem.id;
             d.status = tbl_OrderTem.status;
-
+            d.date_begin_plan = tbl_OrderTem.date_begin_plan;
+            d.date_end_plan = tbl_OrderTem.date_end_plan;
             var queryBaoGia = from u in db.tbl_OrderTem_BaoGia where u.order_id.Value.Equals(tbl_OrderTem.id) orderby u.id descending select u;
             List<tbl_OrderTem_BaoGia> lisBG = queryBaoGia.ToList<tbl_OrderTem_BaoGia>();
             List<BaoGiaTemView> lisBGTem = new List<BaoGiaTemView>();
@@ -276,7 +276,7 @@ namespace WebNhutLong.Controllers
                 for (int i = 1; i < lisBG.Count; i++)
                 {
                     var item = lisBG[i];
-                    BaoGiaTemView temBG = new BaoGiaTemView { date_begin = item.date_begin, date_end = item.date_end, id = item.id, offset = item.offset, order_id = item.order_id, status = item.status, total_money = item.total_money };
+                    BaoGiaTemView temBG = new BaoGiaTemView { flow = item.flow, note = item.note, date_begin = item.date_begin, date_end = item.date_end, id = item.id, offset = item.offset, order_id = item.order_id, status = item.status, total_money = item.total_money };
                     var queryGiaoGiaCT = from u in db.tbl_OrderTem_BaoGia_Detail
                                          join y in db.tbl_Products on u.sanpam_id equals y.ID_Products
                                          where u.baogia_id.Value.Equals(temBG.id)
@@ -291,7 +291,7 @@ namespace WebNhutLong.Controllers
             lisBG = queryBaoGia.ToList<tbl_OrderTem_BaoGia>();
             foreach (var item in lisBG)
             {
-                BaoGiaTemView temBG = new BaoGiaTemView { date_begin = item.date_begin, date_end = item.date_end, id = item.id, offset = item.offset, order_id = item.order_id, status = item.status, total_money = item.total_money };
+                BaoGiaTemView temBG = new BaoGiaTemView { flow = item.flow, note = item.note, date_begin = item.date_begin, date_end = item.date_end, id = item.id, offset = item.offset, order_id = item.order_id, status = item.status, total_money = item.total_money };
                 var queryGiaoGiaCT = from u in db.tbl_OrderTem_BaoGia_Detail
                                      join y in db.tbl_Products on u.sanpam_id equals y.ID_Products
                                      where u.baogia_id.Value.Equals(temBG.id)
