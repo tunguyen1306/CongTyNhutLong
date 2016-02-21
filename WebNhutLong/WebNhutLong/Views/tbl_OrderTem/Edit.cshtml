@@ -10,6 +10,17 @@
 
 
 <script type="text/javascript">
+    function numberParse(nStr) {
+        nStr += '';
+        x = nStr.split('.');
+        x1 = x[0];
+        x2 = x.length > 1 ? '.' + x[1] : '';
+        var rgx = /(\d+)(\d{3})/;
+        while (rgx.test(x1)) {
+            x1 = x1.replace(rgx, '$1' + ',' + '$2');
+        }
+        return x1 + x2;
+    }
     function UpdateResultBaoGia(status) {
         $('#baogia_status').val(status);
         $("#action").val(3);
@@ -107,7 +118,11 @@
                 if ($(this).attr('name') == 'SoLuong') {
                     trdata += "<td><input class='form-control text-box single-line updateSL " + this.name + "'  min='1' value='" + this.value + "' type='number' name='BaoGiaTemView.BaoGiaTemDetailViews[" + id + "]." + this.name + "'/></td>";
                 } else {
-                    trdata += "<td>" + this.value + "<input class='" + this.name + "' name='BaoGiaTemView.BaoGiaTemDetailViews[" + id + "]." + this.name + "' value='" + this.value + "' type='hidden'/></td>";
+                    var text = this.value;
+                    if ($(this).attr('name') == 'GiaProducts') {
+                        text = numberParse(this.value)+" đ";
+                    }
+                    trdata += "<td>" + text + "<input class='" + this.name + "' name='BaoGiaTemView.BaoGiaTemDetailViews[" + id + "]." + this.name + "' value='" + this.value + "' type='hidden'/></td>";
                 }
                 this.value = $(this).attr('default-value');
             });
@@ -155,7 +170,7 @@
             }
         });
         $('.BaoGiaTemView_total_money').val(money);
-        $('#BaoGiaTemView_total_money').text(money);
+        $('#BaoGiaTemView_total_money').text(numberParse(money));
     }
 
 </script>
@@ -216,10 +231,6 @@
                         <label class="col-md-4">Ngày bắt đầu dự kiến</label>
                         <div class="col-md-8">
 
-                            @Html.HiddenFor(model => model.date_begin_plan)
-                            @(Model.date_begin_plan.HasValue ? Model.date_begin_plan.Value.ToString("dd/MM/yyyy") : "Chưa cập nhập")
-
-                            
                             @(Model.date_begin_plan.HasValue ? Model.date_begin_plan.Value.ToString("MM/dd/yyyy") : "Chưa cập nhập")
 
                         </div>
@@ -228,12 +239,7 @@
                 <div class="col-lg-6">
                     <div class="form-group">
                         <label class="col-md-4">Ngày kết thúc dự kiến</label>
-                        <div class="col-md-8">
-
-                            @Html.HiddenFor(model => model.date_end_plan)
-                            @(Model.date_end_plan.HasValue ? Model.date_end_plan.Value.ToString("dd/MM/yyyy") : "Chưa cập nhập")
-
-                           
+                        <div class="col-md-8"> 
                             @(Model.date_end_plan.HasValue ? Model.date_end_plan.Value.ToString("MM/dd/yyyy") : "Chưa cập nhập")
 
                         </div>
@@ -431,7 +437,7 @@
             <div class="row">
                 <span style="margin-left: 10px; line-height: 33px">Báo giá lần @(Model.BaoGiaTemViews.Count + 1)</span>
                 <input type="submit" style="float: right; margin-right: 10px" value="In báo giá" class="btn btn-primary" />
-                @Html.ActionLink("In báo giá", "PrintOrder",new{ id=Model.id}, htmlAttributes: new { @class = "btn btn-primary", @style="float: right; margin-right: 10px" })
+                @Html.ActionLink("In báo giá", "PrintOrder",new{ id=Model.BaoGiaTemView.id}, htmlAttributes: new { @class = "btn btn-primary", @style="float: right; margin-right: 10px" })
                 
                 @if (Model.BaoGiaTemView.status.Value == 0)
                 {
@@ -462,7 +468,7 @@
 
                             <label class="control-label col-md-4" for="total_money">Tổng tiền</label>
                             <div class="col-md-8" style="padding-top: 7px">
-                                @Model.BaoGiaTemView.total_money.Value đ
+                                @Model.BaoGiaTemView.total_money.Value.ToString("n2") đ
                             </div>
                         </div>
 
@@ -507,7 +513,7 @@
                         <div class="form-group">
                             <label class="control-label col-md-4">Quy trình</label>
                             <div class="col-md-4" style="padding-top: 7px">
-                                @(Model.BaoGiaTemView.flow.HasValue ? "Quy trình" + Model.BaoGiaTemView.flow.Value : "Chưa cập nhập")
+                                @(Model.BaoGiaTemView.flow.HasValue ? "Quy trình " + Model.BaoGiaTemView.flow.Value : "Chưa cập nhập")
 
                             </div>
                         </div>
@@ -559,7 +565,7 @@
                                     <td>@item.OffsetFlexoProducts</td>
                                     <td>@item.DanKimProducts</td>
                                     <td>@item.QuyCachProducts</td>
-                                    <td>@item.GiaProducts VND</td>
+                                    <td>@double.Parse( item.GiaProducts).ToString("n2") đ</td>
                                     <td>@item.SoLuong</td>
                                 </tr>
                             }                            
@@ -599,7 +605,7 @@
 
                                 <label class="control-label col-md-4" for="total_money">Tổng tiền</label>
                                 <div class="col-md-8" style="padding-top: 7px">
-                                    @Model.BaoGiaTemViews[i].total_money.Value đ
+                                    @Model.BaoGiaTemViews[i].total_money.Value.ToString("n2") đ
                                 </div>
                             </div>
 
@@ -645,7 +651,7 @@
                             <div class="form-group">
                                 <label class="control-label col-md-4">Quy trình</label>
                                 <div class="col-md-4" style="padding-top: 7px">
-                                    @(Model.BaoGiaTemViews[i].flow.HasValue ? "Quy trình" + Model.BaoGiaTemViews[i].flow.Value : "Chưa cập nhập")
+                                    @(Model.BaoGiaTemViews[i].flow.HasValue ? "Quy trình " + Model.BaoGiaTemViews[i].flow.Value : "Chưa cập nhập")
 
                                 </div>
                             </div>
@@ -695,7 +701,7 @@
                                         <td>@item.OffsetFlexoProducts</td>
                                         <td>@item.DanKimProducts</td>
                                         <td>@item.QuyCachProducts</td>
-                                        <td>@item.GiaProducts.ToString() VND</td>
+                                        <td>@double.Parse(item.GiaProducts).ToString("n2") đ</td>
                                         <td>@item.SoLuong</td>
                                     </tr>
                                 }
@@ -734,7 +740,7 @@
 
 
     <div id="modal-container-donhang" class="modal fade" tabindex="-1" role="dialog">
-        <div class="modal-dialog" role="document">
+        <div class="modal-dialog" style="width:400px" role="document">
             <div class="modal-content">
                 <div class="modal-header">
                     Cập nhật thời gian kế hoạch
@@ -748,11 +754,17 @@
                         <label for="pwd">Ngày kết thúc :</label>
                         @Html.EditorFor(model => model.date_end_plan, new {htmlAttributes = new {@class = "form-control date"}})
                     </div>
-            
+                    <div class="form-group">
+                        <label for="pwd">Quy trình :</label>
+                        <select class="form-control valid" default-value="1" name="BaoGiaTemView.flow">
+                            <option value="1" selected="selected">Quy trình 1</option>
+                            <option value="2">Quy trình 2</option>
+                        </select>
+                    </div>
                 </div>
                 <div class="modal-footer">
                     <div class="bootstrap-dialog-footer-buttons">
-                        <button class="btn btn-primary" onclick=" UpdateStatusOrder(1); return false; ">Update</button>                   
+                        <button class="btn btn-primary" onclick="UpdateStatusOrder(1); return false; ">Update</button>                   
                     </div>
                 </div>
             </div>
