@@ -344,19 +344,7 @@ namespace WebNhutLong.Controllers
         public ActionResult PrintOrder(int id)
         {
 
-            var qr = (from data in db.tbl_OrderTem
-                     join cus in db.tbl_Customers on data.customer_id equals cus.IDCustomers
-                     where data.id==id
-                     select new { data ,cus}).ToList().Select(x=>new DonHangView
-                     {
-                         id =x.data.id,
-                         customer_id = x.cus.IDCustomers
-                        
-                         
-                     });
-            ;
-           
-            return View(qr.ToList()[0]);
+
 
             tbl_OrderTem_BaoGia item = db.tbl_OrderTem_BaoGia.Find(id);
             tbl_OrderTem tbl_OrderTem = db.tbl_OrderTem.Find(item.order_id);
