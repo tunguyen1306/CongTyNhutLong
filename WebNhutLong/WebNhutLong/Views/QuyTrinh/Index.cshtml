@@ -21,13 +21,13 @@
         @*<div class="panel-body">
           
         </div>*@
-        <div class="ui-helper-clearfix"></div>
-        <div class="panel-heading">
+       
+        <div class="well top">
             <div class="row">
                 <div class="col-lg-4"> Đơn hàng:<b>23456789</b><br />
-            Ngày đặt hàng :<b>Nguyễn Tấn Tú</b><br /></div>
+                    Ngày đặt hàng :<b>Nguyễn Tấn Tú</b><br /></div>
                 <div class="col-lg-4"> Giao hàng tai:công ty <br/> Ngày giao hàng:01/01/2016</div>
-                <div class="col-lg-4">@Html.ActionLink("In báo giá", "PrintOrder", new { id = 1 }, htmlAttributes: new { @class = "btn btn-primary", @style = "float: right; margin-right: 10px" })</div>
+               
             </div>
            
            
@@ -36,12 +36,10 @@
 
             <div class="dataTable_wrapper">
 
-                <table class="table table-striped table-bordered table-hover" id="dataTables-example">
+                <table class="table table-striped table-bordered table-hover" >
                     <thead>
                         <tr>
-                            <th>
-                                
-                            </th>
+                          
                             <th>
                                 Mã Đơn hàng
                             </th>
@@ -72,33 +70,48 @@
                     <tbody>
                      
                         <tr>
-                            <td>Ngày bắt đầu dự kiến</td>
+                           
                             <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                               
-                        </tr>
-                        <tr>
-                            <td>Ngày kết thúc dự kiến</td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
+                            <td>
+                                <table class="table table-striped table-bordered table-hover">
+                                    <thead>
+                                        <tr><th></th>
+                                            <th>
+                                                Dự kiến
+                                            </th>
+                                            <th>
+                                                Thực tế
+                                            </th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td>Bắt đầu</td>
+                                            <td>01/01/2016</td>
+                                            <td></td>
+                                        </tr>
+                                        <tr>
+                                            <td>Kết thúc</td>
+                                            <td>10/10/2016</td>
+                                            <td></td>
+                                        </tr>
 
+                                    </tbody>
+                                </table>
+                            </td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
                         </tr>
+                      
                         
 
                     </tbody>
                 </table>
+            
             </div>
 
 
