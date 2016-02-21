@@ -1045,6 +1045,7 @@
     <Content Include="Views\tbl_OrderTem\PrintOrder.cshtml" />
     <Content Include="Views\QuyTrinh\Index.cshtml" />
     <Content Include="Views\SanXuat\Index.cshtml" />
+    <Content Include="Views\SanXuat\Edit.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

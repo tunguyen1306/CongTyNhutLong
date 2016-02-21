@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data.Entity;
 using System.Linq;
+using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using WebNhutLong.Models;
@@ -14,9 +16,137 @@ namespace WebNhutLong.Controllers
         public ActionResult Index()
         {
             var qr = from data in db.tbl_OrderTem
-                where data.status == 1
-                select data;
+                     where data.status == 1
+                     select data;
             return View(qr.ToList());
+        }
+        public ActionResult Edit(int? id)
+        {
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            tbl_OrderTem tbl_OrderTem = db.tbl_OrderTem.Find(id);
+            if (tbl_OrderTem == null)
+            {
+                return HttpNotFound();
+            }
+
+            DonHangView d = new DonHangView();
+            d.customer_id = tbl_OrderTem.customer_id;
+            d.code = tbl_OrderTem.code;
+            d.date_begin = tbl_OrderTem.date_begin;
+            d.date_end = tbl_OrderTem.date_end;
+            d.id = tbl_OrderTem.id;
+            d.status = tbl_OrderTem.status;
+            d.date_begin_plan = tbl_OrderTem.date_begin_plan;
+            d.date_end_plan = tbl_OrderTem.date_end_plan;
+            var queryBaoGia = from u in db.tbl_OrderTem_BaoGia where u.order_id.Value.Equals(tbl_OrderTem.id) orderby u.id descending select u;
+            List<tbl_OrderTem_BaoGia> lisBG = queryBaoGia.ToList<tbl_OrderTem_BaoGia>();
+            List<BaoGiaTemView> lisBGTem = new List<BaoGiaTemView>();
+
+            if (lisBG.Count > 1)
+            {
+                for (int i = 1; i < lisBG.Count; i++)
+                {
+                    var item = lisBG[i];
+                    BaoGiaTemView temBG = new BaoGiaTemView { flow = item.flow, note = item.note, date_begin = item.date_begin, date_end = item.date_end, id = item.id, offset = item.offset, order_id = item.order_id, status = item.status, total_money = item.total_money };
+                    var queryGiaoGiaCT = from u in db.tbl_OrderTem_BaoGia_Detail
+                                         join y in db.tbl_Products on u.sanpam_id equals y.ID_Products
+                                         where u.baogia_id.Value.Equals(temBG.id)
+                                         select new BaoGiaTemDetailView { ID_Products = u.sanpam_id.Value, CodeProducts = y.CodeProducts, CreatedDateProducts = y.CreatedDateProducts, CreateUserProducts = y.CreateUserProducts, DanKimProducts = y.DanKimProducts, GiaProducts = u.money.Value.ToString(), LoaigiayProducts = y.LoaigiayProducts, ModifyDateProducts = y.ModifyDateProducts, ModifyUserProducts = y.ModifyUserProducts, NameProducts = y.NameProducts, OffsetFlexoProducts = y.OffsetFlexoProducts, QuyCachProducts = y.QuyCachProducts, SolopProducts = y.SolopProducts, SoLuong = u.soluong.Value, StatusProducts = y.StatusProducts };
+                    temBG.BaoGiaTemDetailViews = queryGiaoGiaCT.ToList<BaoGiaTemDetailView>();
+                    lisBGTem.Add(temBG);
+                }
+            }
+
+            d.BaoGiaTemViews = lisBGTem;
+            queryBaoGia = from u in db.tbl_OrderTem_BaoGia where u.order_id.Value.Equals(tbl_OrderTem.id) orderby u.id descending select u;
+            lisBG = queryBaoGia.ToList<tbl_OrderTem_BaoGia>();
+            foreach (var item in lisBG)
+            {
+                BaoGiaTemView temBG = new BaoGiaTemView { flow = item.flow, note = item.note, date_begin = item.date_begin, date_end = item.date_end, id = item.id, offset = item.offset, order_id = item.order_id, status = item.status, total_money = item.total_money };
+                var queryGiaoGiaCT = from u in db.tbl_OrderTem_BaoGia_Detail
+                                     join y in db.tbl_Products on u.sanpam_id equals y.ID_Products
+                                     where u.baogia_id.Value.Equals(temBG.id)
+                                     select new BaoGiaTemDetailView { ID_Products = u.sanpam_id.Value, CodeProducts = y.CodeProducts, CreatedDateProducts = y.CreatedDateProducts, CreateUserProducts = y.CreateUserProducts, DanKimProducts = y.DanKimProducts, GiaProducts = u.money.Value.ToString(), LoaigiayProducts = y.LoaigiayProducts, ModifyDateProducts = y.ModifyDateProducts, ModifyUserProducts = y.ModifyUserProducts, NameProducts = y.NameProducts, OffsetFlexoProducts = y.OffsetFlexoProducts, QuyCachProducts = y.QuyCachProducts, SolopProducts = y.SolopProducts, SoLuong = u.soluong.Value, StatusProducts = y.StatusProducts };
+                temBG.BaoGiaTemDetailViews = queryGiaoGiaCT.ToList<BaoGiaTemDetailView>();
+                d.BaoGiaTemView = temBG;
+                break;
+            }
+            var list = from tt in db.tbl_Customers where tt.IDCustomers == d.customer_id select tt;
+            d.Customer = list.ToList()[0];
+            return View(d);
+        }
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult Edit(DonHangView donHang)
+        {
+            int? id = donHang.id;
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            tbl_OrderTem tbl_OrderTem = db.tbl_OrderTem.Find(id);
+            if (tbl_OrderTem == null)
+            {
+                return HttpNotFound();
+            }
+
+            if (donHang.action == 5)
+            {
+                donHang.action = 0;
+                tbl_OrderTem order = db.tbl_OrderTem.Find(donHang.id);
+                order.status = donHang.status.Value;
+                db.Entry(order).State = EntityState.Modified;
+                db.SaveChanges();
+
+            }
+            DonHangView d = new DonHangView();
+            d.customer_id = tbl_OrderTem.customer_id;
+            d.code = tbl_OrderTem.code;
+            d.date_begin = tbl_OrderTem.date_begin;
+            d.date_end = tbl_OrderTem.date_end;
+            d.id = tbl_OrderTem.id;
+            d.status = tbl_OrderTem.status;
+            d.date_begin_plan = tbl_OrderTem.date_begin_plan;
+            d.date_end_plan = tbl_OrderTem.date_end_plan;
+            var queryBaoGia = from u in db.tbl_OrderTem_BaoGia where u.order_id.Value.Equals(tbl_OrderTem.id) orderby u.id descending select u;
+            List<tbl_OrderTem_BaoGia> lisBG = queryBaoGia.ToList<tbl_OrderTem_BaoGia>();
+            List<BaoGiaTemView> lisBGTem = new List<BaoGiaTemView>();
+
+            if (lisBG.Count > 1)
+            {
+                for (int i = 1; i < lisBG.Count; i++)
+                {
+                    var item = lisBG[i];
+                    BaoGiaTemView temBG = new BaoGiaTemView { flow = item.flow, note = item.note, date_begin = item.date_begin, date_end = item.date_end, id = item.id, offset = item.offset, order_id = item.order_id, status = item.status, total_money = item.total_money };
+                    var queryGiaoGiaCT = from u in db.tbl_OrderTem_BaoGia_Detail
+                                         join y in db.tbl_Products on u.sanpam_id equals y.ID_Products
+                                         where u.baogia_id.Value.Equals(temBG.id)
+                                         select new BaoGiaTemDetailView { ID_Products = u.sanpam_id.Value, CodeProducts = y.CodeProducts, CreatedDateProducts = y.CreatedDateProducts, CreateUserProducts = y.CreateUserProducts, DanKimProducts = y.DanKimProducts, GiaProducts = u.money.Value.ToString(), LoaigiayProducts = y.LoaigiayProducts, ModifyDateProducts = y.ModifyDateProducts, ModifyUserProducts = y.ModifyUserProducts, NameProducts = y.NameProducts, OffsetFlexoProducts = y.OffsetFlexoProducts, QuyCachProducts = y.QuyCachProducts, SolopProducts = y.SolopProducts, SoLuong = u.soluong.Value, StatusProducts = y.StatusProducts };
+                    temBG.BaoGiaTemDetailViews = queryGiaoGiaCT.ToList<BaoGiaTemDetailView>();
+                    lisBGTem.Add(temBG);
+                }
+            }
+
+            d.BaoGiaTemViews = lisBGTem;
+            queryBaoGia = from u in db.tbl_OrderTem_BaoGia where u.order_id.Value.Equals(tbl_OrderTem.id) orderby u.id descending select u;
+            lisBG = queryBaoGia.ToList<tbl_OrderTem_BaoGia>();
+            foreach (var item in lisBG)
+            {
+                BaoGiaTemView temBG = new BaoGiaTemView { flow = item.flow, note = item.note, date_begin = item.date_begin, date_end = item.date_end, id = item.id, offset = item.offset, order_id = item.order_id, status = item.status, total_money = item.total_money };
+                var queryGiaoGiaCT = from u in db.tbl_OrderTem_BaoGia_Detail
+                                     join y in db.tbl_Products on u.sanpam_id equals y.ID_Products
+                                     where u.baogia_id.Value.Equals(temBG.id)
+                                     select new BaoGiaTemDetailView { ID_Products = u.sanpam_id.Value, CodeProducts = y.CodeProducts, CreatedDateProducts = y.CreatedDateProducts, CreateUserProducts = y.CreateUserProducts, DanKimProducts = y.DanKimProducts, GiaProducts = u.money.Value.ToString(), LoaigiayProducts = y.LoaigiayProducts, ModifyDateProducts = y.ModifyDateProducts, ModifyUserProducts = y.ModifyUserProducts, NameProducts = y.NameProducts, OffsetFlexoProducts = y.OffsetFlexoProducts, QuyCachProducts = y.QuyCachProducts, SolopProducts = y.SolopProducts, SoLuong = u.soluong.Value, StatusProducts = y.StatusProducts };
+                temBG.BaoGiaTemDetailViews = queryGiaoGiaCT.ToList<BaoGiaTemDetailView>();
+                d.BaoGiaTemView = temBG;
+                break;
+            }
+            var list = from tt in db.tbl_Customers where tt.IDCustomers == d.customer_id select tt;
+            d.Customer = list.ToList()[0];
+            return View(d);
         }
     }
 }

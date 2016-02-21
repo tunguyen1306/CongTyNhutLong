@@ -6,7 +6,7 @@
 
 <div class="row">
     <div class="col-lg-12">
-        <h1 class="page-header">Thông Tin báo giá</h1>
+        <h1 class="page-header">Tiếp nhận sản xuất</h1>
     </div>
     <!-- /.col-lg-12 -->
 </div>
@@ -18,9 +18,7 @@
 
         <div class="panel panel-default">
 
-            <div class="panel-heading">
-                @Html.ActionLink("Thêm báo giá", "Create", "", new { @class = "btn btn-primary" })
-            </div>
+          
             <!-- /.panel-heading -->
             <div class="panel-body">
 
@@ -41,11 +39,8 @@
                                 <th>
                                     Ngày kết thúc
                                 </th>
-                                <th>
-                                    Trạng thái
-                                </th>
-
-                                <th></th>
+                               
+                             
                             </tr>
                         </thead>
                         <tbody>
@@ -53,7 +48,9 @@
                             {
                                 <tr>
                                     <td>
-                                        @Html.DisplayFor(modelItem => item.code)
+
+                                        @Html.ActionLink(item.code, "Edit", new { id = item.id }, htmlAttributes: new { @class = "btn btn-outline btn-primary btn-xs" })
+                                        
                                     </td>
                                     <td>
                                         @Html.DisplayFor(modelItem => item.customer_id)
@@ -67,26 +64,7 @@
                                     <td>
                                         @Html.DisplayFor(modelItem => item.date_end)
 
-                                    </td>
-                                    <td>
-
-
-                                        @(
- item.status == 1 ? "Hoạt động" : "Không hoạt động"
-                                        )
-
-
-
-
-                                    </td>
-
-
-                                    <td>
-
-                                        @Html.ActionLink("Sửa", "Edit", new { id = item.id }, htmlAttributes: new { @class = "btn btn-outline btn-primary btn-xs" })
-
-                                        @Html.ActionLink("Xóa", "Delete", new { id = item.id }, htmlAttributes: new { @class = "btn btn-outline btn-primary btn-xs" })
-                                    </td>
+                                    </td>  
                                 </tr>
                             }
 
