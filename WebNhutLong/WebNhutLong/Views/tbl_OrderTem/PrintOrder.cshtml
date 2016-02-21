@@ -133,7 +133,7 @@
         </div>
         <ul>
             <li>Trong vòng  
-            @if (Model.BaoGiaTemView.status.Value == 1)
+            @if (Model.BaoGiaTemView.status.Value == 1 && Model.date_end_plan.HasValue)
             {
                 <span>@((int)Model.date_end_plan.Value.Subtract(Model.date_begin_plan.Value).TotalDays)</span>
             }

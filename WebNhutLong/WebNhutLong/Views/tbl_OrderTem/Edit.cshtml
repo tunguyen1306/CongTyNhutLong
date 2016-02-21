@@ -436,8 +436,8 @@
         <div class="panel-heading">
             <div class="row">
                 <span style="margin-left: 10px; line-height: 33px">Báo giá lần @(Model.BaoGiaTemViews.Count + 1)</span>
-                <input type="submit" style="float: right; margin-right: 10px" value="In báo giá" class="btn btn-primary" />
-                @Html.ActionLink("In báo giá", "PrintOrder",new{ id=Model.BaoGiaTemView.id}, htmlAttributes: new { @class = "btn btn-primary", @style="float: right; margin-right: 10px" })
+             
+                @Html.ActionLink("In báo giá", "PrintOrder",new{ id=Model.BaoGiaTemView.id}, htmlAttributes: new { @class = "btn btn-primary", @target = "_bank", @style="float: right; margin-right: 10px" })
                 
                 @if (Model.BaoGiaTemView.status.Value == 0)
                 {
@@ -585,7 +585,10 @@
             <div class="panel-heading">
                 <div class="row">
                     <span style="margin-left: 10px; line-height: 33px">Báo giá lần @(Model.BaoGiaTemViews.Count - i)</span>
-                    <input type="submit" style="float: right; margin-right: 10px" value="In báo giá" class="btn btn-primary" />
+
+                    @Html.ActionLink("In báo giá", "PrintOrder", new { id = Model.BaoGiaTemViews[i].id }, htmlAttributes: new { @class = "btn btn-primary",@target="_bank", @style = "float: right; margin-right: 10px" })
+
+
 
                    
                 </div>
