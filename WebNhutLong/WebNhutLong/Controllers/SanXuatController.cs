@@ -11,10 +11,10 @@ namespace WebNhutLong.Controllers
     {
         private WebNhutLongEntities db = new WebNhutLongEntities();
         // GET: SanXuat
-        public ActionResult Index(int id)
+        public ActionResult Index()
         {
             var qr = from data in db.tbl_OrderTem
-                where data.status == id
+                where data.status == 1
                 select data;
             return View(qr.ToList());
         }
