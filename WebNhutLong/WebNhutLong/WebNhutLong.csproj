@@ -129,6 +129,7 @@
     <Compile Include="Controllers\LoginController.cs" />
     <Compile Include="Controllers\NavbarController.cs" />
     <Compile Include="Controllers\ProductsController.cs" />
+    <Compile Include="Controllers\QuyTrinhController.cs" />
     <Compile Include="Controllers\tbl_OrderTemController.cs" />
     <Compile Include="Controllers\tbl_OrderTem_BaoGiaController.cs" />
     <Compile Include="Controllers\tbl_OrderTem_BaoGia_DetailController.cs" />
@@ -1041,6 +1042,7 @@
     <Content Include="Views\Shared\_Layout_1.cshtml" />
     <Content Include="Views\Shared\_Navbar_1.cshtml" />
     <Content Include="Views\tbl_OrderTem\PrintOrder.cshtml" />
+    <Content Include="Views\QuyTrinh\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

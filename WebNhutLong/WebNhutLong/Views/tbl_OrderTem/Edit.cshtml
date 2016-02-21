@@ -216,7 +216,7 @@
                         <label class="col-md-4">Ngày bắt đầu dự kiến</label>
                         <div class="col-md-8">
                             @Html.HiddenFor(model => model.date_begin_plan)
-                            @(Model.date_begin_plan.HasValue ? Model.date_begin_plan.Value.ToString("MM/dd/yyyy") : "Chưa cập nhập")
+                            @(Model.date_begin_plan.HasValue ? Model.date_begin_plan.Value.ToString("dd/MM/yyyy") : "Chưa cập nhập")
                         </div>
                     </div>
                 </div>
@@ -225,7 +225,7 @@
                         <label class="col-md-4">Ngày kết thúc dự kiến</label>
                         <div class="col-md-8">
                             @Html.HiddenFor(model => model.date_end_plan)
-                            @(Model.date_end_plan.HasValue ? Model.date_end_plan.Value.ToString("MM/dd/yyyy") : "Chưa cập nhập")
+                            @(Model.date_end_plan.HasValue ? Model.date_end_plan.Value.ToString("dd/MM/yyyy") : "Chưa cập nhập")
                         </div>
                     </div>
                 </div>
@@ -284,7 +284,7 @@
                             <div class="form-group">
                                 <label class="col-md-4" for="date_begin">Ngày bất đầu</label>
                                 <div class="col-md-8">
-                                    <input class="form-control date" data-val="true" data-val-date="The field date_begin must be a date." name="BaoGiaTemView.date_begin" value="@DateTime.Now.ToString("MM/dd/yyyy")" type="hidden">
+                                    <input class="form-control date" data-val="true" data-val-date="The field date_begin must be a date." name="BaoGiaTemView.date_begin" value="@DateTime.Now.ToString("dd/MM/yyyy")" type="hidden">
                                     @DateTime.Now.ToString("dd/MM/yyyy")
                                 </div>
 
@@ -421,7 +421,7 @@
             <div class="row">
                 <span style="margin-left: 10px; line-height: 33px">Báo giá lần @(Model.BaoGiaTemViews.Count + 1)</span>
                 <input type="submit" style="float: right; margin-right: 10px" value="In báo giá" class="btn btn-primary" />
-                @Html.ActionLink("In báo giá", "PrintOrder", new { id = Model.id}, htmlAttributes: new { @class = "btn btn-primary", @style = "float: right; margin-right: 10px" })
+                @Html.ActionLink("In báo giá", "PrintOrder",new{ id=Model.id}, htmlAttributes: new { @class = "btn btn-primary", @style="float: right; margin-right: 10px" })
                 
                 @if (Model.BaoGiaTemView.status.Value == 0)
                 {
@@ -702,7 +702,7 @@
 
     <!-- Modal -->
     <div id="modal-container" class="modal fade" tabindex="-1" role="dialog">
-        <div class="modal-dialog" role="document" >
+        <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
                     Cập nhật plan
@@ -724,7 +724,7 @@
 
 
     <div id="modal-container-donhang" class="modal fade" tabindex="-1" role="dialog">
-        <div class="modal-dialog" role="document" style="width:300px">
+        <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
                     Cập nhật thời gian kế hoạch
@@ -737,13 +737,6 @@
                     <div class="form-group">
                         <label for="pwd">Ngày kết thúc :</label>
                         @Html.EditorFor(model => model.date_begin_plan, new {htmlAttributes = new {@class = "form-control date"}})
-                    </div>
-                    <div class="form-group">
-                        <label for="pwd">Quy trình :</label>
-                        <select class="form-control valid" default-value="1" name="BaoGiaTemView.flow">
-                            <option value="1" selected="selected">Quy trình 1</option>
-                            <option value="2">Quy trình 2</option>
-                        </select>
                     </div>
             
                 </div>

@@ -1,0 +1,107 @@
+﻿@using WebNhutLong.Models
+@model DonHangView
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout_1.cshtml";
+}
+
+<h2>Quy trình sản xuất</h2>
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+    @Html.ValidationSummary(true, "", new {@class = "text-danger"})
+
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            Mã khách hàng:<b>23456789</b><br />
+            Tên khách hàng:<b>Nguyễn Tấn Tú</b><br />
+            Công ty:<b>Môt thành viên</b>
+        </div>
+        @*<div class="panel-body">
+          
+        </div>*@
+        <div class="ui-helper-clearfix"></div>
+        <div class="panel-heading">
+            <div class="row">
+                <div class="col-lg-4"> Đơn hàng:<b>23456789</b><br />
+            Ngày đặt hàng :<b>Nguyễn Tấn Tú</b><br /></div>
+                <div class="col-lg-4"> Giao hàng tai:công ty <br/> Ngày giao hàng:01/01/2016</div>
+                <div class="col-lg-4">@Html.ActionLink("In báo giá", "PrintOrder", new { id = 1 }, htmlAttributes: new { @class = "btn btn-primary", @style = "float: right; margin-right: 10px" })</div>
+            </div>
+           
+           
+        </div>
+        <div class="panel-body">
+
+            <div class="dataTable_wrapper">
+
+                <table class="table table-striped table-bordered table-hover" id="dataTables-example">
+                    <thead>
+                        <tr>
+                            <th>
+                                
+                            </th>
+                            <th>
+                                Mã Đơn hàng
+                            </th>
+                            <th>
+                                Sản xuất giấy tấm
+                            </th>
+                            <th>
+                                Xã biên,cán lằn
+                            </th>
+                            <th>
+                                In Flexo
+                            </th>
+                            <th>
+                                Chạp khoe
+                            </th>
+
+                            <th>
+                                Đóng kim/Dán
+                            </th>
+                            <th>
+                                Đóng gói
+                            </th>
+                            <th>
+                                Giao hàng
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                     
+                        <tr>
+                            <td>Ngày bắt đầu dự kiến</td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                               
+                        </tr>
+                        <tr>
+                            <td>Ngày kết thúc dự kiến</td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+
+                        </tr>
+                        
+
+                    </tbody>
+                </table>
+            </div>
+
+
+        </div>
+    </div>
+}
