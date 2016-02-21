@@ -1,4 +1,4 @@
-﻿@model IEnumerable<WebNhutLong.Models.tbl_OrderTem>
+﻿@model IEnumerable<WebNhutLong.Models.DonHangView>
 
 @{
     ViewBag.Title = "Index";
@@ -58,7 +58,7 @@
                                         @Html.DisplayFor(modelItem => item.code)
                                     </td>
                                     <td>
-                                        @Html.DisplayFor(modelItem => item.customer_id)
+                                        @Html.DisplayFor(modelItem => item.Customer.NameCustomers)
                                        
 
                                     </td>

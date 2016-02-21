@@ -17,7 +17,23 @@ namespace WebNhutLong.Controllers
         // GET: tbl_OrderTem
         public ActionResult Index()
         {
-            return View(db.tbl_OrderTem.ToList());
+            var qr = (from data in db.tbl_OrderTem
+                      join cus in db.tbl_Customers on data.customer_id equals cus.IDCustomers
+                      where data.status == 1
+                      select new DonHangView
+                      {
+                          id = data.id,
+                          customer_id = cus.IDCustomers,
+                          Customer = cus,
+                          code = data.code,
+                          date_begin = data.date_begin,
+                          date_end = data.date_end,
+                          status = data.status
+
+
+
+                      });
+            return View(qr.ToList());
         }
 
         // GET: tbl_OrderTem/Details/5
