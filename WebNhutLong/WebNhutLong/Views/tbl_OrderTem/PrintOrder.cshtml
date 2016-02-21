@@ -1,10 +1,4 @@
-﻿
-﻿@using WebNhutLong.Models
-@model DonHangView
-
-
 ﻿@model WebNhutLong.Models.DonHangView
-
 
 @{
     ViewBag.Title = "PrintOrder";
@@ -15,6 +9,8 @@
 <!-- /.row -->
 @using (Html.BeginForm())
 {
+  
+
     @Html.AntiForgeryToken()
     <div class="container">
         <div class="row">
@@ -22,15 +18,9 @@
                 Bảng báo giá
             </div>
             <div class="col-xs-4 print-header">
-
-                Số: 25122015NLC001<br>
-                Ngày: 21/02/16
-                @Model.id
-
                 Số: @Model.code  <br>
                 Ngày: @(DateTime.Now.ToString("dd/MM/yyyy"))
                 
-
            
          
             </div>
