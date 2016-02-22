@@ -97,8 +97,10 @@ ul li {
  .custt {
      background-color: #a7eefb;
      color: red;
+     font-weight: bold;
  }
  .cusdk {
       background-color: #84fff8;
       color: red;
+       font-weight: bold;
  }
