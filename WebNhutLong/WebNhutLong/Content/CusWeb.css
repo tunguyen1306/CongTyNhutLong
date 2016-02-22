@@ -88,3 +88,9 @@ ul li {
  .cushover:hover {
     background-color: yellow;
 }
+
+ .cusint {
+    background-color: blue;
+     color: white;
+     font-weight: bold;
+}
