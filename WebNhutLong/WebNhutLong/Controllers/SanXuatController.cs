@@ -125,6 +125,20 @@ namespace WebNhutLong.Controllers
                 db.SaveChanges();
 
             }
+            if (donHang.action == 6)
+            {
+                foreach (var item in donHang.BaoGiaTemView.BaoGiaTemDetailViews)
+                {
+                    foreach (var itemSP in item.QuyTrinhs)
+                    {
+                        tbl_QuyTrinh tbQT= db.tbl_QuyTrinh.Find(itemSP.ID);
+                        tbQT.NgayBatDau_DK = itemSP.NgayBatDau_DK;
+                        tbQT.NgayKetThuc_DK = itemSP.NgayKetThuc_DK;
+                        db.Entry(tbQT).State = EntityState.Modified;
+                    }
+                    db.SaveChanges();
+                }
+            }
             DonHangView d = new DonHangView();
             d.customer_id = tbl_OrderTem.customer_id;
             d.code = tbl_OrderTem.code;
@@ -165,6 +179,11 @@ namespace WebNhutLong.Controllers
                                      select new BaoGiaTemDetailView { id = u.id, ID_Products = u.sanpam_id.Value, CodeProducts = y.CodeProducts, CreatedDateProducts = y.CreatedDateProducts, CreateUserProducts = y.CreateUserProducts, DanKimProducts = y.DanKimProducts, GiaProducts = u.money.Value.ToString(), LoaigiayProducts = y.LoaigiayProducts, ModifyDateProducts = y.ModifyDateProducts, ModifyUserProducts = y.ModifyUserProducts, NameProducts = y.NameProducts, OffsetFlexoProducts = y.OffsetFlexoProducts, QuyCachProducts = y.QuyCachProducts, SolopProducts = y.SolopProducts, SoLuong = u.soluong.Value, StatusProducts = y.StatusProducts };
                 temBG.BaoGiaTemDetailViews = queryGiaoGiaCT.ToList<BaoGiaTemDetailView>();
                 d.BaoGiaTemView = temBG;
+                foreach (var itemSP in d.BaoGiaTemView.BaoGiaTemDetailViews)
+                {
+                    var queryQT = from u in db.tbl_QuyTrinh where u.ID_BaoGiaDetail.Equals(itemSP.id) orderby u.ThuTu ascending select u;
+                    itemSP.QuyTrinhs = queryQT.ToList<tbl_QuyTrinh>();
+                }
                 break;
             }
             var list = from tt in db.tbl_Customers where tt.IDCustomers == d.customer_id select tt;
