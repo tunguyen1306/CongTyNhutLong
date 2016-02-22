@@ -216,12 +216,16 @@
                             }
                             @if (Model.status == 2)
                             {
-                                <span>Đang vào sản xuất</span>
+                                <span>Kế hoạch sản xuất</span>
                             }
                             @if (Model.status == 3)
                             {
-                                <span>Kết thúc đơn hàng</span>
+                                <span>Tiến hành sản xuất</span>
                             }
+                            @if (Model.status == 4)
+                            {
+                                <span>Kết thúc sản xuất</span>
+                            }                           
                         </div>
                     </div>
                 </div>
