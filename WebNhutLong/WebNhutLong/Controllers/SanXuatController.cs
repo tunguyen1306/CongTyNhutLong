@@ -120,6 +120,14 @@ namespace WebNhutLong.Controllers
             {
                 donHang.action = 0;
                 tbl_OrderTem order = db.tbl_OrderTem.Find(donHang.id);
+                if (donHang.status.Value==3)
+                {
+                    order.date_begin = DateTime.Now;
+                }
+                if (donHang.status.Value == 4)
+                {
+                    order.date_end = DateTime.Now;
+                }
                 order.status = donHang.status.Value;
                 db.Entry(order).State = EntityState.Modified;
                 db.SaveChanges();
@@ -146,8 +154,8 @@ namespace WebNhutLong.Controllers
                     foreach (var itemSP in item.QuyTrinhs)
                     {
                         tbl_QuyTrinh tbQT = db.tbl_QuyTrinh.Find(itemSP.ID);
-                        tbQT.NgayBatDau_DK = itemSP.NgayBatDau_TT;
-                        tbQT.NgayKetThuc_DK = itemSP.NgayKetThuc_TT;
+                        tbQT.NgayBatDau_TT = itemSP.NgayBatDau_TT;
+                        tbQT.NgayKetThuc_TT = itemSP.NgayKetThuc_TT;
                         db.Entry(tbQT).State = EntityState.Modified;
                     }
                     db.SaveChanges();

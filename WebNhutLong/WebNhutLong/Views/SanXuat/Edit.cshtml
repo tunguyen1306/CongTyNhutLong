@@ -161,8 +161,12 @@
                         {
                             <input type="submit" value="Tiến hành sản xuất" class="btn btn-primary" onclick=" UpdateStatusOrder(3); return false; " />
                         }
+                        @if (Model.status.Value == 3)
+                        {
+                            <input type="submit" value="Kết thúc đơn hàng" class="btn btn-primary" onclick=" UpdateStatusOrder(4); return false; " />
+                        }
                         <a class="btn btn-primary" href="@Url.Action("Index", "SanXuat")">
-                            Hủy
+                            Quay lại
                         </a>
                     </div>
 
