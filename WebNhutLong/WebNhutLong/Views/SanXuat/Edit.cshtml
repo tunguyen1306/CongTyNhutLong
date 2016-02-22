@@ -10,7 +10,29 @@
 
 
 <script type="text/javascript">
-
+    function loadPopup(el,id)
+    {
+        $('#id').val(id);
+        $('#begin').val($('#'+id+'_begin').val());
+        $('#end').val($('#' + id + '_end').val());
+        $('#update_plan').click();
+    }
+    function updatePlan(el)
+    {
+        var id = $('#id').val();
+        $('#'+id+'_begin').val($('#begin').val());
+        $('#' + id + '_end').val($('#end').val());
+        $('#' + id + '').text(reformatDate($('#begin').val()) + ' - ' + reformatDate($('#end').val()));
+    }
+    function reformatDate(strMMDDYYYY)
+    {
+        var arr = strMMDDYYYY.split("/");
+        if(arr.length==3)
+        {
+            return arr[1]+"/"+arr[0]+"/"+arr[2]
+        }
+        return strMMDDYYYY;
+    }
     function SubmitUpdatePlan()
     {
         $("#action").val(6);
@@ -149,8 +171,10 @@
         <div class="panel-heading">
             <div class="row">
                 <span style="margin-left: 10px; line-height: 33px">Cập nhật kế hoạch sản xuất</span>
-                <input type="submit" style="float: right; margin-right: 10px" value="Cập nhật" class="btn btn-primary" onclick="SubmitUpdatePlan();return false; " />
-            </div>
+                <input type="submit" style="float: right; margin-right: 10px" value="Cập nhật" class="btn btn-primary" onclick="SubmitUpdatePlan();return false;" />
+           
+                <button type="button" style="display:none" id="update_plan" class="btn btn-danger" data-toggle="modal" data-target="#modal-container-donhang">Thêm Ngày</button>
+             </div>
         </div>
         <div class="panel-body">
             <div class="row">
@@ -228,8 +252,8 @@
                                         <tr>
                                             @for (int i = 0; i < item.QuyTrinhs.Count; i++)
                                             {
-                                                <th class="cusfontsize2">Bắt đầu</th>
-                                                <th class="cusfontsize2">Kết thúc</th>
+                                                <th class="cusfontsize2" colspan="2">Bắt đầu - Kết thúc</th>
+                                               
                                             }
 
 
@@ -237,8 +261,14 @@
                                         <tr>
                                             @for (int i = 0; i < item.QuyTrinhs.Count; i++)
                                             {
-                                                <td class="cusfontsize1"><input type="text" class="form-control date" /></td>
-                                                    <td class="cusfontsize1"><input type="text" class="form-control date" /></td>
+                                                <td onclick="loadPopup(this,'@(item.QuyTrinhs[i].ID)_flow')"  colspan="2" class="cusfontsize1">
+                                                    <input type="hidden"  name="BaoGiaTemView.BaoGiaTemDetailViews[@j].QuyTrinhs[@i].ID" value="@item.QuyTrinhs[i].ID"/>
+                                                    <input type="hidden" id="@(item.QuyTrinhs[i].ID)_flow_begin" name="BaoGiaTemView.BaoGiaTemDetailViews[@j].QuyTrinhs[@i].NgayBatDau_DK" value="@(item.QuyTrinhs[i].NgayBatDau_DK.HasValue? item.QuyTrinhs[i].NgayBatDau_DK.Value.ToString("MM/dd/yyyy"):"")" />
+                                                    <input type="hidden" id="@(item.QuyTrinhs[i].ID)_flow_end" name="BaoGiaTemView.BaoGiaTemDetailViews[@j].QuyTrinhs[@i].NgayKetThuc_DK" value="@(item.QuyTrinhs[i].NgayKetThuc_DK.HasValue?item.QuyTrinhs[i].NgayKetThuc_DK.Value.ToString("MM/dd/yyyy"):"")" />
+                                                    <span  id="@(item.QuyTrinhs[i].ID)_flow">@(item.QuyTrinhs[i].NgayBatDau_DK.HasValue ? item.QuyTrinhs[i].NgayBatDau_DK.Value.ToString("dd/MM/yyyy") : "") - @(item.QuyTrinhs[i].NgayKetThuc_DK.HasValue ? item.QuyTrinhs[i].NgayKetThuc_DK.Value.ToString("dd/MM/yyyy") : "")</span>
+
+                                                </td>
+
                                             }
                                         </tr>
                                     }
@@ -381,6 +411,34 @@
         </div>
     </div>
     <!-- Trigger the modal with a button -->
+
+    <div id="modal-container-donhang" class="modal fade" tabindex="-1" role="dialog">
+        <div class="modal-dialog" style="width:400px" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    Cập nhật thời gian kế hoạch
+                </div>
+                <div class="modal-body">
+                    <div class="form-group">
+                        <label for="usr">Ngày bắt đầu :</label>
+                        <input type="text" class="form-control date" value="" id="begin"/>
+                        <input type="hidden" value="" id="id"  />
+                    </div>
+                    <div class="form-group">
+                        <label for="pwd">Ngày kết thúc :</label>
+                        <input type="text" class="form-control date" value="" id="end" />
+                    </div>
+
+                </div>
+                <div class="modal-footer">
+                    <div class="bootstrap-dialog-footer-buttons">
+                        <button class="btn btn-primary" data-dismiss="modal" onclick="updatePlan(this); return false;">Update</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
 }
 
 <div>
