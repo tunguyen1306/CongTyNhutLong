@@ -956,7 +956,9 @@
       <DependentUpon>DataWeb.edmx</DependentUpon>
       <LastGenOutput>DataWeb.cs</LastGenOutput>
     </Content>
-    <None Include="Properties\PublishProfiles\publishWebNhutLong.pubxml" />
+    <None Include="Properties\PublishProfiles\publishWebNhutLong.pubxml">
+      <SubType>Designer</SubType>
+    </None>
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\bootstrap-datetimepicker.js" />
     <Content Include="Scripts\flot-data.js" />
