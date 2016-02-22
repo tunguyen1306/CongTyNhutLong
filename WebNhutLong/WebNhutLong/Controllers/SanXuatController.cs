@@ -11,7 +11,7 @@ namespace WebNhutLong.Controllers
 {
     public class SanXuatController : Controller
     {
-        private WebNhutLongEntities db = new WebNhutLongEntities();
+        private Entities db = new Entities();
         // GET: SanXuat
         public ActionResult Index()
         {

@@ -14,7 +14,7 @@ namespace WebNhutLong.Controllers
 {
     public class ProductsController : Controller
     {
-        private WebNhutLongEntities db = new WebNhutLongEntities();
+        private Entities db = new Entities();
 
         // GET: Products
         public ActionResult Index()

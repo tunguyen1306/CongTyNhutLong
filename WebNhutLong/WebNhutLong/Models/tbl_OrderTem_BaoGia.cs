@@ -12,16 +12,15 @@ namespace WebNhutLong.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class tbl_User
+    public partial class tbl_OrderTem_BaoGia
     {
-        public int IDUser { get; set; }
-        public string Username { get; set; }
-        public string FullName { get; set; }
-        public Nullable<int> Status { get; set; }
-        public Nullable<System.DateTime> ModifyDate { get; set; }
-        public string ModifyUser { get; set; }
-        public string CreateUser { get; set; }
-        public Nullable<System.DateTime> CreateDate { get; set; }
-        public string Password { get; set; }
+        public int id { get; set; }
+        public Nullable<int> order_id { get; set; }
+        public Nullable<double> total_money { get; set; }
+        public Nullable<System.DateTime> date_begin { get; set; }
+        public Nullable<System.DateTime> date_end { get; set; }
+        public Nullable<int> status { get; set; }
+        public Nullable<int> offset { get; set; }
+        public string note { get; set; }
     }
 }

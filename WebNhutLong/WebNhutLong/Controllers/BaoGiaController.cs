@@ -10,7 +10,7 @@ namespace WebNhutLong.Controllers
 {
     public class BaoGiaController : Controller
     {
-        private readonly WebNhutLongEntities db = new WebNhutLongEntities();
+        private readonly Entities db = new Entities();
 
         // GET: BaoGia
       

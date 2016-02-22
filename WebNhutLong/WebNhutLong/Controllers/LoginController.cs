@@ -12,7 +12,7 @@ namespace WebNhutLong.Controllers
 {
     public class LoginController : Controller
     {
-        private WebNhutLongEntities db = new WebNhutLongEntities();
+        private Entities db = new Entities();
 
         // GET: Login
         public ActionResult Index()

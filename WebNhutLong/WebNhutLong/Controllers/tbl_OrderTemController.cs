@@ -12,7 +12,7 @@ namespace WebNhutLong.Controllers
 {
     public class tbl_OrderTemController : Controller
     {
-        private WebNhutLongEntities db = new WebNhutLongEntities();
+        private Entities db = new Entities();
 
         // GET: tbl_OrderTem
         public ActionResult Index()

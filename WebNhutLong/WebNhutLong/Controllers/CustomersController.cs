@@ -12,7 +12,7 @@ namespace WebNhutLong.Controllers
 {
     public class CustomersController : Controller
     {
-        private WebNhutLongEntities db = new WebNhutLongEntities();
+        private Entities db = new Entities();
 
         // GET: Customers
         public ActionResult Index()
