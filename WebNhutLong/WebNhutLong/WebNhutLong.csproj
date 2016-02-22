@@ -173,16 +173,10 @@
     <Compile Include="Models\tbl_OrderTem.cs">
       <DependentUpon>DataWeb.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\tbl_OrderTem_BaoGia.cs">
-      <DependentUpon>DataWeb.tt</DependentUpon>
-    </Compile>
     <Compile Include="Models\tbl_OrderTem_BaoGia_Detail.cs">
       <DependentUpon>DataWeb.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\tbl_Products.cs">
-      <DependentUpon>DataWeb.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\tbl_QuyTrinh.cs">
       <DependentUpon>DataWeb.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\tbl_User.cs">

@@ -156,11 +156,11 @@ namespace WebNhutLong.Controllers
                 for (int i = 1; i < lisBG.Count; i++)
                 {
                     var item = lisBG[i];
-                    BaoGiaTemView temBG = new BaoGiaTemView {flow=item.flow,note=item.note,  date_begin = item.date_begin, date_end = item.date_end, id = item.id, offset = item.offset, order_id = item.order_id, status = item.status, total_money = item.total_money };
+                    BaoGiaTemView temBG = new BaoGiaTemView {note=item.note,  date_begin = item.date_begin, date_end = item.date_end, id = item.id, offset = item.offset, order_id = item.order_id, status = item.status, total_money = item.total_money };
                     var queryGiaoGiaCT = from u in db.tbl_OrderTem_BaoGia_Detail
                                          join y in db.tbl_Products on u.sanpam_id equals y.ID_Products
                                          where u.baogia_id.Value.Equals(temBG.id)
-                                         select new BaoGiaTemDetailView { ID_Products = u.sanpam_id.Value, CodeProducts = y.CodeProducts, CreatedDateProducts = y.CreatedDateProducts, CreateUserProducts = y.CreateUserProducts, DanKimProducts = y.DanKimProducts, GiaProducts = u.money.Value.ToString(), LoaigiayProducts = y.LoaigiayProducts, ModifyDateProducts = y.ModifyDateProducts, ModifyUserProducts = y.ModifyUserProducts, NameProducts = y.NameProducts, OffsetFlexoProducts = y.OffsetFlexoProducts, QuyCachProducts = y.QuyCachProducts, SolopProducts = y.SolopProducts, SoLuong = u.soluong.Value, StatusProducts = y.StatusProducts };
+                                         select new BaoGiaTemDetailView { id = u.id, ID_Products = u.sanpam_id.Value, CodeProducts = y.CodeProducts, CreatedDateProducts = y.CreatedDateProducts, CreateUserProducts = y.CreateUserProducts, DanKimProducts = y.DanKimProducts, GiaProducts = u.money.Value.ToString(), LoaigiayProducts = y.LoaigiayProducts, ModifyDateProducts = y.ModifyDateProducts, ModifyUserProducts = y.ModifyUserProducts, NameProducts = y.NameProducts, OffsetFlexoProducts = y.OffsetFlexoProducts, QuyCachProducts = y.QuyCachProducts, SolopProducts = y.SolopProducts, SoLuong = u.soluong.Value, StatusProducts = y.StatusProducts };
                     temBG.BaoGiaTemDetailViews = queryGiaoGiaCT.ToList<BaoGiaTemDetailView>();
                     lisBGTem.Add(temBG);
                 }
@@ -171,10 +171,10 @@ namespace WebNhutLong.Controllers
             lisBG = queryBaoGia.ToList<tbl_OrderTem_BaoGia>();
             foreach (var item in lisBG)
             {
-                BaoGiaTemView temBG = new BaoGiaTemView { flow=item.flow,note=item.note, date_begin = item.date_begin, date_end = item.date_end, id = item.id, offset = item.offset, order_id = item.order_id, status = item.status, total_money = item.total_money };
+                BaoGiaTemView temBG = new BaoGiaTemView {note=item.note, date_begin = item.date_begin, date_end = item.date_end, id = item.id, offset = item.offset, order_id = item.order_id, status = item.status, total_money = item.total_money };
                 var queryGiaoGiaCT = from u in db.tbl_OrderTem_BaoGia_Detail
                                      join y in db.tbl_Products on u.sanpam_id equals y.ID_Products where u.baogia_id.Value.Equals(temBG.id)
-                                     select new BaoGiaTemDetailView { ID_Products = u.sanpam_id.Value, CodeProducts = y.CodeProducts, CreatedDateProducts = y.CreatedDateProducts, CreateUserProducts = y.CreateUserProducts, DanKimProducts = y.DanKimProducts, GiaProducts = u.money.Value.ToString(), LoaigiayProducts = y.LoaigiayProducts, ModifyDateProducts = y.ModifyDateProducts, ModifyUserProducts = y.ModifyUserProducts, NameProducts = y.NameProducts, OffsetFlexoProducts = y.OffsetFlexoProducts, QuyCachProducts = y.QuyCachProducts, SolopProducts = y.SolopProducts, SoLuong = u.soluong.Value, StatusProducts = y.StatusProducts };
+                                     select new BaoGiaTemDetailView { id = u.id, ID_Products = u.sanpam_id.Value, CodeProducts = y.CodeProducts, CreatedDateProducts = y.CreatedDateProducts, CreateUserProducts = y.CreateUserProducts, DanKimProducts = y.DanKimProducts, GiaProducts = u.money.Value.ToString(), LoaigiayProducts = y.LoaigiayProducts, ModifyDateProducts = y.ModifyDateProducts, ModifyUserProducts = y.ModifyUserProducts, NameProducts = y.NameProducts, OffsetFlexoProducts = y.OffsetFlexoProducts, QuyCachProducts = y.QuyCachProducts, SolopProducts = y.SolopProducts, SoLuong = u.soluong.Value, StatusProducts = y.StatusProducts };
                 temBG.BaoGiaTemDetailViews = queryGiaoGiaCT.ToList<BaoGiaTemDetailView>();
                 d.BaoGiaTemView = temBG;
                 break;
@@ -267,64 +267,59 @@ namespace WebNhutLong.Controllers
                 order.status = donHang.status.Value;
                 db.Entry(order).State = EntityState.Modified;
                 db.SaveChanges();
-
-
-
-
-
-                tbl_OrderTem_BaoGia baogia = db.tbl_OrderTem_BaoGia.Find(donHang.BaoGiaTemView.id);
-                baogia.flow = donHang.BaoGiaTemView.flow;             
-                db.Entry(baogia).State = EntityState.Modified;
-                db.SaveChanges();
-                if (donHang.BaoGiaTemView.flow==1)
+                var queryGiaoGiaCT = from u in db.tbl_OrderTem_BaoGia_Detail
+                                     join y in db.tbl_Products on u.sanpam_id equals y.ID_Products
+                                     where u.baogia_id.Value.Equals(donHang.BaoGiaTemView.id)
+                                     select new BaoGiaTemDetailView { id=u.id, ID_Products = u.sanpam_id.Value, CodeProducts = y.CodeProducts, CreatedDateProducts = y.CreatedDateProducts, CreateUserProducts = y.CreateUserProducts, DanKimProducts = y.DanKimProducts, GiaProducts = u.money.Value.ToString(), LoaigiayProducts = y.LoaigiayProducts, ModifyDateProducts = y.ModifyDateProducts, ModifyUserProducts = y.ModifyUserProducts, NameProducts = y.NameProducts, OffsetFlexoProducts = y.OffsetFlexoProducts, QuyCachProducts = y.QuyCachProducts, SolopProducts = y.SolopProducts, SoLuong = u.soluong.Value, StatusProducts = y.StatusProducts };
+                List<BaoGiaTemDetailView> listSP = queryGiaoGiaCT.ToList<BaoGiaTemDetailView>();
+                foreach (var item in listSP)
                 {
-                    tbl_QuyTrinh qt1 = new tbl_QuyTrinh { ID_BaoGia = baogia.id, ThuTu = 0, TrangThai = 0, TenBuoc = "Sản xuất giấy tấm" };
-                    db.tbl_QuyTrinh.Add(qt1);
-                    tbl_QuyTrinh qt2 = new tbl_QuyTrinh { ID_BaoGia = baogia.id, ThuTu = 1, TrangThai = 0, TenBuoc = "Xã biên,cán lằn" };
-                    db.tbl_QuyTrinh.Add(qt2);
-                    tbl_QuyTrinh qt3 = new tbl_QuyTrinh { ID_BaoGia = baogia.id, ThuTu = 2, TrangThai = 0, TenBuoc = "In Flexo " };
-                    db.tbl_QuyTrinh.Add(qt3);
-                    tbl_QuyTrinh qt4 = new tbl_QuyTrinh { ID_BaoGia = baogia.id, ThuTu = 3, TrangThai = 0, TenBuoc = "Chạp khoe" };
-                    db.tbl_QuyTrinh.Add(qt4);
-                    tbl_QuyTrinh qt5 = new tbl_QuyTrinh { ID_BaoGia = baogia.id, ThuTu = 4, TrangThai = 0, TenBuoc = "Đóng kim/Dán" };
-                    db.tbl_QuyTrinh.Add(qt5);
-                    tbl_QuyTrinh qt6 = new tbl_QuyTrinh { ID_BaoGia = baogia.id, ThuTu = 5, TrangThai = 0, TenBuoc = "Đóng gói" };
-                    db.tbl_QuyTrinh.Add(qt6);
-                    tbl_QuyTrinh qt7 = new tbl_QuyTrinh { ID_BaoGia = baogia.id, ThuTu = 6, TrangThai = 0, TenBuoc = "Giao hàng" };
-                    db.tbl_QuyTrinh.Add(qt7);
-                    tbl_QuyTrinh qt8 = new tbl_QuyTrinh { ID_BaoGia = baogia.id, ThuTu = 7, TrangThai = 0, TenBuoc = "Thanh toán" };
-                    db.tbl_QuyTrinh.Add(qt8);
-                    tbl_QuyTrinh qt9 = new tbl_QuyTrinh { ID_BaoGia = baogia.id, ThuTu = 8, TrangThai = 0, TenBuoc = "Kết thúc đơn hàng" };
-                    db.tbl_QuyTrinh.Add(qt9);
-                    db.SaveChanges();
+                    if (item.OffsetFlexoProducts.Equals("Offset"))
+                    {
+                        tbl_QuyTrinh qt1 = new tbl_QuyTrinh { ID_BaoGiaDetail = item.id, ThuTu = 0, TrangThai = 0, TenBuoc = "Nhận tờ in offset" };
+                        db.tbl_QuyTrinh.Add(qt1);
+                        tbl_QuyTrinh qt2 = new tbl_QuyTrinh { ID_BaoGiaDetail = item.id, ThuTu = 1, TrangThai = 0, TenBuoc = "Sản xuất giấy tấm" };
+                        db.tbl_QuyTrinh.Add(qt2);
+                        tbl_QuyTrinh qt3 = new tbl_QuyTrinh { ID_BaoGiaDetail = item.id, ThuTu = 2, TrangThai = 0, TenBuoc = "Bồi" };
+                        db.tbl_QuyTrinh.Add(qt3);
+                        tbl_QuyTrinh qt4 = new tbl_QuyTrinh { ID_BaoGiaDetail = item.id, ThuTu = 3, TrangThai = 0, TenBuoc = "Bế" };
+                        db.tbl_QuyTrinh.Add(qt4);
+                        tbl_QuyTrinh qt5 = new tbl_QuyTrinh { ID_BaoGiaDetail = item.id, ThuTu = 4, TrangThai = 0, TenBuoc = "Bấm kim/dán" };
+                        db.tbl_QuyTrinh.Add(qt5);
+                        tbl_QuyTrinh qt6 = new tbl_QuyTrinh { ID_BaoGiaDetail = item.id, ThuTu = 5, TrangThai = 0, TenBuoc = "Đóng gói" };
+                        db.tbl_QuyTrinh.Add(qt6);
+                        tbl_QuyTrinh qt7 = new tbl_QuyTrinh { ID_BaoGiaDetail = item.id, ThuTu = 6, TrangThai = 0, TenBuoc = "Giao hàng" };
+                        db.tbl_QuyTrinh.Add(qt7);
+                        tbl_QuyTrinh qt8 = new tbl_QuyTrinh { ID_BaoGiaDetail = item.id, ThuTu = 7, TrangThai = 0, TenBuoc = "Thanh toán" };
+                        db.tbl_QuyTrinh.Add(qt8);
+                        tbl_QuyTrinh qt9 = new tbl_QuyTrinh { ID_BaoGiaDetail = item.id, ThuTu = 8, TrangThai = 0, TenBuoc = "Kết thúc đơn hàng" };
+                        db.tbl_QuyTrinh.Add(qt9);
+
+                        db.SaveChanges();
+                    }
+                    else
+                    {
+                        tbl_QuyTrinh qt1 = new tbl_QuyTrinh { ID_BaoGiaDetail = item.id, ThuTu = 0, TrangThai = 0, TenBuoc = "Sản xuất giấy tấm" };
+                        db.tbl_QuyTrinh.Add(qt1);
+                        tbl_QuyTrinh qt2 = new tbl_QuyTrinh { ID_BaoGiaDetail = item.id, ThuTu = 1, TrangThai = 0, TenBuoc = "Xã biên,cán lằn" };
+                        db.tbl_QuyTrinh.Add(qt2);
+                        tbl_QuyTrinh qt3 = new tbl_QuyTrinh { ID_BaoGiaDetail = item.id, ThuTu = 2, TrangThai = 0, TenBuoc = "In Flexo " };
+                        db.tbl_QuyTrinh.Add(qt3);
+                        tbl_QuyTrinh qt4 = new tbl_QuyTrinh { ID_BaoGiaDetail = item.id, ThuTu = 3, TrangThai = 0, TenBuoc = "Chạp khoe" };
+                        db.tbl_QuyTrinh.Add(qt4);
+                        tbl_QuyTrinh qt5 = new tbl_QuyTrinh { ID_BaoGiaDetail = item.id, ThuTu = 4, TrangThai = 0, TenBuoc = "Đóng kim/Dán" };
+                        db.tbl_QuyTrinh.Add(qt5);
+                        tbl_QuyTrinh qt6 = new tbl_QuyTrinh { ID_BaoGiaDetail = item.id, ThuTu = 5, TrangThai = 0, TenBuoc = "Đóng gói" };
+                        db.tbl_QuyTrinh.Add(qt6);
+                        tbl_QuyTrinh qt7 = new tbl_QuyTrinh { ID_BaoGiaDetail = item.id, ThuTu = 6, TrangThai = 0, TenBuoc = "Giao hàng" };
+                        db.tbl_QuyTrinh.Add(qt7);
+                        tbl_QuyTrinh qt8 = new tbl_QuyTrinh { ID_BaoGiaDetail = item.id, ThuTu = 7, TrangThai = 0, TenBuoc = "Thanh toán" };
+                        db.tbl_QuyTrinh.Add(qt8);
+                        tbl_QuyTrinh qt9 = new tbl_QuyTrinh { ID_BaoGiaDetail = item.id, ThuTu = 8, TrangThai = 0, TenBuoc = "Kết thúc đơn hàng" };
+                        db.tbl_QuyTrinh.Add(qt9);
+                        db.SaveChanges();
+                    }
                 }
-                else if (donHang.BaoGiaTemView.flow==2)
-                {
-                    tbl_QuyTrinh qt1 = new tbl_QuyTrinh { ID_BaoGia = baogia.id, ThuTu = 0, TrangThai = 0, TenBuoc = "Nhận tờ in offset" };
-                    db.tbl_QuyTrinh.Add(qt1);
-                    tbl_QuyTrinh qt2 = new tbl_QuyTrinh { ID_BaoGia = baogia.id, ThuTu = 1, TrangThai = 0, TenBuoc = "Sản xuất giấy tấm" };
-                    db.tbl_QuyTrinh.Add(qt2);
-                    tbl_QuyTrinh qt3 = new tbl_QuyTrinh { ID_BaoGia = baogia.id, ThuTu = 2, TrangThai = 0, TenBuoc = "Bồi" };
-                    db.tbl_QuyTrinh.Add(qt3);
-                    tbl_QuyTrinh qt4 = new tbl_QuyTrinh { ID_BaoGia = baogia.id, ThuTu = 3, TrangThai = 0, TenBuoc = "Bế" };
-                    db.tbl_QuyTrinh.Add(qt4);
-                    tbl_QuyTrinh qt5 = new tbl_QuyTrinh { ID_BaoGia = baogia.id, ThuTu = 4, TrangThai = 0, TenBuoc = "Bấm kim/dán" };
-                    db.tbl_QuyTrinh.Add(qt5);
-                    tbl_QuyTrinh qt6 = new tbl_QuyTrinh { ID_BaoGia = baogia.id, ThuTu = 5, TrangThai = 0, TenBuoc = "Đóng gói" };
-                    db.tbl_QuyTrinh.Add(qt6);
-                    tbl_QuyTrinh qt7 = new tbl_QuyTrinh { ID_BaoGia = baogia.id, ThuTu = 6, TrangThai = 0, TenBuoc = "Giao hàng" };
-                    db.tbl_QuyTrinh.Add(qt7);
-                    tbl_QuyTrinh qt8 = new tbl_QuyTrinh { ID_BaoGia = baogia.id, ThuTu = 7, TrangThai = 0, TenBuoc = "Thanh toán" };
-                    db.tbl_QuyTrinh.Add(qt8);
-                    tbl_QuyTrinh qt9 = new tbl_QuyTrinh { ID_BaoGia = baogia.id, ThuTu = 8, TrangThai = 0, TenBuoc = "Kết thúc đơn hàng" };
-                    db.tbl_QuyTrinh.Add(qt9);
-                
-                    db.SaveChanges();
-                }
-               
-
-
-
             }
             DonHangView d = new DonHangView();
             d.customer_id = tbl_OrderTem.customer_id;
@@ -344,11 +339,11 @@ namespace WebNhutLong.Controllers
                 for (int i = 1; i < lisBG.Count; i++)
                 {
                     var item = lisBG[i];
-                    BaoGiaTemView temBG = new BaoGiaTemView { flow = item.flow, note = item.note, date_begin = item.date_begin, date_end = item.date_end, id = item.id, offset = item.offset, order_id = item.order_id, status = item.status, total_money = item.total_money };
+                    BaoGiaTemView temBG = new BaoGiaTemView {  note = item.note, date_begin = item.date_begin, date_end = item.date_end, id = item.id, offset = item.offset, order_id = item.order_id, status = item.status, total_money = item.total_money };
                     var queryGiaoGiaCT = from u in db.tbl_OrderTem_BaoGia_Detail
                                          join y in db.tbl_Products on u.sanpam_id equals y.ID_Products
                                          where u.baogia_id.Value.Equals(temBG.id)
-                                         select new BaoGiaTemDetailView { ID_Products = u.sanpam_id.Value, CodeProducts = y.CodeProducts, CreatedDateProducts = y.CreatedDateProducts, CreateUserProducts = y.CreateUserProducts, DanKimProducts = y.DanKimProducts, GiaProducts = u.money.Value.ToString(), LoaigiayProducts = y.LoaigiayProducts, ModifyDateProducts = y.ModifyDateProducts, ModifyUserProducts = y.ModifyUserProducts, NameProducts = y.NameProducts, OffsetFlexoProducts = y.OffsetFlexoProducts, QuyCachProducts = y.QuyCachProducts, SolopProducts = y.SolopProducts, SoLuong = u.soluong.Value, StatusProducts = y.StatusProducts };
+                                         select new BaoGiaTemDetailView { id = u.id, ID_Products = u.sanpam_id.Value, CodeProducts = y.CodeProducts, CreatedDateProducts = y.CreatedDateProducts, CreateUserProducts = y.CreateUserProducts, DanKimProducts = y.DanKimProducts, GiaProducts = u.money.Value.ToString(), LoaigiayProducts = y.LoaigiayProducts, ModifyDateProducts = y.ModifyDateProducts, ModifyUserProducts = y.ModifyUserProducts, NameProducts = y.NameProducts, OffsetFlexoProducts = y.OffsetFlexoProducts, QuyCachProducts = y.QuyCachProducts, SolopProducts = y.SolopProducts, SoLuong = u.soluong.Value, StatusProducts = y.StatusProducts };
                     temBG.BaoGiaTemDetailViews = queryGiaoGiaCT.ToList<BaoGiaTemDetailView>();
                     lisBGTem.Add(temBG);
                 }
@@ -359,11 +354,11 @@ namespace WebNhutLong.Controllers
             lisBG = queryBaoGia.ToList<tbl_OrderTem_BaoGia>();
             foreach (var item in lisBG)
             {
-                BaoGiaTemView temBG = new BaoGiaTemView { flow = item.flow, note = item.note, date_begin = item.date_begin, date_end = item.date_end, id = item.id, offset = item.offset, order_id = item.order_id, status = item.status, total_money = item.total_money };
+                BaoGiaTemView temBG = new BaoGiaTemView { note = item.note, date_begin = item.date_begin, date_end = item.date_end, id = item.id, offset = item.offset, order_id = item.order_id, status = item.status, total_money = item.total_money };
                 var queryGiaoGiaCT = from u in db.tbl_OrderTem_BaoGia_Detail
                                      join y in db.tbl_Products on u.sanpam_id equals y.ID_Products
                                      where u.baogia_id.Value.Equals(temBG.id)
-                                     select new BaoGiaTemDetailView { ID_Products = u.sanpam_id.Value, CodeProducts = y.CodeProducts, CreatedDateProducts = y.CreatedDateProducts, CreateUserProducts = y.CreateUserProducts, DanKimProducts = y.DanKimProducts, GiaProducts = u.money.Value.ToString(), LoaigiayProducts = y.LoaigiayProducts, ModifyDateProducts = y.ModifyDateProducts, ModifyUserProducts = y.ModifyUserProducts, NameProducts = y.NameProducts, OffsetFlexoProducts = y.OffsetFlexoProducts, QuyCachProducts = y.QuyCachProducts, SolopProducts = y.SolopProducts, SoLuong = u.soluong.Value, StatusProducts = y.StatusProducts };
+                                     select new BaoGiaTemDetailView { id = u.id, ID_Products = u.sanpam_id.Value, CodeProducts = y.CodeProducts, CreatedDateProducts = y.CreatedDateProducts, CreateUserProducts = y.CreateUserProducts, DanKimProducts = y.DanKimProducts, GiaProducts = u.money.Value.ToString(), LoaigiayProducts = y.LoaigiayProducts, ModifyDateProducts = y.ModifyDateProducts, ModifyUserProducts = y.ModifyUserProducts, NameProducts = y.NameProducts, OffsetFlexoProducts = y.OffsetFlexoProducts, QuyCachProducts = y.QuyCachProducts, SolopProducts = y.SolopProducts, SoLuong = u.soluong.Value, StatusProducts = y.StatusProducts };
                 temBG.BaoGiaTemDetailViews = queryGiaoGiaCT.ToList<BaoGiaTemDetailView>();
                 d.BaoGiaTemView = temBG;
                 break;
@@ -428,11 +423,11 @@ namespace WebNhutLong.Controllers
 
 
             
-           BaoGiaTemView temBG = new BaoGiaTemView { flow = item.flow, note = item.note, date_begin = item.date_begin, date_end = item.date_end, id = item.id, offset = item.offset, order_id = item.order_id, status = item.status, total_money = item.total_money };
+           BaoGiaTemView temBG = new BaoGiaTemView {  note = item.note, date_begin = item.date_begin, date_end = item.date_end, id = item.id, offset = item.offset, order_id = item.order_id, status = item.status, total_money = item.total_money };
            var queryGiaoGiaCT = from u in db.tbl_OrderTem_BaoGia_Detail
                                      join y in db.tbl_Products on u.sanpam_id equals y.ID_Products
                                      where u.baogia_id.Value.Equals(temBG.id)
-                                     select new BaoGiaTemDetailView { ID_Products = u.sanpam_id.Value, CodeProducts = y.CodeProducts, CreatedDateProducts = y.CreatedDateProducts, CreateUserProducts = y.CreateUserProducts, DanKimProducts = y.DanKimProducts, GiaProducts = u.money.Value.ToString(), LoaigiayProducts = y.LoaigiayProducts, ModifyDateProducts = y.ModifyDateProducts, ModifyUserProducts = y.ModifyUserProducts, NameProducts = y.NameProducts, OffsetFlexoProducts = y.OffsetFlexoProducts, QuyCachProducts = y.QuyCachProducts, SolopProducts = y.SolopProducts, SoLuong = u.soluong.Value, StatusProducts = y.StatusProducts };
+                                     select new BaoGiaTemDetailView { id = u.id, ID_Products = u.sanpam_id.Value, CodeProducts = y.CodeProducts, CreatedDateProducts = y.CreatedDateProducts, CreateUserProducts = y.CreateUserProducts, DanKimProducts = y.DanKimProducts, GiaProducts = u.money.Value.ToString(), LoaigiayProducts = y.LoaigiayProducts, ModifyDateProducts = y.ModifyDateProducts, ModifyUserProducts = y.ModifyUserProducts, NameProducts = y.NameProducts, OffsetFlexoProducts = y.OffsetFlexoProducts, QuyCachProducts = y.QuyCachProducts, SolopProducts = y.SolopProducts, SoLuong = u.soluong.Value, StatusProducts = y.StatusProducts };
             temBG.BaoGiaTemDetailViews = queryGiaoGiaCT.ToList<BaoGiaTemDetailView>();
 
             d.BaoGiaTemView = temBG;

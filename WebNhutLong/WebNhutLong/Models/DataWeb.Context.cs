@@ -31,8 +31,6 @@ namespace WebNhutLong.Models
         public DbSet<tbl_BaoGia> tbl_BaoGia { get; set; }
         public DbSet<tbl_BaoGiaChiTiet> tbl_BaoGiaChiTiet { get; set; }
         public DbSet<tbl_OrderTem> tbl_OrderTem { get; set; }
-        public DbSet<tbl_OrderTem_BaoGia> tbl_OrderTem_BaoGia { get; set; }
         public DbSet<tbl_OrderTem_BaoGia_Detail> tbl_OrderTem_BaoGia_Detail { get; set; }
-        public DbSet<tbl_QuyTrinh> tbl_QuyTrinh { get; set; }
     }
 }

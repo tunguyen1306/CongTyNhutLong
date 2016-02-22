@@ -7,6 +7,7 @@ namespace WebNhutLong.Models
 {
     public class BaoGiaTemDetailView
     {
+        public int id { get; set; }
         public int ID_Products { get; set; }
         public string NameProducts { get; set; }
         public Nullable<int> SolopProducts { get; set; }
@@ -22,5 +23,6 @@ namespace WebNhutLong.Models
         public string CodeProducts { get; set; }
         public string QuyCachProducts { get; set; }
         public int SoLuong { get; set; }
+        public List<tbl_QuyTrinh> QuyTrinhs { get; set; }
     }
 }

@@ -509,15 +509,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class="col-lg-6">
-                        <div class="form-group">
-                            <label class="control-label col-md-4">Quy trình</label>
-                            <div class="col-md-4" style="padding-top: 7px">
-                                @(Model.BaoGiaTemView.flow.HasValue ? "Quy trình " + Model.BaoGiaTemView.flow.Value : "Chưa cập nhập")
-
-                            </div>
-                        </div>
-                    </div>
+                    
                 </div>
             </div>
 
@@ -650,15 +642,7 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="col-lg-6">
-                            <div class="form-group">
-                                <label class="control-label col-md-4">Quy trình</label>
-                                <div class="col-md-4" style="padding-top: 7px">
-                                    @(Model.BaoGiaTemViews[i].flow.HasValue ? "Quy trình " + Model.BaoGiaTemViews[i].flow.Value : "Chưa cập nhập")
-
-                                </div>
-                            </div>
-                        </div>
+                      
                     </div>
                 </div>
 
@@ -757,13 +741,7 @@
                         <label for="pwd">Ngày kết thúc :</label>
                         @Html.EditorFor(model => model.date_end_plan, new {htmlAttributes = new {@class = "form-control date"}})
                     </div>
-                    <div class="form-group">
-                        <label for="pwd">Quy trình :</label>
-                        <select class="form-control valid" default-value="1" name="BaoGiaTemView.flow">
-                            <option value="1" selected="selected">Quy trình 1</option>
-                            <option value="2">Quy trình 2</option>
-                        </select>
-                    </div>
+                   
                 </div>
                 <div class="modal-footer">
                     <div class="bootstrap-dialog-footer-buttons">

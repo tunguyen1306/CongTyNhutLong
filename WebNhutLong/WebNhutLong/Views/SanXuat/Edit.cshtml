@@ -123,35 +123,89 @@
 
                                         <th colspan="20">Kế hoạch sản xuất</th>
                                     </tr>
-                                    <tr>
-
-                                        @for (int i = 0; i < Model.BaoGiaTemView.QuyTrinhs.Count; i++)
-                                        {
-                                            tbl_QuyTrinh item = Model.BaoGiaTemView.QuyTrinhs[i];
-                                            <th colspan="2" class="cusfontsize">@item.TenBuoc</th>
-                                        }
-                                     
-                                       
-                                    </tr>
+                                   
+                                    
                                 </thead>
                                 <tbody>
-                                    <tr>
-                                        @for (int i = 0; i < Model.BaoGiaTemView.QuyTrinhs.Count; i++)
+                                    @foreach (var item in Model.BaoGiaTemView.BaoGiaTemDetailViews)
+                                    {
+                                        if (!item.OffsetFlexoProducts.Equals("Offset"))
                                         {
-                                            <th class="cusfontsize2">Bắt đầu</th>
-                                            <th class="cusfontsize2">Kết thúc</th>
-                                        }
-                                      
-                                       
-                                    </tr>
-                                    <tr>
-                                        @for (int i = 0; i < Model.BaoGiaTemView.QuyTrinhs.Count; i++)
-                                        {
-                                            <td class="cusfontsize1"><input type="text" class="form-control date"/></td>
-                                            <td class="cusfontsize1"><input type="text" class="form-control date" /></td>
-                                        }                                      
-                                    </tr>
+                                            <tr>
 
+                                                <th colspan="20">@item.NameProducts</th>
+                                            </tr>
+                                            <tr>
+
+                                                @for (int i = 0; i < item.QuyTrinhs.Count; i++)
+                                                {
+                                                    tbl_QuyTrinh itemQT = item.QuyTrinhs[i];
+                                                    <th colspan="2" class="cusfontsize">@itemQT.TenBuoc</th>
+                                                }
+
+
+                                            </tr>
+
+                                            <tr>
+                                                @for (int i = 0; i < item.QuyTrinhs.Count; i++)
+                                                {
+                                                    <th class="cusfontsize2">Bắt đầu</th>
+                                                    <th class="cusfontsize2">Kết thúc</th>
+                                                }
+
+
+                                            </tr>
+                                            <tr>
+                                                @for (int i = 0; i < item.QuyTrinhs.Count; i++)
+                                                {
+                                                    <td class="cusfontsize1"><input type="text" class="form-control date" /></td>
+                                                    <td class="cusfontsize1"><input type="text" class="form-control date" /></td>
+                                                }
+                                            </tr>
+                                        }
+
+
+                                    }
+                                   
+                                    @foreach (var item in Model.BaoGiaTemView.BaoGiaTemDetailViews)
+                                    {
+                                        if (item.OffsetFlexoProducts.Equals("Offset"))
+                                        {
+                                            <tr>
+
+                                                <th colspan="20">@item.NameProducts</th>
+                                            </tr>
+                                            <tr>
+
+                                                @for (int i = 0; i < item.QuyTrinhs.Count; i++)
+                                                {
+                                                    tbl_QuyTrinh itemQT = item.QuyTrinhs[i];
+                                                    <th colspan="2" class="cusfontsize">@itemQT.TenBuoc</th>
+                                                }
+
+
+                                            </tr>
+
+                                            <tr>
+                                                @for (int i = 0; i < item.QuyTrinhs.Count; i++)
+                                                {
+                                                    <th class="cusfontsize2">Bắt đầu</th>
+                                                    <th class="cusfontsize2">Kết thúc</th>
+                                                }
+
+
+                                            </tr>
+                                            <tr>
+                                                @for (int i = 0; i < item.QuyTrinhs.Count; i++)
+                                                {
+                                                    <td class="cusfontsize1"><input type="text" class="form-control date" /></td>
+                                                    <td class="cusfontsize1"><input type="text" class="form-control date" /></td>
+                                                }
+                                            </tr>
+                                        }
+
+
+                                    }
                                 </tbody>
                             </table>
 
@@ -246,15 +300,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class="col-lg-6">
-                        <div class="form-group">
-                            <label class="control-label col-md-4">Quy trình</label>
-                            <div class="col-md-4" style="padding-top: 7px">
-                                @(Model.BaoGiaTemView.flow.HasValue ? "Quy trình " + Model.BaoGiaTemView.flow.Value : "Chưa cập nhập")
-
-                            </div>
-                        </div>
-                    </div>
+                   
                 </div>
             </div>
 

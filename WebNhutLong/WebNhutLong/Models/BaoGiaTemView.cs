@@ -16,10 +16,10 @@ namespace WebNhutLong.Models
         public Nullable<int> offset { get; set; }
         public List<BaoGiaTemDetailView> BaoGiaTemDetailViews { get; set; }
         public String note { get; set; }
-        public Nullable<int> flow { get; set; }
+      
 
 
-        public List<tbl_QuyTrinh> QuyTrinhs { get; set; }
+      
 
         public List<String> PrintTen { get; set; }
         public List<int> PrintSoLop { get; set; }
