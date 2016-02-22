@@ -21,7 +21,7 @@
         <div class="panel panel-default">
 
             <div class="panel-heading">
-                @Html.ActionLink("Thêm Khách hàng", "Create", "", new { @class = "btn btn-primary" }) 
+                @Html.ActionLink("Thêm Khách hàng", "Create", "", new {@class = "btn btn-primary"}) 
             </div>
             <!-- /.panel-heading -->
             <div class="panel-body">
@@ -68,10 +68,13 @@
                         <tbody>
                             @foreach (tbl_Customers item in Model)
                             {
-                             
-                                <tr><td>
-                                        @Html.ActionLink("Thêm báo giá", "Create", "tbl_OrderTem", new { id = item.IDCustomers }, htmlAttributes: new { @class = "btn btn-outline btn-primary btn-xs" })
-</td>
+                                <tr>
+                                    <td>
+                                        @Html.ActionLink("Thêm báo giá", "Create", "tbl_OrderTem", new {id = item.IDCustomers}, new {@class = "btn btn-outline btn-primary btn-xs"})
+                                        @Html.ActionLink("DS đơn hàng", "Index", "tbl_OrderTem", new {id = item.IDCustomers}, new {@class = "btn btn-outline btn-primary btn-xs"})
+
+
+                                    </td>
                                     <td>
                                         @Html.DisplayFor(modelItem => item.CodeCustomers)
                                     </td>
@@ -106,14 +109,14 @@
                                     </td>
                                     <td>
                                         @(
-                                            item.StatusCustomers == 1 ? "Hoạt động" : "Không hoạt động"
-                                        )
+    item.StatusCustomers == 1 ? "Hoạt động" : "Không hoạt động"
+                                              )
                                       
                                     </td>
                                     <td>
-                                        @Html.ActionLink("Sửa", "Edit", new { id = item.IDCustomers }, htmlAttributes: new { @class = "btn btn-outline btn-primary btn-xs" }) 
+                                        @Html.ActionLink("Sửa", "Edit", new {id = item.IDCustomers}, new {@class = "btn btn-outline btn-primary btn-xs"}) 
                                       
-                                        @Html.ActionLink("Xóa", "Delete", new { id = item.IDCustomers }, htmlAttributes: new { @class = "btn btn-outline btn-primary btn-xs" })
+                                        @Html.ActionLink("Xóa", "Delete", new {id = item.IDCustomers}, new {@class = "btn btn-outline btn-primary btn-xs"})
                                     </td>
                                 </tr>
                             }
