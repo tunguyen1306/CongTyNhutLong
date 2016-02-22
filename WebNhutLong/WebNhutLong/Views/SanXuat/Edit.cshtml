@@ -201,15 +201,16 @@
                                                 </tr>
                                             }
                                             <tr>
-
+                                                <input type="hidden" name="BaoGiaTemView.BaoGiaTemDetailViews[@j].id" value="@item.id" />
                                                 <td colspan="20">@item.NameProducts</td>
                                             </tr>
 
                                             <tr>
                                                 @for (int i = 0; i < item.QuyTrinhs.Count; i++)
                                                 {
-                                                    <th class="cusfontsize2">Bắt đầu</th>
-                                                    <th class="cusfontsize2">Kết thúc</th>
+
+                                                    <th class="cusfontsize2" colspan="2">Bắt đầu - Kết thúc</th>
+
                                                 }
 
 
@@ -217,8 +218,14 @@
                                             <tr>
                                                 @for (int i = 0; i < item.QuyTrinhs.Count; i++)
                                                 {
-                                                    <td class="cusfontsize1"><input type="text" class="form-control date" /></td>
-                                                    <td class="cusfontsize1"><input type="text" class="form-control date" /></td>
+                                                <td onclick="loadPopup(this,'@(item.QuyTrinhs[i].ID)_flow')" colspan="2" class="cusfontsize1">
+
+                                                    <input type="hidden" name="BaoGiaTemView.BaoGiaTemDetailViews[@j].QuyTrinhs[@i].ID" value="@item.QuyTrinhs[i].ID" />
+                                                    <input type="hidden" id="@(item.QuyTrinhs[i].ID)_flow_begin" name="BaoGiaTemView.BaoGiaTemDetailViews[@j].QuyTrinhs[@i].NgayBatDau_DK" value="@(item.QuyTrinhs[i].NgayBatDau_DK.HasValue? item.QuyTrinhs[i].NgayBatDau_DK.Value.ToString("MM/dd/yyyy"):"")" />
+                                                    <input type="hidden" id="@(item.QuyTrinhs[i].ID)_flow_end" name="BaoGiaTemView.BaoGiaTemDetailViews[@j].QuyTrinhs[@i].NgayKetThuc_DK" value="@(item.QuyTrinhs[i].NgayKetThuc_DK.HasValue?item.QuyTrinhs[i].NgayKetThuc_DK.Value.ToString("MM/dd/yyyy"):"")" />
+                                                    <span id="@(item.QuyTrinhs[i].ID)_flow">@(item.QuyTrinhs[i].NgayBatDau_DK.HasValue ? item.QuyTrinhs[i].NgayBatDau_DK.Value.ToString("dd/MM/yyyy") : "") - @(item.QuyTrinhs[i].NgayKetThuc_DK.HasValue ? item.QuyTrinhs[i].NgayKetThuc_DK.Value.ToString("dd/MM/yyyy") : "")</span>
+
+                                                </td>
                                                 }
                                             </tr>
                                         }
@@ -246,7 +253,7 @@
                                                 </tr>
                                             }
                                             <tr>
-
+                                                <input type="hidden" name="BaoGiaTemView.BaoGiaTemDetailViews[@j].id" value="@item.id" />
                                                 <td colspan="20">@item.NameProducts</td>
                                             </tr>
 
@@ -263,7 +270,8 @@
                                                 @for (int i = 0; i < item.QuyTrinhs.Count; i++)
                                                 {
                                                     <td onclick="loadPopup(this,'@(item.QuyTrinhs[i].ID)_flow')" colspan="2" class="cusfontsize1">
-                                                        <input type="hidden" name="BaoGiaTemView.BaoGiaTemDetailViews[@j].QuyTrinhs[@i].ID" value="@item.QuyTrinhs[i].ID" />
+                                                        
+                                                         <input type="hidden" name="BaoGiaTemView.BaoGiaTemDetailViews[@j].QuyTrinhs[@i].ID" value="@item.QuyTrinhs[i].ID" />
                                                         <input type="hidden" id="@(item.QuyTrinhs[i].ID)_flow_begin" name="BaoGiaTemView.BaoGiaTemDetailViews[@j].QuyTrinhs[@i].NgayBatDau_DK" value="@(item.QuyTrinhs[i].NgayBatDau_DK.HasValue? item.QuyTrinhs[i].NgayBatDau_DK.Value.ToString("MM/dd/yyyy"):"")" />
                                                         <input type="hidden" id="@(item.QuyTrinhs[i].ID)_flow_end" name="BaoGiaTemView.BaoGiaTemDetailViews[@j].QuyTrinhs[@i].NgayKetThuc_DK" value="@(item.QuyTrinhs[i].NgayKetThuc_DK.HasValue?item.QuyTrinhs[i].NgayKetThuc_DK.Value.ToString("MM/dd/yyyy"):"")" />
                                                         <span id="@(item.QuyTrinhs[i].ID)_flow">@(item.QuyTrinhs[i].NgayBatDau_DK.HasValue ? item.QuyTrinhs[i].NgayBatDau_DK.Value.ToString("dd/MM/yyyy") : "") - @(item.QuyTrinhs[i].NgayKetThuc_DK.HasValue ? item.QuyTrinhs[i].NgayKetThuc_DK.Value.ToString("dd/MM/yyyy") : "")</span>
