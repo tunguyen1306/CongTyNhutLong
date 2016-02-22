@@ -10,11 +10,30 @@
 
 
 <script type="text/javascript">
-
+    function loadPopup(el, id) {
+        $('#id').val(id);
+        $('#begin').val($('#' + id + '_begin').val());
+        $('#end').val($('#' + id + '_end').val());
+        $('#update_plan').click();
+    }
+    function updatePlan(el) {
+        var id = $('#id').val();
+        $('#' + id + '_begin').val($('#begin').val());
+        $('#' + id + '_end').val($('#end').val());
+        $('#' + id + '').text(reformatDate($('#begin').val()) + ' - ' + reformatDate($('#end').val()));
+    }
+    function reformatDate(strMMDDYYYY) {
+        var arr = strMMDDYYYY.split("/");
+        if (arr.length == 3) {
+            return arr[1] + "/" + arr[0] + "/" + arr[2]
+        }
+        return strMMDDYYYY;
+    }
     function SubmitUpdatePlan() {
+
+
         $("#action").val(6);
     }
-
     function UpdateStatusOrder(status) {
         $('#status').val(status);
         $("#action").val(5);
@@ -28,7 +47,7 @@
 @using (Html.BeginForm())
 {
     @Html.AntiForgeryToken()
-    @Html.ValidationSummary(true, "", new {@class = "text-danger"})
+    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
 
     <div class="panel panel-default">
         <div class="panel-heading">
@@ -38,7 +57,7 @@
         </div>
         <div class="panel-body">
             <div class="row form-horizontal">
-                <input type="hidden" value="@Model.action" name="action" id="action" >
+                <input type="hidden" value="@Model.action" name="action" id="action">
 
                 <div class="col-lg-6">
                     <div class="form-group">
@@ -66,7 +85,7 @@
                             @if (Model.status == 2)
                             {
                                 <span>Kế hoạch sản xuất</span>
-                            }                           
+                            }
                             @if (Model.status == 3)
                             {
                                 <span>Tiến hành sản xuất</span>
@@ -92,7 +111,7 @@
                 <div class="col-lg-6">
                     <div class="form-group">
                         <label class="col-md-4">Ngày kết thúc dự kiến</label>
-                        <div class="col-md-8"> 
+                        <div class="col-md-8">
                             @(Model.date_end_plan.HasValue ? Model.date_end_plan.Value.ToString("MM/dd/yyyy") : "Chưa cập nhập")
 
                         </div>
@@ -102,7 +121,7 @@
                     <div class="form-group">
                         <label class="col-md-4">Ngày bắt đầu thực tế</label>
                         <div class="col-md-8">
-                           
+
                             @(Model.date_begin.HasValue ? Model.date_begin.Value.ToString("dd/MM/yyyy") : "Chưa cập nhập")
                         </div>
                     </div>
@@ -111,13 +130,13 @@
                     <div class="form-group">
                         <label class="col-md-4">Ngày kết thúc thực tế</label>
                         <div class="col-md-8">
-                           
+
                             @(Model.date_end.HasValue ? Model.date_end.Value.ToString("dd/MM/yyyy") : "Chưa cập nhập")
                         </div>
                     </div>
                 </div>
-               
-                   
+
+
 
 
                 <div class="col-lg-12">
@@ -142,11 +161,16 @@
     </div>
     if (Model.status >= 2)
     {
+
+
+
         <div class="panel panel-default">
             <div class="panel-heading">
                 <div class="row">
                     <span style="margin-left: 10px; line-height: 33px">Cập nhật kế hoạch sản xuất</span>
-                    <input type="submit" style="float: right; margin-right: 10px" value="Cập nhật" class="btn btn-primary" onclick=" SubmitUpdatePlan();return false; " />
+                    <input type="submit" style="float: right; margin-right: 10px" value="Cập nhật" class="btn btn-primary" onclick="SubmitUpdatePlan();return false;" />
+
+                    <button type="button" style="display:none" id="update_plan" class="btn btn-danger" data-toggle="modal" data-target="#modal-container-donhang">Thêm Ngày</button>
                 </div>
             </div>
             <div class="panel-body">
@@ -157,9 +181,10 @@
                                 <tbody>
                                     @for (int j = 0; j < Model.BaoGiaTemView.BaoGiaTemDetailViews.Count; j++)
                                     {
-                                        BaoGiaTemDetailView item = Model.BaoGiaTemView.BaoGiaTemDetailViews[j];
+                                        var item = Model.BaoGiaTemView.BaoGiaTemDetailViews[j];
                                         if (!item.OffsetFlexoProducts.Equals("Offset"))
                                         {
+
                                             if (j == 0)
                                             {
                                                 <tr>
@@ -193,13 +218,16 @@
                                                 }
                                             </tr>
                                         }
+
+
                                     }
 
                                     @for (int j = 0; j < Model.BaoGiaTemView.BaoGiaTemDetailViews.Count; j++)
                                     {
-                                        BaoGiaTemDetailView item = Model.BaoGiaTemView.BaoGiaTemDetailViews[j];
+                                        var item = Model.BaoGiaTemView.BaoGiaTemDetailViews[j];
                                         if (item.OffsetFlexoProducts.Equals("Offset"))
                                         {
+
                                             if (j == 0)
                                             {
                                                 <tr>
@@ -221,8 +249,8 @@
                                             <tr>
                                                 @for (int i = 0; i < item.QuyTrinhs.Count; i++)
                                                 {
-                                                    <th class="cusfontsize2">Bắt đầu</th>
-                                                    <th class="cusfontsize2">Kết thúc</th>
+                                                    <th class="cusfontsize2" colspan="2">Bắt đầu - Kết thúc</th>
+
                                                 }
 
 
@@ -230,12 +258,19 @@
                                             <tr>
                                                 @for (int i = 0; i < item.QuyTrinhs.Count; i++)
                                                 {
-                                                    <td class="cusfontsize1" colspan="2"><button type="button" class="btn btn-danger" data-toggle="modal" data-target="#myModal">Thêm Ngày</button></td>
-    @*<td id="@(item.QuyTrinhs[i].ID)_flow_@(item.QuyTrinhs[i].ThuTu)_begin" class="cusfontsize1"><input type="text" class="form-control date" /></td>
-    <td id="@(item.QuyTrinhs[i].ID)_flow_@(item.QuyTrinhs[i].ThuTu)_end" class="cusfontsize1"><input type="text" class="form-control date" /></td>*@
+                                                    <td onclick="loadPopup(this,'@(item.QuyTrinhs[i].ID)_flow')" colspan="2" class="cusfontsize1">
+                                                        <input type="hidden" name="BaoGiaTemView.BaoGiaTemDetailViews[@j].QuyTrinhs[@i].ID" value="@item.QuyTrinhs[i].ID" />
+                                                        <input type="hidden" id="@(item.QuyTrinhs[i].ID)_flow_begin" name="BaoGiaTemView.BaoGiaTemDetailViews[@j].QuyTrinhs[@i].NgayBatDau_DK" value="@(item.QuyTrinhs[i].NgayBatDau_DK.HasValue? item.QuyTrinhs[i].NgayBatDau_DK.Value.ToString("MM/dd/yyyy"):"")" />
+                                                        <input type="hidden" id="@(item.QuyTrinhs[i].ID)_flow_end" name="BaoGiaTemView.BaoGiaTemDetailViews[@j].QuyTrinhs[@i].NgayKetThuc_DK" value="@(item.QuyTrinhs[i].NgayKetThuc_DK.HasValue?item.QuyTrinhs[i].NgayKetThuc_DK.Value.ToString("MM/dd/yyyy"):"")" />
+                                                        <span id="@(item.QuyTrinhs[i].ID)_flow">@(item.QuyTrinhs[i].NgayBatDau_DK.HasValue ? item.QuyTrinhs[i].NgayBatDau_DK.Value.ToString("dd/MM/yyyy") : "") - @(item.QuyTrinhs[i].NgayKetThuc_DK.HasValue ? item.QuyTrinhs[i].NgayKetThuc_DK.Value.ToString("dd/MM/yyyy") : "")</span>
+
+                                                    </td>
+
                                                 }
                                             </tr>
                                         }
+
+
                                     }
                                 </tbody>
                             </table>
@@ -252,7 +287,7 @@
     <div class="panel panel-default">
         <div class="panel-heading">
             <div class="row">
-                <span style="margin-left: 10px; line-height: 33px">Báo giá lần @(Model.BaoGiaTemViews.Count + 1)</span>             
+                <span style="margin-left: 10px; line-height: 33px">Báo giá lần @(Model.BaoGiaTemViews.Count + 1)</span>
             </div>
         </div>
         <div class="panel-body">
@@ -311,7 +346,7 @@
                             </div>
                         </div>
                     </div>
-                   
+
                 </div>
             </div>
 
@@ -352,7 +387,7 @@
                         <tbody class="body_data">
                             @foreach (BaoGiaTemDetailView item in Model.BaoGiaTemView.BaoGiaTemDetailViews)
                             {
-                                <tr >
+                                <tr>
                                     <td>@item.NameProducts</td>
                                     <td>@item.SolopProducts</td>
                                     <td>@item.LoaigiayProducts</td>
@@ -362,7 +397,7 @@
                                     <td>@double.Parse(item.GiaProducts).ToString("n2") đ</td>
                                     <td>@item.SoLuong</td>
                                 </tr>
-                            }                            
+                            }
                         </tbody>
                     </table>
 
@@ -372,59 +407,36 @@
 
         </div>
     </div>
-}
-    
-<!-- Trigger the modal with a button -->
+    <!-- Trigger the modal with a button -->
 
-<!-- Modal -->
-<div id="myModal" class="modal fade" role="dialog">
-    <div class="modal-dialog cusmodal">
-
-        <!-- Modal content-->
-        <div class="modal-content">
-            <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal">&times;</button>
-                <h4 class="modal-title">Thêm Ngày</h4>
-            </div>
-            <div class="modal-body">
-                <div class="panel panel-default">
-                    <div class="panel-body">
-                        <div class="row">
-
-                            <div class="col-lg-12">
-                                <div class="form-group">
-                                    <label>Ngày bắt đầu</label>
-                                    <input class="form-control date" name="begin_date" type="text" />
-
-
-                                </div>
-
-                                <div class="form-group">
-                                    <label>Ngày kết thúc</label>
-
-                                    <input class="form-control date" name="end_date" type="text" />
-
-                                </div>
-                                   
-                            </div>
-                               
-
-                        </div>
-                        <!-- /.row (nested) -->
+    <div id="modal-container-donhang" class="modal fade" tabindex="-1" role="dialog">
+        <div class="modal-dialog" style="width:400px" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    Cập nhật thời gian kế hoạch
+                </div>
+                <div class="modal-body">
+                    <div class="form-group">
+                        <label for="usr">Ngày bắt đầu :</label>
+                        <input type="text" class="form-control date" value="" id="begin" />
+                        <input type="hidden" value="" id="id" />
+                    </div>
+                    <div class="form-group">
+                        <label for="pwd">Ngày kết thúc :</label>
+                        <input type="text" class="form-control date" value="" id="end" />
                     </div>
 
-
+                </div>
+                <div class="modal-footer">
+                    <div class="bootstrap-dialog-footer-buttons">
+                        <button class="btn btn-primary" data-dismiss="modal" onclick="updatePlan(this); return false;">Update</button>
+                    </div>
                 </div>
             </div>
-            <div class="modal-footer">
-                <input type="submit" value="Lưu" class="btn btn-primary" />
-                <button type="button" class="btn btn-default" data-dismiss="modal">Hủy</button>
-            </div>
         </div>
-
     </div>
-</div>
-<!-- /.row -->
+
+}
 
 <div>
     @Html.ActionLink("Back to List", "Index")
@@ -434,7 +446,11 @@
     @Scripts.Render("~/bundles/jqueryval")
 }
 <style>
-    .table td { text-align: center; }
+    .table td {
+        text-align: center;
+    }
 
-    .table th { text-align: center; }
+    .table th {
+        text-align: center;
+    }
 </style>
