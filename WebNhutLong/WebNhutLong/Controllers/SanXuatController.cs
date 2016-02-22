@@ -139,6 +139,20 @@ namespace WebNhutLong.Controllers
                     db.SaveChanges();
                 }
             }
+            if (donHang.action == 7)
+            {
+                foreach (var item in donHang.BaoGiaTemView.BaoGiaTemDetailViews)
+                {
+                    foreach (var itemSP in item.QuyTrinhs)
+                    {
+                        tbl_QuyTrinh tbQT = db.tbl_QuyTrinh.Find(itemSP.ID);
+                        tbQT.NgayBatDau_DK = itemSP.NgayBatDau_TT;
+                        tbQT.NgayKetThuc_DK = itemSP.NgayKetThuc_TT;
+                        db.Entry(tbQT).State = EntityState.Modified;
+                    }
+                    db.SaveChanges();
+                }
+            }
             DonHangView d = new DonHangView();
             d.customer_id = tbl_OrderTem.customer_id;
             d.code = tbl_OrderTem.code;
