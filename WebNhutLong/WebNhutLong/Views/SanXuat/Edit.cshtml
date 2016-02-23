@@ -256,6 +256,7 @@
                                                             <input type="hidden" name="BaoGiaTemView.BaoGiaTemDetailViews[@j].QuyTrinhs[@i].ID" value="@item.QuyTrinhs[i].ID" />
                                                             <input type="hidden" id="@(item.QuyTrinhs[i].ID)_flow_DK_begin" name="BaoGiaTemView.BaoGiaTemDetailViews[@j].QuyTrinhs[@i].NgayBatDau_DK" value="@(item.QuyTrinhs[i].NgayBatDau_DK.HasValue ? item.QuyTrinhs[i].NgayBatDau_DK.Value.ToString("MM/dd/yyyy") : "")" />
                                                             <input type="hidden" id="@(item.QuyTrinhs[i].ID)_flow_DK_end" name="BaoGiaTemView.BaoGiaTemDetailViews[@j].QuyTrinhs[@i].NgayKetThuc_DK" value="@(item.QuyTrinhs[i].NgayKetThuc_DK.HasValue ? item.QuyTrinhs[i].NgayKetThuc_DK.Value.ToString("MM/dd/yyyy") : "")" />
+                                                            <input type="hidden" id="@(item.QuyTrinhs[i].ID)_flow_DK_tt" name="BaoGiaTemView.BaoGiaTemDetailViews[@j].QuyTrinhs[@i].TrangThai" value="@(item.QuyTrinhs[i].TrangThai)" />
 
 
 
@@ -285,6 +286,8 @@
                                                                 <input type="hidden" name="BaoGiaTemView.BaoGiaTemDetailViews[@j].QuyTrinhs[@i].ID" value="@item.QuyTrinhs[i].ID" />
                                                                 <input type="hidden" id="@(item.QuyTrinhs[i].ID)_flow_TT_begin" name="BaoGiaTemView.BaoGiaTemDetailViews[@j].QuyTrinhs[@i].NgayBatDau_TT" value="@(item.QuyTrinhs[i].NgayBatDau_TT.HasValue? item.QuyTrinhs[i].NgayBatDau_TT.Value.ToString("MM/dd/yyyy"):"")" />
                                                                 <input type="hidden" id="@(item.QuyTrinhs[i].ID)_flow_TT_end" name="BaoGiaTemView.BaoGiaTemDetailViews[@j].QuyTrinhs[@i].NgayKetThuc_TT" value="@(item.QuyTrinhs[i].NgayKetThuc_TT.HasValue?item.QuyTrinhs[i].NgayKetThuc_TT.Value.ToString("MM/dd/yyyy"):"")" />
+                                                                <input type="hidden" id="@(item.QuyTrinhs[i].ID)_flow_TT_tt" name="BaoGiaTemView.BaoGiaTemDetailViews[@j].QuyTrinhs[@i].TrangThai" value="@(item.QuyTrinhs[i].TrangThai)" />
+
                                                                 <span id="@(item.QuyTrinhs[i].ID)_flow_TT">@(item.QuyTrinhs[i].NgayBatDau_TT.HasValue ? item.QuyTrinhs[i].NgayBatDau_TT.Value.ToString("dd/MM/yyyy") : "") - @(item.QuyTrinhs[i].NgayKetThuc_TT.HasValue ? item.QuyTrinhs[i].NgayKetThuc_TT.Value.ToString("dd/MM/yyyy") : "")</span>
 
                                                             </td>
@@ -342,7 +345,7 @@
                                                             <input type="hidden" name="BaoGiaTemView.BaoGiaTemDetailViews[@j].QuyTrinhs[@i].ID" value="@item.QuyTrinhs[i].ID" />
                                                             <input type="hidden" id="@(item.QuyTrinhs[i].ID)_flow_DK_begin" name="BaoGiaTemView.BaoGiaTemDetailViews[@j].QuyTrinhs[@i].NgayBatDau_DK" value="@(item.QuyTrinhs[i].NgayBatDau_DK.HasValue ? item.QuyTrinhs[i].NgayBatDau_DK.Value.ToString("MM/dd/yyyy") : "")" />
                                                             <input type="hidden" id="@(item.QuyTrinhs[i].ID)_flow_DK_end" name="BaoGiaTemView.BaoGiaTemDetailViews[@j].QuyTrinhs[@i].NgayKetThuc_DK" value="@(item.QuyTrinhs[i].NgayKetThuc_DK.HasValue ? item.QuyTrinhs[i].NgayKetThuc_DK.Value.ToString("MM/dd/yyyy") : "")" />
-
+                                                            <input type="hidden" id="@(item.QuyTrinhs[i].ID)_flow_DK_tt" name="BaoGiaTemView.BaoGiaTemDetailViews[@j].QuyTrinhs[@i].TrangThai" value="@(item.QuyTrinhs[i].TrangThai)" />
 
 
 
@@ -372,6 +375,7 @@
                                                                 <input type="hidden" name="BaoGiaTemView.BaoGiaTemDetailViews[@j].QuyTrinhs[@i].ID" value="@item.QuyTrinhs[i].ID" />
                                                                 <input type="hidden" id="@(item.QuyTrinhs[i].ID)_flow_TT_begin" name="BaoGiaTemView.BaoGiaTemDetailViews[@j].QuyTrinhs[@i].NgayBatDau_TT" value="@(item.QuyTrinhs[i].NgayBatDau_TT.HasValue? item.QuyTrinhs[i].NgayBatDau_TT.Value.ToString("MM/dd/yyyy"):"")" />
                                                                 <input type="hidden" id="@(item.QuyTrinhs[i].ID)_flow_TT_end" name="BaoGiaTemView.BaoGiaTemDetailViews[@j].QuyTrinhs[@i].NgayKetThuc_TT" value="@(item.QuyTrinhs[i].NgayKetThuc_TT.HasValue?item.QuyTrinhs[i].NgayKetThuc_TT.Value.ToString("MM/dd/yyyy"):"")" />
+                                                                <input type="hidden" id="@(item.QuyTrinhs[i].ID)_flow_TT_tt" name="BaoGiaTemView.BaoGiaTemDetailViews[@j].QuyTrinhs[@i].TrangThai" value="@(item.QuyTrinhs[i].TrangThai)" />
                                                                 <span id="@(item.QuyTrinhs[i].ID)_flow_TT">@(item.QuyTrinhs[i].NgayBatDau_TT.HasValue ? item.QuyTrinhs[i].NgayBatDau_TT.Value.ToString("dd/MM/yyyy") : "") - @(item.QuyTrinhs[i].NgayKetThuc_TT.HasValue ? item.QuyTrinhs[i].NgayKetThuc_TT.Value.ToString("dd/MM/yyyy") : "")</span>
 
                                                             </td>
