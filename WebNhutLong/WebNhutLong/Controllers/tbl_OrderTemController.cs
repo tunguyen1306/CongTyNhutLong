@@ -30,8 +30,8 @@ namespace WebNhutLong.Controllers
                           customer_id = cus.IDCustomers,
                           Customer = cus,
                           code = data.code,
-                          date_begin = data.date_begin,
-                          date_end = data.date_end,
+                          date_begin_plan = data.date_begin_plan,
+                          date_end_plan = data.date_end_plan,
                           status = data.status
                       });
             return View(qr.ToList());
@@ -399,11 +399,16 @@ namespace WebNhutLong.Controllers
             {
                 return RedirectToAction("Login", "Login");
             }
-       
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
             tbl_OrderTem tbl_OrderTem = db.tbl_OrderTem.Find(id);
-            db.tbl_OrderTem.Remove(tbl_OrderTem);
-            db.SaveChanges();
-            return RedirectToAction("Index", new { id = tbl_OrderTem .customer_id});
+            if (tbl_OrderTem == null)
+            {
+                return HttpNotFound();
+            }
+            return View(tbl_OrderTem);
         }
 
         // POST: tbl_OrderTem/Delete/5
