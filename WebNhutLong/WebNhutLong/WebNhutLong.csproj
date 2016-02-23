@@ -1032,7 +1032,6 @@
     <Content Include="Views\tbl_OrderTem\Delete.cshtml" />
     <Content Include="Views\tbl_OrderTem\Details.cshtml" />
     <Content Include="Views\tbl_OrderTem\Edit.cshtml" />
-    <Content Include="Views\tbl_OrderTem\Index.cshtml" />
     <Content Include="Views\tbl_OrderTem_BaoGia\Create.cshtml" />
     <Content Include="Views\tbl_OrderTem_BaoGia\Delete.cshtml" />
     <Content Include="Views\tbl_OrderTem_BaoGia\Details.cshtml" />
@@ -1049,6 +1048,7 @@
     <Content Include="Views\QuyTrinh\Index.cshtml" />
     <Content Include="Views\SanXuat\Index.cshtml" />
     <Content Include="Views\SanXuat\Edit.cshtml" />
+    <Content Include="Views\tbl_OrderTem\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
