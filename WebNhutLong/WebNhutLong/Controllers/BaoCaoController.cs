@@ -14,6 +14,10 @@ namespace WebNhutLong.Controllers
         // GET: BaoCao
         public ActionResult Index()
         {
+            if (Session["username"] == null)
+            {
+                return RedirectToAction("Login", "Login");
+            }
            var listDHView = new List<DonHangView>();
             var qr = (from data in db.tbl_OrderTem
                       join cus in db.tbl_Customers on data.customer_id equals cus.IDCustomers
