@@ -17,6 +17,10 @@ namespace WebNhutLong.Controllers
         // GET: Login
         public ActionResult Index()
         {
+            if (Session["username"] == null)
+            {
+                return RedirectToAction("Login", "Login");
+            }
             return View(db.tbl_User.ToList());
         }
 
