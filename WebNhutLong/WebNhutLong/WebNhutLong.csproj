@@ -1048,11 +1048,14 @@
     <Content Include="Views\QuyTrinh\Index.cshtml" />
     <Content Include="Views\SanXuat\Index.cshtml" />
     <Content Include="Views\SanXuat\Edit.cshtml" />
+
     <Content Include="Views\tbl_OrderTem\Index.cshtml" />
+
+    <Content Include="Views\BaoCao\Index.cshtml" />
+
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Views\BaoCao\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff" />
