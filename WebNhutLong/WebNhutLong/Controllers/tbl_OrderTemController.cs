@@ -110,7 +110,7 @@ namespace WebNhutLong.Controllers
            
                 donHang.status = 0;
                 donHang.BaoGiaTemView.status = 0;
-                tbl_OrderTem temValue = new tbl_OrderTem { customer_id = donHang.customer_id, code = donHang.code, date_begin = donHang.date_begin, date_end = donHang.date_end, status = donHang.status, id = donHang.id };
+                tbl_OrderTem temValue = new tbl_OrderTem {create_date=DateTime.Now,create_user= Session["username"].ToString(), customer_id = donHang.customer_id, code = donHang.code, date_begin = donHang.date_begin, date_end = donHang.date_end, status = donHang.status, id = donHang.id };
                 temValue = db.tbl_OrderTem.Add(temValue);
                 db.SaveChanges();
                 donHang.id = temValue.id;
@@ -246,6 +246,13 @@ namespace WebNhutLong.Controllers
             if (donHang.action==2)
             {
                 donHang.action = 0;
+
+                tbl_OrderTem order = db.tbl_OrderTem.Find(donHang.id);
+                order.update_date = DateTime.Now;
+                order.update_user = Session["username"].ToString();
+                db.Entry(order).State = EntityState.Modified;
+                db.SaveChanges();
+
                 donHang.BaoGiaTemView.status = 0;
                 donHang.BaoGiaTemView.date_begin = DateTime.Now;
                 tbl_OrderTem_BaoGia tbl_OrderTem_BaoGia = new tbl_OrderTem_BaoGia { date_begin = donHang.BaoGiaTemView.date_begin, date_end = donHang.BaoGiaTemView.date_end, id = donHang.BaoGiaTemView.id, order_id = donHang.id, status = donHang.BaoGiaTemView.status, offset = donHang.BaoGiaTemView.offset, total_money = donHang.BaoGiaTemView.total_money };
@@ -292,6 +299,13 @@ namespace WebNhutLong.Controllers
             if (donHang.action == 3)
             {
                 donHang.action = 0;
+
+                tbl_OrderTem order = db.tbl_OrderTem.Find(donHang.id);            
+                order.update_date = DateTime.Now;
+                order.update_user = Session["username"].ToString();
+                db.Entry(order).State = EntityState.Modified;
+                db.SaveChanges();
+
                 tbl_OrderTem_BaoGia baogia = db.tbl_OrderTem_BaoGia.Find(donHang.BaoGiaTemView.id);
                 baogia.status =donHang.BaoGiaTemView.status.Value;
                 baogia.date_end = DateTime.Now;
@@ -307,6 +321,8 @@ namespace WebNhutLong.Controllers
                 order.date_begin_plan = donHang.date_begin_plan.Value;
                 order.date_end_plan = donHang.date_end_plan.Value;
                 order.status = donHang.status.Value;
+                order.update_date = DateTime.Now;
+                order.update_user = Session["username"].ToString();
                 db.Entry(order).State = EntityState.Modified;
                 db.SaveChanges();
                 var queryGiaoGiaCT = from u in db.tbl_OrderTem_BaoGia_Detail
@@ -421,11 +437,16 @@ namespace WebNhutLong.Controllers
             {
                 return RedirectToAction("Login", "Login");
             }
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
             tbl_OrderTem tbl_OrderTem = db.tbl_OrderTem.Find(id);
-            db.tbl_OrderTem.Remove(tbl_OrderTem);
-            db.SaveChanges();
-          
-            return RedirectToAction("Index",new{id= tbl_OrderTem.customer_id});
+            if (tbl_OrderTem == null)
+            {
+                return HttpNotFound();
+            }
+            return View(tbl_OrderTem);
         }
 
         // POST: tbl_OrderTem/Delete/5

@@ -141,12 +141,25 @@ namespace WebNhutLong.Controllers
                     order.date_end = DateTime.Now;
                 }
                 order.status = donHang.status.Value;
+
+                
+                order.update_date = DateTime.Now;
+                order.update_user = Session["username"].ToString();
+                db.Entry(order).State = EntityState.Modified;
+                db.SaveChanges();
+
                 db.Entry(order).State = EntityState.Modified;
                 db.SaveChanges();
 
             }
             if (donHang.action == 6)
             {
+                tbl_OrderTem order = db.tbl_OrderTem.Find(donHang.id);
+                order.update_date = DateTime.Now;
+                order.update_user = Session["username"].ToString();
+                db.Entry(order).State = EntityState.Modified;
+                db.SaveChanges();
+
                 foreach (var item in donHang.BaoGiaTemView.BaoGiaTemDetailViews)
                 {
                     foreach (var itemSP in item.QuyTrinhs)
@@ -154,6 +167,15 @@ namespace WebNhutLong.Controllers
                         tbl_QuyTrinh tbQT= db.tbl_QuyTrinh.Find(itemSP.ID);
                         tbQT.NgayBatDau_DK = itemSP.NgayBatDau_DK;
                         tbQT.NgayKetThuc_DK = itemSP.NgayKetThuc_DK;
+                        if (itemSP.NgayBatDau_DK.HasValue && itemSP.NgayKetThuc_DK.HasValue)
+                        {
+                            tbQT.TrangThai = 1;
+                            
+                        }
+                        else
+                        {
+                            tbQT.TrangThai = 0;
+                        }
                         db.Entry(tbQT).State = EntityState.Modified;
                     }
                     db.SaveChanges();
@@ -161,6 +183,12 @@ namespace WebNhutLong.Controllers
             }
             if (donHang.action == 7)
             {
+                tbl_OrderTem order = db.tbl_OrderTem.Find(donHang.id);
+                order.update_date = DateTime.Now;
+                order.update_user = Session["username"].ToString();
+                db.Entry(order).State = EntityState.Modified;
+                db.SaveChanges();
+
                 foreach (var item in donHang.BaoGiaTemView.BaoGiaTemDetailViews)
                 {
                     foreach (var itemSP in item.QuyTrinhs)
@@ -168,6 +196,18 @@ namespace WebNhutLong.Controllers
                         tbl_QuyTrinh tbQT = db.tbl_QuyTrinh.Find(itemSP.ID);
                         tbQT.NgayBatDau_TT = itemSP.NgayBatDau_TT;
                         tbQT.NgayKetThuc_TT = itemSP.NgayKetThuc_TT;
+                        if (itemSP.NgayBatDau_TT.HasValue && itemSP.NgayKetThuc_TT.HasValue)
+                        {
+                            tbQT.TrangThai = 3;
+
+                        }
+                        else if (itemSP.NgayBatDau_TT.HasValue && !itemSP.NgayKetThuc_TT.HasValue)
+                        {
+                            tbQT.TrangThai = 2;
+                        }else
+                        {
+                            tbQT.TrangThai = 1;
+                        }
                         db.Entry(tbQT).State = EntityState.Modified;
                     }
                     db.SaveChanges();

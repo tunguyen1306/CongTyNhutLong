@@ -18,6 +18,7 @@ namespace WebNhutLong.Controllers
             var qr = (from data in db.tbl_OrderTem
                       join cus in db.tbl_Customers on data.customer_id equals cus.IDCustomers
                       where data.status >= 3
+                      orderby data.status ascending,data.update_date descending
                       select data);
             var listDH= qr.ToList();
             foreach (var tbl_OrderTem in listDH)
