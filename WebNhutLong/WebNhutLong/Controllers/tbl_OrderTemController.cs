@@ -399,16 +399,11 @@ namespace WebNhutLong.Controllers
             {
                 return RedirectToAction("Login", "Login");
             }
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
             tbl_OrderTem tbl_OrderTem = db.tbl_OrderTem.Find(id);
-            if (tbl_OrderTem == null)
-            {
-                return HttpNotFound();
-            }
-            return View(tbl_OrderTem);
+            db.tbl_OrderTem.Remove(tbl_OrderTem);
+            db.SaveChanges();
+          
+            return RedirectToAction("Index",new{id= tbl_OrderTem.customer_id});
         }
 
         // POST: tbl_OrderTem/Delete/5
