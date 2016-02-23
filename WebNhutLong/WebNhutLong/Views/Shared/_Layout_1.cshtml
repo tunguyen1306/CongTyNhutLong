@@ -27,15 +27,26 @@
 
 </head>
 <body>
+    <style>
+        #page-wrapper 
+        {
+            margin:0px !important;
+        }
+        .sidebar
+        {
+            display:none;
+        }
+    </style>
     <div id="wrapper">
         <!-- Navigation -->
-       
+        @Html.Action("Index", "Navbar")
 
-        <div id="page-wrapper" style="margin:0">
+        <div id="page-wrapper">
             @RenderBody()
         </div>
         <!-- /#page-wrapper -->
     </div>
+   
     <!-- /#wrapper -->
     <!-- DataTables JavaScript -->
     <script src="@Url.Content("~/bower_components/raphael/raphael-min.js")"></script>
