@@ -112,10 +112,10 @@
                                         }
                                         else
                                         {
-                                            <fieldset disabled="">
+                                            
 
-                                                @Html.ActionLink("Xóa", "Delete", new { id = item.id }, htmlAttributes: new { @class = "btn btn-outline  btn-xs " })
-                                            </fieldset>
+                                                @Html.ActionLink("Xóa", "Delete", new { id = item.id }, htmlAttributes: new { @class = "btn btn-outline btn-primary  btn-xs disabled" })
+                                         
                                             
                                         }
                                         
