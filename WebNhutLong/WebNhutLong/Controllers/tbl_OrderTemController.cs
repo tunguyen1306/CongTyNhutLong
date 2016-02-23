@@ -338,7 +338,7 @@ namespace WebNhutLong.Controllers
                         db.tbl_QuyTrinh.Add(qt9);
 
                         db.SaveChanges();
-                        return RedirectToAction("Edit", "SanXuat", new { id = donHang.id });
+                       
                     }
                     else
                     {
@@ -361,9 +361,10 @@ namespace WebNhutLong.Controllers
                         tbl_QuyTrinh qt9 = new tbl_QuyTrinh { ID_BaoGiaDetail = item.id, ThuTu = 8, TrangThai = 0, TenBuoc = "Kết thúc đơn hàng" };
                         db.tbl_QuyTrinh.Add(qt9);
                         db.SaveChanges();
-                        return RedirectToAction("Edit", "SanXuat", new { id = donHang.id });
+                       
                     }
                 }
+                return RedirectToAction("Edit", "SanXuat", new { id = donHang.id });
             }
             DonHangView d = new DonHangView();
             d.customer_id = tbl_OrderTem.customer_id;
