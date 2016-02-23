@@ -116,7 +116,9 @@
                                     <td>
                                         @Html.ActionLink("Sửa", "Edit", new {id = item.IDCustomers}, new {@class = "btn btn-outline btn-primary btn-xs"}) 
                                       
-                                        @Html.ActionLink("Xóa", "Delete", new {id = item.IDCustomers}, new {@class = "btn btn-outline btn-primary btn-xs"})
+                                        
+                                        <a href="@Url.Action("Delete", "Customers", new { id = item.IDCustomers })" class="btn btn-outline btn-primary btn-xs" onclick="return confirm('Bạn có muốn xóa khách hàng không?');">Xóa</a>
+                                    
                                     </td>
                                 </tr>
                             }

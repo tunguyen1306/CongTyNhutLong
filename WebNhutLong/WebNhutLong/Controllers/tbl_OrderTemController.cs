@@ -17,6 +17,10 @@ namespace WebNhutLong.Controllers
         // GET: tbl_OrderTem
         public ActionResult Index(int id)
         {
+            if (Session["username"] == null)
+            {
+                return RedirectToAction("Login", "Login");
+            }
             var qr = (from data in db.tbl_OrderTem
                       join cus in db.tbl_Customers on data.customer_id equals cus.IDCustomers
                       where data.customer_id == id
@@ -36,6 +40,10 @@ namespace WebNhutLong.Controllers
         // GET: tbl_OrderTem/Details/5
         public ActionResult Details(int? id)
         {
+            if (Session["username"] == null)
+            {
+                return RedirectToAction("Login", "Login");
+            }
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
@@ -51,6 +59,10 @@ namespace WebNhutLong.Controllers
         // GET: tbl_OrderTem/Create
         public ActionResult Create(int? id)
         {
+            if (Session["username"] == null)
+            {
+                return RedirectToAction("Login", "Login");
+            }
             DonHangView d = new DonHangView();
             d.customer_id = id;
             var queryMax = (from u in db.tbl_OrderTem
@@ -70,6 +82,10 @@ namespace WebNhutLong.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Create(DonHangView donHang)
         {
+            if (Session["username"] == null)
+            {
+                return RedirectToAction("Login", "Login");
+            }
            
                 donHang.status = 0;
                 donHang.BaoGiaTemView.status = 0;
@@ -125,6 +141,10 @@ namespace WebNhutLong.Controllers
         // GET: tbl_OrderTem/Edit/5
         public ActionResult Edit(int? id)
         {
+            if (Session["username"] == null)
+            {
+                return RedirectToAction("Login", "Login");
+            }
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
@@ -188,6 +208,10 @@ namespace WebNhutLong.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Edit(DonHangView donHang)
         {
+            if (Session["username"] == null)
+            {
+                return RedirectToAction("Login", "Login");
+            }
             int? id = donHang.id;
             if (id == null)
             {
@@ -293,6 +317,7 @@ namespace WebNhutLong.Controllers
                         db.tbl_QuyTrinh.Add(qt9);
 
                         db.SaveChanges();
+                        return RedirectToAction("Edit", "SanXuat", new { id = donHang.id });
                     }
                     else
                     {
@@ -315,7 +340,7 @@ namespace WebNhutLong.Controllers
                         tbl_QuyTrinh qt9 = new tbl_QuyTrinh { ID_BaoGiaDetail = item.id, ThuTu = 8, TrangThai = 0, TenBuoc = "Kết thúc đơn hàng" };
                         db.tbl_QuyTrinh.Add(qt9);
                         db.SaveChanges();
-                        return RedirectToAction("Index", "SanXuat");
+                        return RedirectToAction("Edit", "SanXuat", new { id = donHang.id });
                     }
                 }
             }
@@ -370,6 +395,10 @@ namespace WebNhutLong.Controllers
         // GET: tbl_OrderTem/Delete/5
         public ActionResult Delete(int? id)
         {
+            if (Session["username"] == null)
+            {
+                return RedirectToAction("Login", "Login");
+            }
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
@@ -406,7 +435,10 @@ namespace WebNhutLong.Controllers
         public ActionResult PrintOrder(int id)
         {
 
-
+            if (Session["username"] == null)
+            {
+                return RedirectToAction("Login", "Login");
+            }
 
             tbl_OrderTem_BaoGia item = db.tbl_OrderTem_BaoGia.Find(id);
             tbl_OrderTem tbl_OrderTem = db.tbl_OrderTem.Find(item.order_id);

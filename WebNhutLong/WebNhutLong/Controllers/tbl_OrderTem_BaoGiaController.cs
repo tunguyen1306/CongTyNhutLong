@@ -17,12 +17,20 @@ namespace WebNhutLong.Controllers
         // GET: tbl_OrderTem_BaoGia
         public ActionResult Index()
         {
+            if (Session["username"] == null)
+            {
+                return RedirectToAction("Login", "Login");
+            }
             return View(db.tbl_OrderTem_BaoGia.ToList());
         }
 
         // GET: tbl_OrderTem_BaoGia/Details/5
         public ActionResult Details(int? id)
         {
+            if (Session["username"] == null)
+            {
+                return RedirectToAction("Login", "Login");
+            }
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
@@ -38,6 +46,10 @@ namespace WebNhutLong.Controllers
         // GET: tbl_OrderTem_BaoGia/Create
         public ActionResult Create()
         {
+            if (Session["username"] == null)
+            {
+                return RedirectToAction("Login", "Login");
+            }
             return View();
         }
 
@@ -48,6 +60,10 @@ namespace WebNhutLong.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Create([Bind(Include = "id,order_id,total_money,date_begin,date_end,status,offset")] tbl_OrderTem_BaoGia tbl_OrderTem_BaoGia)
         {
+            if (Session["username"] == null)
+            {
+                return RedirectToAction("Login", "Login");
+            }
             if (ModelState.IsValid)
             {
                 db.tbl_OrderTem_BaoGia.Add(tbl_OrderTem_BaoGia);
@@ -61,6 +77,10 @@ namespace WebNhutLong.Controllers
         // GET: tbl_OrderTem_BaoGia/Edit/5
         public ActionResult Edit(int? id)
         {
+            if (Session["username"] == null)
+            {
+                return RedirectToAction("Login", "Login");
+            }
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
@@ -80,6 +100,10 @@ namespace WebNhutLong.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Edit([Bind(Include = "id,order_id,total_money,date_begin,date_end,status,offset")] tbl_OrderTem_BaoGia tbl_OrderTem_BaoGia)
         {
+            if (Session["username"] == null)
+            {
+                return RedirectToAction("Login", "Login");
+            }
             if (ModelState.IsValid)
             {
                 db.Entry(tbl_OrderTem_BaoGia).State = EntityState.Modified;
@@ -92,6 +116,10 @@ namespace WebNhutLong.Controllers
         // GET: tbl_OrderTem_BaoGia/Delete/5
         public ActionResult Delete(int? id)
         {
+            if (Session["username"] == null)
+            {
+                return RedirectToAction("Login", "Login");
+            }
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
@@ -109,6 +137,10 @@ namespace WebNhutLong.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
+            if (Session["username"] == null)
+            {
+                return RedirectToAction("Login", "Login");
+            }
             tbl_OrderTem_BaoGia tbl_OrderTem_BaoGia = db.tbl_OrderTem_BaoGia.Find(id);
             db.tbl_OrderTem_BaoGia.Remove(tbl_OrderTem_BaoGia);
             db.SaveChanges();

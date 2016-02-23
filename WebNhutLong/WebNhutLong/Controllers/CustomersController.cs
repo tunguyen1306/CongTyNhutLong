@@ -112,28 +112,27 @@ namespace WebNhutLong.Controllers
         // GET: Customers/Delete/5
         public ActionResult Delete(int? id)
         {
-            //if (Session["username"] == null)
-            //{
-            //    return RedirectToAction("Login", "Login");
-            //}
-            //if (id == null)
-            //{
-            //    return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            //}
-            //tbl_Customers tbl_Customers = db.tbl_Customers.Find(id);
-            //if (tbl_Customers == null)
-            //{
-            //    return HttpNotFound();
-            //}
-            //return View(tbl_Customers);
+           
             if (Session["username"] == null)
             {
                 return RedirectToAction("Login", "Login");
+            }
+            var qr = from datadh in db.tbl_OrderTem
+                where datadh.customer_id == id
+                select datadh;
+            if (qr.ToList().Count > 0)
+            {
+
+                return RedirectToAction("Index");
+
+            
+
             }
             tbl_Customers tbl_Customers = db.tbl_Customers.Find(id);
             db.tbl_Customers.Remove(tbl_Customers);
             db.SaveChanges();
             return RedirectToAction("Index");
+            
         }
 
         // POST: Customers/Delete/5

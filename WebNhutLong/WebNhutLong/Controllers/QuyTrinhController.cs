@@ -11,6 +11,10 @@ namespace WebNhutLong.Controllers
         // GET: QuyTrinh
         public ActionResult Index()
         {
+            if (Session["username"] == null)
+            {
+                return RedirectToAction("Login", "Login");
+            }
             return View();
         }
     }

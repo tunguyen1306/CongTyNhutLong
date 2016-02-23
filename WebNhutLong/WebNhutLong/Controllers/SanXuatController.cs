@@ -15,6 +15,10 @@ namespace WebNhutLong.Controllers
         // GET: SanXuat
         public ActionResult Index()
         {
+            if (Session["username"] == null)
+            {
+                return RedirectToAction("Login", "Login");
+            }
 
             var qr = (from data in db.tbl_OrderTem
                 join cus in db.tbl_Customers on data.customer_id equals cus.IDCustomers
@@ -37,6 +41,10 @@ namespace WebNhutLong.Controllers
         }
         public ActionResult Edit(int? id)
         {
+            if (Session["username"] == null)
+            {
+                return RedirectToAction("Login", "Login");
+            }
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
@@ -105,6 +113,10 @@ namespace WebNhutLong.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Edit(DonHangView donHang)
         {
+            if (Session["username"] == null)
+            {
+                return RedirectToAction("Login", "Login");
+            }
             int? id = donHang.id;
             if (id == null)
             {
