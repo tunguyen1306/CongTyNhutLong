@@ -39,7 +39,7 @@
     }
 
     function UpdateStatusOrder(status) {
-
+      
         $('#status').val(status);
         $("#action").val(4);
         document.forms[0].submit();
@@ -757,9 +757,7 @@
     </div>
 }
 
-<div>
-    @Html.ActionLink("Back to List", "Index")
-</div>
+
 
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")

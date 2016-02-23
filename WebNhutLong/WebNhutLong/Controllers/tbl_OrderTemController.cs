@@ -315,6 +315,7 @@ namespace WebNhutLong.Controllers
                         tbl_QuyTrinh qt9 = new tbl_QuyTrinh { ID_BaoGiaDetail = item.id, ThuTu = 8, TrangThai = 0, TenBuoc = "Kết thúc đơn hàng" };
                         db.tbl_QuyTrinh.Add(qt9);
                         db.SaveChanges();
+                        return RedirectToAction("Index", "SanXuat");
                     }
                 }
             }
@@ -362,6 +363,7 @@ namespace WebNhutLong.Controllers
             }
             var list = from tt in db.tbl_Customers where tt.IDCustomers == d.customer_id select tt;
             d.Customer = list.ToList()[0];
+
             return View(d);
         }
 
