@@ -39,7 +39,9 @@
                                 <th>
                                     Ngày kết thúc
                                 </th>
-                               
+                                <th>
+                                   Trang thái
+                                </th>
                              
                             </tr>
                         </thead>
@@ -63,6 +65,29 @@
                                     </td>
                                     <td>
                                         @Html.DisplayFor(modelItem => item.date_end_plan)
+
+                                    </td>  
+                                    <td>
+                                        @if (item.status == 0)
+                                        {
+                                            <span>Đang báo giá</span>
+                                        }
+                                        @if (item.status == 1)
+                                        {
+                                            <span>Đưa vào sản xuất</span>
+                                        }
+                                        @if (item.status == 2)
+                                        {
+                                            <span>Kế hoạch sản xuất</span>
+                                        }
+                                        @if (item.status == 3)
+                                        {
+                                            <span>Tiến hành sản xuất</span>
+                                        }
+                                        @if (item.status == 4)
+                                        {
+                                            <span>Kết thúc sản xuất</span>
+                                        }
 
                                     </td>  
                                 </tr>
