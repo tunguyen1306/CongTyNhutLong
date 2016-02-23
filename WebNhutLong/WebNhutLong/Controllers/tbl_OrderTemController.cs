@@ -30,8 +30,8 @@ namespace WebNhutLong.Controllers
                           customer_id = cus.IDCustomers,
                           Customer = cus,
                           code = data.code,
-                          date_begin = data.date_begin,
-                          date_end = data.date_end,
+                          date_begin_plan = data.date_begin_plan,
+                          date_end_plan = data.date_end_plan,
                           status = data.status
                       });
             return View(qr.ToList());
