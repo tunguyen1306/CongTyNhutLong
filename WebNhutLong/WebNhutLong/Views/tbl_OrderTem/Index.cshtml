@@ -107,7 +107,7 @@
                                         
                                         @if (item.status == 0)
                                         {
-                                            @Html.ActionLink("Xóa", "Delete", new { id = item.id }, htmlAttributes: new { @class = "btn btn-outline btn-primary btn-xs" })
+                                            <a href="@Url.Action("Delete", "tbl_OrderTem", new { id = item.id })" class="btn btn-outline btn-primary btn-xs" onclick="return confirm('Bạn có muốn xóa khách hàng không?');">Xóa</a>
 
                                         }
                                         else
