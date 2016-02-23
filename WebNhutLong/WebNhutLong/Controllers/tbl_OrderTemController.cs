@@ -15,26 +15,47 @@ namespace WebNhutLong.Controllers
         private Entities db = new Entities();
 
         // GET: tbl_OrderTem
-        public ActionResult Index(int id)
+        public ActionResult Index(int? id)
         {
             if (Session["username"] == null)
             {
                 return RedirectToAction("Login", "Login");
             }
-            var qr = (from data in db.tbl_OrderTem
-                      join cus in db.tbl_Customers on data.customer_id equals cus.IDCustomers
-                      where data.customer_id == id
-                      select new DonHangView
-                      {
-                          id = data.id,
-                          customer_id = cus.IDCustomers,
-                          Customer = cus,
-                          code = data.code,
-                          date_begin_plan = data.date_begin_plan,
-                          date_end_plan = data.date_end_plan,
-                          status = data.status
-                      });
-            return View(qr.ToList());
+            if (id.HasValue)
+            {
+                var qr = (from data in db.tbl_OrderTem
+                          join cus in db.tbl_Customers on data.customer_id equals cus.IDCustomers
+                          where data.customer_id == id.Value
+                          select new DonHangView
+                          {
+                              id = data.id,
+                              customer_id = cus.IDCustomers,
+                              Customer = cus,
+                              code = data.code,
+                              date_begin_plan = data.date_begin_plan,
+                              date_end_plan = data.date_end_plan,
+                              status = data.status
+                          });
+                return View(qr.ToList());
+            }
+            else
+            {
+                var qr = (from data in db.tbl_OrderTem
+                          join cus in db.tbl_Customers on data.customer_id equals cus.IDCustomers
+                        
+                          select new DonHangView
+                          {
+                              id = data.id,
+                              customer_id = cus.IDCustomers,
+                              Customer = cus,
+                              code = data.code,
+                              date_begin_plan = data.date_begin_plan,
+                              date_end_plan = data.date_end_plan,
+                              status = data.status
+                          });
+                return View(qr.ToList());
+            }
+            
         }
 
         // GET: tbl_OrderTem/Details/5
