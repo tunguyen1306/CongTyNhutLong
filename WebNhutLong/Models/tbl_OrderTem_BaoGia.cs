@@ -20,7 +20,6 @@ namespace WebNhutLong.Models
         public Nullable<System.DateTime> date_begin { get; set; }
         public Nullable<System.DateTime> date_end { get; set; }
         public Nullable<int> status { get; set; }
-        public Nullable<int> offset { get; set; }
         public string note { get; set; }
     }
 }

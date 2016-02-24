@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="DataWeb.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="DataWeb.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="tbl_BaoGia">
           <Key>
             <PropertyRef Name="ID_BaoGia" />
@@ -86,7 +86,6 @@
           <Property Name="date_begin" Type="datetime" />
           <Property Name="date_end" Type="datetime" />
           <Property Name="status" Type="int" />
-          <Property Name="offset" Type="int" />
           <Property Name="note" Type="nvarchar" MaxLength="200" />
         </EntityType>
         <EntityType Name="tbl_OrderTem_BaoGia_Detail">
@@ -98,6 +97,9 @@
           <Property Name="sanpam_id" Type="int" />
           <Property Name="soluong" Type="int" />
           <Property Name="money" Type="float" />
+          <Property Name="design" Type="int" />
+          <Property Name="design_img" Type="nvarchar" MaxLength="200" />
+          <Property Name="design_date" Type="date" />
         </EntityType>
         <EntityType Name="tbl_Products">
           <Key>
@@ -157,8 +159,7 @@
           <EntitySet Name="tbl_QuyTrinh" EntityType="Self.tbl_QuyTrinh" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="tbl_User" EntityType="Self.tbl_User" Schema="dbo" store:Type="Tables" />
         </EntityContainer>
-      </Schema>
-    </edmx:StorageModels>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="DataWeb" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -188,11 +189,11 @@
           <Key>
             <PropertyRef Name="ID_BaoGiaChiTiet" />
           </Key>
-          <Property Name="ID_BaoGiaChiTiet" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ID_BaoGiaChiTiet" Nullable="false" annotation:StoreGeneratedPattern="Identity" Type="Int32" />
           <Property Name="ID_BaoGia" Type="Int32" />
           <Property Name="ID_SanPham" Type="Int32" />
           <Property Name="SoLuong" Type="Int32" />
-          <Property Name="Tien" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Tien" MaxLength="50" FixedLength="false" Unicode="false" Type="String" />
         </EntityType>
         <EntityType Name="tbl_Customers">
           <Key>
@@ -243,7 +244,6 @@
           <Property Name="date_begin" Type="DateTime" Precision="3" />
           <Property Name="date_end" Type="DateTime" Precision="3" />
           <Property Name="status" Type="Int32" />
-          <Property Name="offset" Type="Int32" />
           <Property Name="note" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
         </EntityType>
         <EntityType Name="tbl_OrderTem_BaoGia_Detail">
@@ -255,6 +255,9 @@
           <Property Name="sanpam_id" Type="Int32" />
           <Property Name="soluong" Type="Int32" />
           <Property Name="money" Type="Double" />
+          <Property Name="design" Type="Int32" />
+          <Property Name="design_img" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="design_date" Type="DateTime" Precision="0" />
         </EntityType>
         <EntityType Name="tbl_Products">
           <Key>
@@ -404,7 +407,6 @@
                 <ScalarProperty Name="date_begin" ColumnName="date_begin" />
                 <ScalarProperty Name="date_end" ColumnName="date_end" />
                 <ScalarProperty Name="status" ColumnName="status" />
-                <ScalarProperty Name="offset" ColumnName="offset" />
                 <ScalarProperty Name="note" ColumnName="note" />
               </MappingFragment>
             </EntityTypeMapping>
@@ -412,6 +414,9 @@
           <EntitySetMapping Name="tbl_OrderTem_BaoGia_Detail">
             <EntityTypeMapping TypeName="DataWeb.tbl_OrderTem_BaoGia_Detail">
               <MappingFragment StoreEntitySet="tbl_OrderTem_BaoGia_Detail">
+                <ScalarProperty Name="design_date" ColumnName="design_date" />
+                <ScalarProperty Name="design_img" ColumnName="design_img" />
+                <ScalarProperty Name="design" ColumnName="design" />
                 <ScalarProperty Name="id" ColumnName="id" />
                 <ScalarProperty Name="baogia_id" ColumnName="baogia_id" />
                 <ScalarProperty Name="sanpam_id" ColumnName="sanpam_id" />

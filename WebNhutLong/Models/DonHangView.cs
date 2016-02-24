@@ -23,6 +23,6 @@ namespace WebNhutLong.Models
         {
             action = 0;
         }
-
+        public List<tbl_Customers> tbl_Customers { get; set; }
     }
 }

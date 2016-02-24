@@ -24,5 +24,9 @@ namespace WebNhutLong.Models
         public string QuyCachProducts { get; set; }
         public int SoLuong { get; set; }
         public List<tbl_QuyTrinh> QuyTrinhs { get; set; }
+
+        public int Design { get; set; }
+        public String Design_Img { get; set; }
+        public DateTime Design_Date { get; set; }
     }
 }

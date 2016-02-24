@@ -6,11 +6,11 @@
     <edmx:Diagrams>
       <Diagram DiagramId="7a2947ee4e984f9db6c7ec27a19bb7b6" Name="Diagram1">
         <EntityTypeShape EntityType="DataWeb.tbl_BaoGia" Width="1.5" PointX="0.75" PointY="0.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="DataWeb.tbl_BaoGiaChiTiet" Width="1.5" PointX="2.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="DataWeb.tbl_BaoGiaChiTiet" PointX="7.375" PointY="8.75" Width="1.5" IsExpanded="true" />
         <EntityTypeShape EntityType="DataWeb.tbl_Customers" Width="1.5" PointX="2.75" PointY="3.75" IsExpanded="true" />
         <EntityTypeShape EntityType="DataWeb.tbl_OrderTem" Width="1.5" PointX="4.75" PointY="0.75" IsExpanded="true" />
         <EntityTypeShape EntityType="DataWeb.tbl_OrderTem_BaoGia" Width="1.5" PointX="4.75" PointY="5.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="DataWeb.tbl_OrderTem_BaoGia_Detail" Width="1.5" PointX="6.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="DataWeb.tbl_OrderTem_BaoGia_Detail" Width="2.375" PointX="2.5" PointY="0.75" IsExpanded="true" />
         <EntityTypeShape EntityType="DataWeb.tbl_Products" Width="1.5" PointX="6.75" PointY="3.75" IsExpanded="true" />
         <EntityTypeShape EntityType="DataWeb.tbl_QuyTrinh" Width="1.5" PointX="8.75" PointY="0.75" IsExpanded="true" />
         <EntityTypeShape EntityType="DataWeb.tbl_User" Width="1.5" PointX="0.75" PointY="8.75" IsExpanded="true" />
