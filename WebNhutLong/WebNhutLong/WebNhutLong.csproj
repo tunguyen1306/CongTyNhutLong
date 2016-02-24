@@ -1043,16 +1043,12 @@
     <Content Include="Views\tbl_OrderTem_BaoGia_Detail\Edit.cshtml" />
     <Content Include="Views\tbl_OrderTem_BaoGia_Detail\Index.cshtml" />
     <Content Include="Views\Shared\_Layout_1.cshtml" />
-    <Content Include="Views\Shared\_Navbar_1.cshtml" />
     <Content Include="Views\tbl_OrderTem\PrintOrder.cshtml" />
     <Content Include="Views\QuyTrinh\Index.cshtml" />
     <Content Include="Views\SanXuat\Index.cshtml" />
     <Content Include="Views\SanXuat\Edit.cshtml" />
-
     <Content Include="Views\tbl_OrderTem\Index.cshtml" />
-
     <Content Include="Views\BaoCao\Index.cshtml" />
-
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
