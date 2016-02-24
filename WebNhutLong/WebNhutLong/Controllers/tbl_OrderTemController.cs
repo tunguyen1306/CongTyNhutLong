@@ -243,6 +243,7 @@ namespace WebNhutLong.Controllers
             {
                 return HttpNotFound();
             }
+           
             if (donHang.action==2)
             {
                 donHang.action = 0;
@@ -383,6 +384,7 @@ namespace WebNhutLong.Controllers
                 return RedirectToAction("Edit", "SanXuat", new { id = donHang.id });
             }
             DonHangView d = new DonHangView();
+            d.action = donHang.action;
             d.customer_id = tbl_OrderTem.customer_id;
             d.code = tbl_OrderTem.code;
             d.date_begin = tbl_OrderTem.date_begin;
