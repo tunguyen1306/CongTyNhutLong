@@ -87,6 +87,8 @@
           <Property Name="date_end" Type="datetime" />
           <Property Name="status" Type="int" />
           <Property Name="note" Type="nvarchar" MaxLength="200" />
+          <Property Name="commission" Type="int" />
+          <Property Name="commission_monney" Type="float" />
         </EntityType>
         <EntityType Name="tbl_OrderTem_BaoGia_Detail">
           <Key>
@@ -245,6 +247,8 @@
           <Property Name="date_end" Type="DateTime" Precision="3" />
           <Property Name="status" Type="Int32" />
           <Property Name="note" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="commission" Type="Int32" />
+          <Property Name="commission_monney" Type="Double" />
         </EntityType>
         <EntityType Name="tbl_OrderTem_BaoGia_Detail">
           <Key>
@@ -401,6 +405,8 @@
           <EntitySetMapping Name="tbl_OrderTem_BaoGia">
             <EntityTypeMapping TypeName="DataWeb.tbl_OrderTem_BaoGia">
               <MappingFragment StoreEntitySet="tbl_OrderTem_BaoGia">
+                <ScalarProperty Name="commission_monney" ColumnName="commission_monney" />
+                <ScalarProperty Name="commission" ColumnName="commission" />
                 <ScalarProperty Name="id" ColumnName="id" />
                 <ScalarProperty Name="order_id" ColumnName="order_id" />
                 <ScalarProperty Name="total_money" ColumnName="total_money" />

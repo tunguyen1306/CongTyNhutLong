@@ -53,15 +53,8 @@
 
     });
     function updateProduct(el) {
-
-        //if ($('.NameProducts1').val() == '' || ($('.SolopProducts1').val() < 0)  || ($('select[name=LoaigiayProducts]').val() == 0) || ($('.QuyCachProducts1').val() == '') || ($('.GiaProducts1').val() < 0)) {
-        //    $('.NameProducts1').after('<label class="errorLabel lblNameProducts">Nhập tên sản phẩm</label>');
-        //    $('.QuyCachProducts1').after('<label class="errorLabel lblQuyCachProducts">Nhập quy cách</label>');
-        //    $('.SolopProducts1').after('<label class="errorLabel lblSolopProducts">Số lớp phải lớn hơn 0</label>');
-        //    $('.GiaProducts1').after('<label class="errorLabel lblGiaProducts">Giá phải lớn hơn 0</label>');
-        //    $('.LoaigiayProducts1').after('<label class="errorLabel lblLoaigiayProducts">Chọn loại giấy</label>');
-
-        //}
+       
+        
         var m = 0;
         if ($('.NameProducts1').val() == '') {
             $('.lblNameProducts').addClass('hidden');
@@ -110,7 +103,7 @@
             $('.lblLoaigiayProducts').addClass('hidden');
             var id = new Date().getTime();
             var tr = $(el).parents('tr').eq(0);
-            var trdata = "<tr id='ext_" + id + "'><input name='BaoGiaTemView.BaoGiaTemDetailViews.Index' value='" + id + "' type='hidden'/>";
+            var trdata = "<tr class='tr_edit' id='ext_" + id + "'><input name='BaoGiaTemView.BaoGiaTemDetailViews.Index' value='" + id + "' type='hidden'/>";
             tr.find('.form-control').each(function () {
                 if ($(this).attr('name') == 'SoLuong') {
                     trdata += "<td><input class='form-control text-box single-line updateSL " + this.name + "'  min='1' value='" + this.value + "' type='number' name='BaoGiaTemView.BaoGiaTemDetailViews[" + id + "]." + this.name + "'/></td>";
@@ -191,8 +184,8 @@
 
                 <div class="col-lg-6">
                     <div class="form-group">
-                        <label class="col-md-4">Mã đơn hàng</label>
-                        <div class="col-md-8">
+                        <label class="control-label col-md-4">Mã đơn hàng</label>
+                        <div class="col-md-8" style="padding-top:7px">
                             @Html.HiddenFor(model => model.code)
                             @Model.code
                           
@@ -201,8 +194,8 @@
                 </div>
                 <div class="col-lg-6">
                     <div class="form-group">
-                        <label class="col-md-4">Trạng thái</label>
-                        <div class="col-md-8">
+                        <label class="control-label col-md-4">Trạng thái</label>
+                        <div class="col-md-8" style="padding-top:7px">
                             @Html.HiddenFor(model => model.status)
                             Tạo báo giá
                         </div>
@@ -212,8 +205,8 @@
              
                 <div class="col-lg-12">
                     <div class="form-group">
-                        <label class="col-md-2">Thông tin khách hàng</label>
-                        <div class="col-md-10">
+                        <label class="control-label col-md-2">Thông tin khách hàng</label>
+                        <div class="col-md-10" style="padding-top:7px">
                             <div class="panel panel-default">
                                 <div class="panel-heading">
                                     <div class="row">
@@ -234,7 +227,7 @@
                                                 <div class="form-group">
                                                     <label class="col-md-4">Mã số</label>
                                                     <div class="col-md-8">
-                                                        <input type="text" disabled class="form-control text-box single-line valid" value="NTT" id="customer_id_MS">
+                                                        <input type="text" disabled class="form-control text-box single-line valid" value="@(Model.Customer != null ? Model.Customer.CodeCustomers : ""  )" id="customer_id_MS">
 
                                                     </div>
                                                 </div>
@@ -243,7 +236,7 @@
                                                 <div class="form-group">
                                                     <label class="col-md-4">Công ty</label>
                                                     <div class="col-md-8">
-                                                        <input type="text" disabled id="customer_id_Cty" value="đại gia" class="form-control text-box single-line valid">
+                                                        <input type="text" disabled id="customer_id_Cty" value="@(Model.Customer != null ? Model.Customer.CongTyCustomers : ""  )" class="form-control text-box single-line valid">
 
                                                     </div>
                                                 </div>
@@ -252,7 +245,7 @@
                                                 <div class="form-group">
                                                     <label class="col-md-4">Email</label>
                                                     <div class="col-md-8">
-                                                        <input type="text" disabled id="customer_id_Email" value="daigai@daigia.com" class="form-control text-box single-line valid">
+                                                        <input type="text" disabled id="customer_id_Email" value="@(Model.Customer != null ? Model.Customer.EmailCustomers : ""  )" class="form-control text-box single-line valid">
 
                                                     </div>
                                                 </div>
@@ -341,8 +334,8 @@
                 <div class="col-lg-12 form-horizontal">
                     <div class="col-lg-6">
                         <div class="form-group">
-                            <label class="col-md-4" for="date_begin">Ngày bất đầu</label>
-                            <div class="col-md-8">
+                            <label class="control-label col-md-4" for="date_begin">Ngày bất đầu</label>
+                            <div class="col-md-8" style="padding-top:7px">
 
                               
                                 <input class="form-control date" data-val="true" data-val-date="The field date_begin must be a date." name="BaoGiaTemView.date_begin" value="@DateTime.Now.ToString("MM/dd/yyyy")" type="hidden">
@@ -354,8 +347,8 @@
 
                         <div class="form-group">
 
-                            <label class="col-md-4" for="total_money">Tổng tiền</label>
-                            <div class="col-md-8">
+                            <label class="control-label col-md-4" for="total_money">Tổng tiền</label>
+                            <div class="col-md-8" style="padding-top:7px">
                                 <input class="form-control BaoGiaTemView_total_money" data-val="true" data-val-number="The field total_money must be a number." name="BaoGiaTemView.total_money" value="" type="hidden">
                                 <span id="BaoGiaTemView_total_money">0</span> đ
                             </div>
@@ -364,20 +357,27 @@
                     </div>
                     <div class="col-lg-6">
                         <div class="form-group">
-                            <label class="col-md-4" for="date_end">Ngày kết thúc</label>
-                            <div class="col-md-8">
+                            <label class="control-label col-md-4" for="date_end">Ngày kết thúc</label>
+                            <div class="col-md-8" style="padding-top:7px">
                                 <input class="form-control date" data-val="true" data-val-date="The field date_end must be a date." name="BaoGiaTemView.date_end" value="" type="hidden">
                                 Chờ cập nhật
                             </div>
                         </div>
                         <div class="form-group">
-                            <label class="col-md-4" for="status">Trạng thái</label>
-                            <div class="col-md-8">
+                            <label class="control-label col-md-4" for="status">Trạng thái</label>
+                            <div class="col-md-8" style="padding-top:7px">
                                 Tạo mới báo giá
                             </div>
                         </div>
                     </div>
-
+                    <div class="col-lg-6">
+                        <div class="form-group">
+                            <label class="control-label col-md-4">Hoa hồng</label>
+                            <div class="col-md-8" style="padding-top:7px">
+                                Chưa cập nhập
+                            </div>
+                        </div>
+                    </div>
                
                 </div>
             </div>
@@ -501,6 +501,9 @@
 
     .table th {
         text-align: center;
+    }
+    .tr_edit > td{
+        line-height: 34px !important;
     }
 </style>
 

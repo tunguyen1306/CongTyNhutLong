@@ -13,6 +13,8 @@ namespace WebNhutLong.Models
         public Nullable<System.DateTime> date_end { get; set; }
         public Nullable<System.DateTime> date_begin_plan { get; set; }
         public Nullable<System.DateTime> date_end_plan { get; set; }
+        public String address_deliver { get; set; }
+        public Nullable<System.DateTime> date_deliver { get; set; }
         public Nullable<int> customer_id { get; set; }
         public Nullable<int> status { get; set; }
         public tbl_Customers Customer { get; set; }

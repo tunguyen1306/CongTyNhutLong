@@ -21,5 +21,7 @@ namespace WebNhutLong.Models
         public Nullable<System.DateTime> date_end { get; set; }
         public Nullable<int> status { get; set; }
         public string note { get; set; }
+        public Nullable<int> commission { get; set; }
+        public Nullable<double> commission_monney { get; set; }
     }
 }

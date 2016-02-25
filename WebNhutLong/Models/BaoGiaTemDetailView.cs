@@ -25,8 +25,8 @@ namespace WebNhutLong.Models
         public int SoLuong { get; set; }
         public List<tbl_QuyTrinh> QuyTrinhs { get; set; }
 
-        public int Design { get; set; }
+        public Nullable<int> Design { get; set; }
         public String Design_Img { get; set; }
-        public DateTime Design_Date { get; set; }
+        public Nullable<DateTime>  Design_Date { get; set; }
     }
 }

@@ -93,7 +93,7 @@ namespace WebNhutLong.Controllers
            
                 donHang.status = 0;
                 donHang.BaoGiaTemView.status = 0;
-                tbl_OrderTem temValue = new tbl_OrderTem { customer_id = donHang.customer_id, code = donHang.code, date_begin = donHang.date_begin, date_end = donHang.date_end, status = donHang.status, id = donHang.id };
+                tbl_OrderTem temValue = new tbl_OrderTem { update_date = DateTime.Now,update_user = Session["username"].ToString(), customer_id = donHang.customer_id, code = donHang.code, date_begin = donHang.date_begin, date_end = donHang.date_end, status = donHang.status, id = donHang.id };
                 temValue = db.tbl_OrderTem.Add(temValue);
                 db.SaveChanges();
                 donHang.id = temValue.id;
@@ -160,6 +160,8 @@ namespace WebNhutLong.Controllers
             }
           
             DonHangView d = new DonHangView();
+            d.date_deliver = tbl_OrderTem.date_deliver;
+            d.address_deliver = tbl_OrderTem.address_deliver;
             d.customer_id = tbl_OrderTem.customer_id;
             d.code = tbl_OrderTem.code;
             d.date_begin = tbl_OrderTem.date_begin;
@@ -177,11 +179,11 @@ namespace WebNhutLong.Controllers
                 for (int i = 1; i < lisBG.Count; i++)
                 {
                     var item = lisBG[i];
-                    BaoGiaTemView temBG = new BaoGiaTemView {note=item.note,  date_begin = item.date_begin, date_end = item.date_end, id = item.id,  order_id = item.order_id, status = item.status, total_money = item.total_money };
+                    BaoGiaTemView temBG = new BaoGiaTemView {commission=item.commission,commission_money=item.commission_monney,note=item.note,  date_begin = item.date_begin, date_end = item.date_end, id = item.id,  order_id = item.order_id, status = item.status, total_money = item.total_money };
                     var queryGiaoGiaCT = from u in db.tbl_OrderTem_BaoGia_Detail
                                          join y in db.tbl_Products on u.sanpam_id equals y.ID_Products
                                          where u.baogia_id.Value.Equals(temBG.id)
-                                         select new BaoGiaTemDetailView { id = u.id, ID_Products = u.sanpam_id.Value, CodeProducts = y.CodeProducts, CreatedDateProducts = y.CreatedDateProducts, CreateUserProducts = y.CreateUserProducts, DanKimProducts = y.DanKimProducts, GiaProducts = u.money.Value.ToString(), LoaigiayProducts = y.LoaigiayProducts, ModifyDateProducts = y.ModifyDateProducts, ModifyUserProducts = y.ModifyUserProducts, NameProducts = y.NameProducts, OffsetFlexoProducts = y.OffsetFlexoProducts, QuyCachProducts = y.QuyCachProducts, SolopProducts = y.SolopProducts, SoLuong = u.soluong.Value, StatusProducts = y.StatusProducts };
+                                         select new BaoGiaTemDetailView { Design=u.design,Design_Date=u.design_date,Design_Img=u.design_img,id = u.id, ID_Products = u.sanpam_id.Value, CodeProducts = y.CodeProducts, CreatedDateProducts = y.CreatedDateProducts, CreateUserProducts = y.CreateUserProducts, DanKimProducts = y.DanKimProducts, GiaProducts = u.money.Value.ToString(), LoaigiayProducts = y.LoaigiayProducts, ModifyDateProducts = y.ModifyDateProducts, ModifyUserProducts = y.ModifyUserProducts, NameProducts = y.NameProducts, OffsetFlexoProducts = y.OffsetFlexoProducts, QuyCachProducts = y.QuyCachProducts, SolopProducts = y.SolopProducts, SoLuong = u.soluong.Value, StatusProducts = y.StatusProducts };
                     temBG.BaoGiaTemDetailViews = queryGiaoGiaCT.ToList<BaoGiaTemDetailView>();
                     lisBGTem.Add(temBG);
                 }
@@ -192,10 +194,10 @@ namespace WebNhutLong.Controllers
             lisBG = queryBaoGia.ToList<tbl_OrderTem_BaoGia>();
             foreach (var item in lisBG)
             {
-                BaoGiaTemView temBG = new BaoGiaTemView {note=item.note, date_begin = item.date_begin, date_end = item.date_end, id = item.id,  order_id = item.order_id, status = item.status, total_money = item.total_money };
+                BaoGiaTemView temBG = new BaoGiaTemView { commission = item.commission, commission_money = item.commission_monney,note = item.note, date_begin = item.date_begin, date_end = item.date_end, id = item.id,  order_id = item.order_id, status = item.status, total_money = item.total_money };
                 var queryGiaoGiaCT = from u in db.tbl_OrderTem_BaoGia_Detail
                                      join y in db.tbl_Products on u.sanpam_id equals y.ID_Products where u.baogia_id.Value.Equals(temBG.id)
-                                     select new BaoGiaTemDetailView { id = u.id, ID_Products = u.sanpam_id.Value, CodeProducts = y.CodeProducts, CreatedDateProducts = y.CreatedDateProducts, CreateUserProducts = y.CreateUserProducts, DanKimProducts = y.DanKimProducts, GiaProducts = u.money.Value.ToString(), LoaigiayProducts = y.LoaigiayProducts, ModifyDateProducts = y.ModifyDateProducts, ModifyUserProducts = y.ModifyUserProducts, NameProducts = y.NameProducts, OffsetFlexoProducts = y.OffsetFlexoProducts, QuyCachProducts = y.QuyCachProducts, SolopProducts = y.SolopProducts, SoLuong = u.soluong.Value, StatusProducts = y.StatusProducts };
+                                     select new BaoGiaTemDetailView { Design = u.design, Design_Date = u.design_date, Design_Img = u.design_img,id = u.id, ID_Products = u.sanpam_id.Value, CodeProducts = y.CodeProducts, CreatedDateProducts = y.CreatedDateProducts, CreateUserProducts = y.CreateUserProducts, DanKimProducts = y.DanKimProducts, GiaProducts = u.money.Value.ToString(), LoaigiayProducts = y.LoaigiayProducts, ModifyDateProducts = y.ModifyDateProducts, ModifyUserProducts = y.ModifyUserProducts, NameProducts = y.NameProducts, OffsetFlexoProducts = y.OffsetFlexoProducts, QuyCachProducts = y.QuyCachProducts, SolopProducts = y.SolopProducts, SoLuong = u.soluong.Value, StatusProducts = y.StatusProducts };
                 temBG.BaoGiaTemDetailViews = queryGiaoGiaCT.ToList<BaoGiaTemDetailView>();
                 d.BaoGiaTemView = temBG;
                 break;
@@ -275,8 +277,21 @@ namespace WebNhutLong.Controllers
             if (donHang.action == 3)
             {
                 donHang.action = 0;
+
+
+                tbl_OrderTem order = db.tbl_OrderTem.Find(donHang.id);
+                order.date_deliver = donHang.date_deliver;
+                order.address_deliver = donHang.address_deliver;
+                order.update_date = DateTime.Now;
+                order.update_user = Session["username"].ToString();
+                db.Entry(order).State = EntityState.Modified;
+                db.SaveChanges();
+
+
+
                 tbl_OrderTem_BaoGia baogia = db.tbl_OrderTem_BaoGia.Find(donHang.BaoGiaTemView.id);
                 baogia.status =donHang.BaoGiaTemView.status.Value;
+                baogia.commission = donHang.BaoGiaTemView.commission;
                 baogia.date_end = DateTime.Now;
                 baogia.note = donHang.BaoGiaTemView.note;
                 db.Entry(baogia).State = EntityState.Modified;
@@ -289,6 +304,8 @@ namespace WebNhutLong.Controllers
                 tbl_OrderTem order = db.tbl_OrderTem.Find(donHang.id);
                 order.date_begin_plan = donHang.date_begin_plan.Value;
                 order.date_end_plan = donHang.date_end_plan.Value;
+                order.update_date = DateTime.Now;
+                order.update_user = Session["username"].ToString();
                 order.status = donHang.status.Value;
                 db.Entry(order).State = EntityState.Modified;
                 db.SaveChanges();
@@ -349,6 +366,7 @@ namespace WebNhutLong.Controllers
                 }
             }
             DonHangView d = new DonHangView();
+            d.action = donHang.action;
             d.customer_id = tbl_OrderTem.customer_id;
             d.code = tbl_OrderTem.code;
             d.date_begin = tbl_OrderTem.date_begin;
@@ -366,7 +384,7 @@ namespace WebNhutLong.Controllers
                 for (int i = 1; i < lisBG.Count; i++)
                 {
                     var item = lisBG[i];
-                    BaoGiaTemView temBG = new BaoGiaTemView {  note = item.note, date_begin = item.date_begin, date_end = item.date_end, id = item.id,  order_id = item.order_id, status = item.status, total_money = item.total_money };
+                    BaoGiaTemView temBG = new BaoGiaTemView { commission = item.commission, commission_money = item.commission_monney, note = item.note, date_begin = item.date_begin, date_end = item.date_end, id = item.id,  order_id = item.order_id, status = item.status, total_money = item.total_money };
                     var queryGiaoGiaCT = from u in db.tbl_OrderTem_BaoGia_Detail
                                          join y in db.tbl_Products on u.sanpam_id equals y.ID_Products
                                          where u.baogia_id.Value.Equals(temBG.id)
@@ -381,7 +399,7 @@ namespace WebNhutLong.Controllers
             lisBG = queryBaoGia.ToList<tbl_OrderTem_BaoGia>();
             foreach (var item in lisBG)
             {
-                BaoGiaTemView temBG = new BaoGiaTemView { note = item.note, date_begin = item.date_begin, date_end = item.date_end, id = item.id, order_id = item.order_id, status = item.status, total_money = item.total_money };
+                BaoGiaTemView temBG = new BaoGiaTemView { commission = item.commission, commission_money = item.commission_monney, note = item.note, date_begin = item.date_begin, date_end = item.date_end, id = item.id, order_id = item.order_id, status = item.status, total_money = item.total_money };
                 var queryGiaoGiaCT = from u in db.tbl_OrderTem_BaoGia_Detail
                                      join y in db.tbl_Products on u.sanpam_id equals y.ID_Products
                                      where u.baogia_id.Value.Equals(temBG.id)
@@ -467,6 +485,20 @@ namespace WebNhutLong.Controllers
             return View(d);
 
         }
-       
+
+        [HttpPost]
+        public ActionResult UpdateDesign(int id,DateTime date,HttpPostedFileBase file)
+        {
+            tbl_OrderTem_BaoGia_Detail item= db.tbl_OrderTem_BaoGia_Detail.Find(id);
+            item.design_date = date;
+            item.design = 2;
+            item.design_img = file.FileName;
+            file.SaveAs(Server.MapPath("~/Upload/ThietKe") + "/" + item.id + "_"+file.FileName);
+            db.Entry(item).State = EntityState.Modified;
+            db.SaveChanges();
+            return Json(item);
+        }
+
+
     }
 }

@@ -12,13 +12,12 @@ namespace WebNhutLong.Models
         public Nullable<double> total_money { get; set; }
         public Nullable<System.DateTime> date_begin { get; set; }
         public Nullable<System.DateTime> date_end { get; set; }
-        public Nullable<int> status { get; set; }
-        
+        public Nullable<int> status { get; set; }        
         public List<BaoGiaTemDetailView> BaoGiaTemDetailViews { get; set; }
         public String note { get; set; }
-        
+        public Nullable<int> commission { get; set; }
+        public Nullable<double> commission_money { get; set; }
 
-      
 
         public List<String> PrintTen { get; set; }
         public List<int> PrintSoLop { get; set; }
