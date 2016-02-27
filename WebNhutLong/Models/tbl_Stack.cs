@@ -12,12 +12,10 @@ namespace WebNhutLong.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class tbl_BaoGiaChiTiet
+    public partial class tbl_Stack
     {
-        public int ID_BaoGiaChiTiet { get; set; }
-        public Nullable<int> ID_BaoGia { get; set; }
-        public Nullable<int> ID_SanPham { get; set; }
-        public Nullable<int> SoLuong { get; set; }
-        public string Tien { get; set; }
+        public int baoGia_detail_id { get; set; }
+        public Nullable<int> index_view { get; set; }
+        public Nullable<System.DateTime> date_create { get; set; }
     }
 }

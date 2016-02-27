@@ -123,14 +123,12 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Controllers\BaoCaoController.cs" />
-    <Compile Include="Controllers\BaoGiaController.cs" />
     <Compile Include="Controllers\CustomersController.cs" />
     <Compile Include="Controllers\EmailController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\LoginController.cs" />
     <Compile Include="Controllers\NavbarController.cs" />
     <Compile Include="Controllers\ProductsController.cs" />
-    <Compile Include="Controllers\QuyTrinhController.cs" />
     <Compile Include="Controllers\SanXuatController.cs" />
     <Compile Include="Controllers\tbl_OrderTemController.cs" />
     <Compile Include="Controllers\tbl_OrderTem_BaoGiaController.cs" />
@@ -162,12 +160,6 @@
     <Compile Include="Models\LoaiGiay.cs" />
     <Compile Include="Models\Navbar.cs" />
     <Compile Include="Models\SendEmail.cs" />
-    <Compile Include="Models\tbl_BaoGia.cs">
-      <DependentUpon>DataWeb.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\tbl_BaoGiaChiTiet.cs">
-      <DependentUpon>DataWeb.tt</DependentUpon>
-    </Compile>
     <Compile Include="Models\tbl_Customers.cs">
       <DependentUpon>DataWeb.tt</DependentUpon>
     </Compile>
@@ -184,6 +176,9 @@
       <DependentUpon>DataWeb.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\tbl_QuyTrinh.cs">
+      <DependentUpon>DataWeb.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\tbl_Stack.cs">
       <DependentUpon>DataWeb.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\tbl_User.cs">
@@ -1023,12 +1018,6 @@
     <Content Include="Views\Email\Send.cshtml" />
     <Content Include="Views\Email\Index.cshtml" />
     <Content Include="Views\Email\success.cshtml" />
-    <Content Include="Views\BaoGia\Create.cshtml" />
-    <Content Include="Views\BaoGia\Delete.cshtml" />
-    <Content Include="Views\BaoGia\Details.cshtml" />
-    <Content Include="Views\BaoGia\Edit.cshtml" />
-    <Content Include="Views\BaoGia\Index.cshtml" />
-    <Content Include="Views\BaoGia\BaoGiaCus.cshtml" />
     <Content Include="Views\tbl_OrderTem\Create.cshtml" />
     <Content Include="Views\tbl_OrderTem\Delete.cshtml" />
     <Content Include="Views\tbl_OrderTem\Details.cshtml" />
@@ -1047,11 +1036,13 @@
     <Content Include="Views\Shared\_Layout_1.cshtml" />
     <Content Include="Views\Shared\_Navbar_1.cshtml" />
     <Content Include="Views\tbl_OrderTem\PrintOrder.cshtml" />
-    <Content Include="Views\QuyTrinh\Index.cshtml" />
     <Content Include="Views\SanXuat\Index.cshtml" />
     <Content Include="Views\SanXuat\Edit.cshtml" />
     <Content Include="Views\BaoCao\Index.cshtml" />
     <Content Include="Views\SanXuat\IndexSanXuat.cshtml" />
+    <Content Include="Views\SanXuat\UpdateFlowProduct.cshtml" />
+    <Content Include="Views\SanXuat\ViewFlowProduct.cshtml" />
+    <Content Include="Views\SanXuat\IndexSanXuatByDate.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

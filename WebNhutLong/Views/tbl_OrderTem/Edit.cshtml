@@ -44,7 +44,7 @@
                       
                     }
                 }
-                $('#id_update_tk_' + $('#id_tk').val()).text(text);
+                $('#id_update_tk_' + $('#id_tk').val()).html(text);
                 $('#id_update_tk_' + $('#id_tk').val() + "_value").val(2);                
                 $('#modal-container-tk').modal('hide');
                 $('#id_tk').val("");
@@ -751,7 +751,7 @@
                                     <td>@item.SoLuong
                                     <input id="id_update_tk_@(item.id)_value" class="input_tk_value" type="hidden" value="@(item.Design.HasValue==true?(item.Design.Value+""):"0")"/>
                                     </td>
-                                    <td id="id_update_tk_@item.id">
+                                    <td id="id_update_tk_@item.id">                                      
                                         @if (!item.Design.HasValue || item.Design.Value == 0)
 	                                    {
 		                                    @("N")           }
